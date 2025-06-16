@@ -32,6 +32,7 @@ export const SectionTaxiPage = () => {
 
   return (
     <section className="flex flex-col items-center justify-start">
+      {/* Cabeçalho com botão de voltar */}
       <header className="font-poppins flex w-full items-start justify-start bg-[#194A99] px-4 py-6 text-white">
         <div className="mx-auto flex w-full max-w-6xl cursor-pointer items-center gap-2 text-left">
           <h1
@@ -44,7 +45,8 @@ export const SectionTaxiPage = () => {
         </div>
       </header>
 
-      <div className="m-0 grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(280,1fr))] gap-12 p-4 max-sm:grid-cols-1">
+      {/* Grade responsiva de cards */}
+      <div className="grid max-w-[1280px] w-full m-0 grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {showTaxi.map((taxista) => (
           <CardTaxi
             key={taxista.phone}
