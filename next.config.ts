@@ -1,12 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    // Ignora todos os erros de tipagem durante o build
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Ignora erros de tipagem durante o build
   },
   eslint: {
-    // Ignora erros de ESLint também
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Ignora erros de ESLint durante o build
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'karnaubaapi.onrender.com',
+        pathname: '/uploads/**/**', 
+      },
+    ],
   },
 }
 
