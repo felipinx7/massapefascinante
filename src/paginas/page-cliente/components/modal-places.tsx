@@ -50,6 +50,8 @@ export const ModalLocation: FC<ModalLocationProps> = ({
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
   const photo = baseUrlPhoto('place', photos[0].url)
+  console.log("photo dos cria: ", photo)
+  console.log("fotos: ", photos[0].url)
   const whatsappLink = gerarLinkWhatsApp(phone)
 
   return (
