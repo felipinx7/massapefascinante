@@ -88,7 +88,7 @@ export const SectionTaxi = () => {
   console.log('DADOS DA TAXI TO SHOW', taxisToShow)
 
   return (
-    <section className="w-[calc(100%-20%)]">
+    <section className="w-full">
       <div className="max-lg:hidden">
         <NameAdminstrative SibeBarMobile={false} />
       </div>
