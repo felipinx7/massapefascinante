@@ -37,9 +37,9 @@ export const PageCliente = () => {
             {LinksButtonPageCliente.map((card, index) => (
               <button
                 key={index}
-                className="flex w-auto items-center justify-center gap-3 rounded-full bg-primargreen p-3 text-[1.1rem] font-[600] text-white max-lg:w-full"
+                className="flex text-center w-auto items-center justify-center gap-3 rounded-full bg-primargreen p-3 text-[1.1rem] font-[600] text-white max-lg:w-full"
               >
-                <a href={card.href} className="flex w-auto items-center justify-center gap-4">
+                <a href={card.href} className="flex text-center w-auto items-center justify-center gap-4">
                   {<card.Icon />}
                   {card.name}
                 </a>
@@ -104,7 +104,7 @@ export const PageCliente = () => {
         <SectionHotel />
         <SectionLandscape />
       </section>
-      <footer className="flex min-h-[20vh] w-full flex-col items-center justify-center gap-3 bg-primarygray max-lg:min-h-[14vh]">
+      <footer className="flex p-8 mt-14 min-h-[20vh] w-full flex-col items-center justify-center gap-3 bg-primarygray max-lg:min-h-[14vh]">
         <Image src={imageLogo} width={200} alt="Image Logo" />
         <p className="font-[400]">Copyright © 2025 Massape Facisnante All Rigths Reserved</p>
       </footer>
