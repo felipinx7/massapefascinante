@@ -185,7 +185,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               {/* Header */}
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-800">Update Place</h2>
+                <h2 className="text-lg font-semibold text-gray-800">Atualizar Lugar</h2>
                 <button
                   onClick={handleOpenModalUpdate}
                   type="button"
@@ -221,7 +221,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
                           }}
                           aria-label="Select images"
                         />
-                        <span>Click to update images</span>
+                        <span>Clique e selecione a foto</span>
                       </div>
                     )}
                   />
@@ -270,7 +270,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Phone</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Telefone</label>
                 <input
                   {...register('phone')}
                   type="text"
@@ -299,7 +299,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Location</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Localização</label>
                 <input
                   {...register('location')}
                   type="text"
@@ -313,7 +313,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Category</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Categoria</label>
                 <select
                   {...register('category')}
                   className="w-full rounded border border-gray-300 p-2 text-sm"
@@ -330,7 +330,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Description</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Descrição</label>
                 <textarea
                   {...register('description')}
                   placeholder="Description here"
@@ -345,7 +345,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
 
               {/* Submit button */}
               <button type="submit" className="w-full rounded bg-primargreen py-2 text-white">
-                Update Place
+                 Atualizar Local
               </button>
             </form>
           </article>
