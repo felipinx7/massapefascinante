@@ -56,8 +56,7 @@ export const ModalEvents: FC<ModalEventsProps> = ({
   }, [showModal])
 
   if (!showModal) return null
-  
-  const photoUrl = baseUrlPhoto('event', photoURLs[0].url)
+
   const photo = baseUrlPhoto('event', photoURLs)
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
 
@@ -135,6 +134,10 @@ export const ModalEvents: FC<ModalEventsProps> = ({
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {placesSimilar.map((place, index) => (
               <div key={index} className="flex flex-col">
+                {place?.photos?.map((photoItem, idx) => {
+                  const photoUrl = baseUrlPhoto('event', place?.photos[0].url)
+                  return (
+                    <div key={idx} className="h-[250px] w-full overflow-hidden rounded-lg">
                       <Image
                         src={photoUrl || backgroundloginpage}
                         alt={`Imagem de ${place.name}`}
@@ -143,6 +146,9 @@ export const ModalEvents: FC<ModalEventsProps> = ({
                         height={250}
                         priority={idx === 0}
                       />
+                    </div>
+                  )
+                })}
                 <span className="mt-2 font-semibold">{place.name}</span>
                 <span className="text-sm text-gray-600">{place.location}</span>
               </div>
