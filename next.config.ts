@@ -11,7 +11,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'karnaubaapi.onrender.com',
-        pathname: '/uploads/**/**', 
+        pathname: '/uploads/**',
       },
     ],
   },
