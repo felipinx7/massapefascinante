@@ -106,7 +106,7 @@ export const PageCliente = () => {
       </section>
       <footer className="flex p-8 mt-14 min-h-[20vh] w-full flex-col items-center justify-center gap-3 bg-primarygray max-lg:min-h-[14vh]">
         <Image src={imageLogo} width={200} alt="Image Logo" />
-        <p className="font-[400]">Copyright © 2025 Massape Facisnante All Rigths Reserved</p>
+        <p className="font-[400] font-poppins text-center">Copyright © 2025 Massape Facisnante All Rigths Reserved</p>
       </footer>
     </main>
   )
