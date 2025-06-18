@@ -1,26 +1,15 @@
-'use client'
-
 import { LinksButtonPageCliente } from '@/constants/links-button-page-cliente'
 import { SideBarCliente } from './components/side-bar'
-import { IconeSearch } from '@/assets/icons/icon-search'
 import Image from 'next/image'
-import { backgroundclientpage, imagecitymassape, imageLogo } from '@/assets/image'
-import { SectionAtractionTouristic } from './sections/section-destination'
-import { SectionEvents } from './sections/section-events'
-import { SectionLandscape } from './sections/section-landscape'
-import { useState } from 'react'
-import { SectionRestaurant } from './sections/section-restaurant'
-import { SectionHotel } from './sections/section-hotel'
+import { imagecitymassape, imageLogo } from '@/assets/image'
 
 export const PageCliente = () => {
-  const [cityName, setCityName] = useState('')
-
   return (
-    <main className="flex min-h-[100vh] w-full flex-col justify-start">
+    <main className="flex min-h-[100vh] w-full flex-col justify-between">
       <SideBarCliente />
 
       {/* CONATINER INFO MAIN  */}
-      <div id="home" className="flex w-full flex-col items-center justify-center p-4 py-[70px]">
+      <div id="home" className="flex w-full flex-col items-center justify-center px-4 pt-[70px]">
         <h1 className="mx-auto w-full animate-typing-with-cursor overflow-hidden whitespace-nowrap break-words border-r-4 border-white text-center text-[2rem] font-bold text-primargreen max-lg:hidden sm:text-[3rem] md:text-[3.6rem] lg:w-[50%] lg:border-none">
           Conheça melhor a cidade de Massapê
         </h1>
@@ -37,9 +26,12 @@ export const PageCliente = () => {
             {LinksButtonPageCliente.map((card, index) => (
               <button
                 key={index}
-                className="flex text-center w-auto items-center justify-center gap-3 rounded-full bg-primargreen p-3 text-[1.1rem] font-[600] text-white max-lg:w-full"
+                className="flex w-auto items-center justify-center gap-3 rounded-full bg-primargreen p-3 text-center text-[1.1rem] font-[600] text-white max-lg:w-full"
               >
-                <a href={card.href} className="flex text-center w-auto items-center justify-center gap-4">
+                <a
+                  href={card.href}
+                  className="flex w-auto items-center justify-center gap-4 text-center"
+                >
                   {<card.Icon />}
                   {card.name}
                 </a>
@@ -48,7 +40,7 @@ export const PageCliente = () => {
           </div>
         </div>
         {/* CATEGORY RESPONSIVER  */}
-        <div className="hidden w-full max-w-[1280px] items-center py-4 justify-center max-md:block">
+        <div className="hidden w-full max-w-[1280px] items-center justify-center py-4 max-md:block">
           <div className="grid grid-cols-2 place-items-center gap-3 max-sm:w-full">
             {LinksButtonPageCliente.map((card, index) => (
               <div
@@ -63,7 +55,7 @@ export const PageCliente = () => {
                 />
                 <a
                   href={card.href}
-                  className="bg-primargreen/80 absolute flex items-center gap-4 rounded-full max-md:flex-col  px-4 py-2 text-[1.2rem] font-[600] text-white"
+                  className="bg-primargreen/80 absolute flex items-center gap-4 rounded-full px-4 py-2 text-[1.2rem] font-[600] text-white max-md:flex-col"
                 >
                   {card.name}
                   <card.Icon />
@@ -72,41 +64,12 @@ export const PageCliente = () => {
             ))}
           </div>
         </div>
-
-        <div className="relative w-[70%] max-lg:w-[100%]">
-          <input
-            type="text"
-            value={cityName}
-            onChange={(e) => setCityName(e.target.value)}
-            placeholder="Digite o lugar desejado"
-            className="w-[100%] rounded-full border-[0.1rem] border-[#E0E0E0] p-4 px-14 shadow-shadowInputClientePage"
-          />
-          <div className="absolute left-3 top-3">
-            <IconeSearch />
-          </div>
-          <button className="absolute right-2 top-2 rounded-full bg-primargreen p-2.5 px-5 font-[700] text-white">
-            Buscar
-          </button>
-        </div>
       </div>
-
-      {/* CONTAINER PHOTO  */}
-      <div className="m-auto max-w-[1280px] p-4">
-        <Image src={backgroundclientpage} alt="background" />
-      </div>
-      <section
-        id="explorer"
-        className="flex w-full flex-col items-center justify-center gap-10 p-4 pt-16"
-      >
-        <SectionRestaurant />
-        <SectionAtractionTouristic />
-        <SectionEvents />
-        <SectionHotel />
-        <SectionLandscape />
-      </section>
-      <footer className="flex p-8 mt-14 min-h-[20vh] w-full flex-col items-center justify-center gap-3 bg-primarygray max-lg:min-h-[14vh]">
+      <footer className="mt-14 flex min-h-[20vh] w-full flex-col items-center justify-center gap-3 bg-primarygray p-8 max-lg:min-h-[14vh]">
         <Image src={imageLogo} width={200} alt="Image Logo" />
-        <p className="font-[400] font-poppins text-center">Copyright © 2025 Massape Facisnante All Rigths Reserved</p>
+        <p className="font-poppins text-center font-[400]">
+          Copyright © 2025 Massape Facisnante All Rigths Reserved
+        </p>
       </footer>
     </main>
   )

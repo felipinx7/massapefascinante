@@ -41,12 +41,12 @@ export const SectionTaxiPage = () => {
           >
             <IconArrowLeft />
           </h1>
-          <p className="w-auto">Área Taxista</p>
+          <p className="w-auto text-xl font-bold text-white">Área Taxista</p>
         </div>
       </header>
 
       {/* Grade responsiva de cards */}
-      <div className="grid max-w-[1280px] w-full m-0 grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="m-0 grid w-full max-w-[1280px] grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {showTaxi.map((taxista) => (
           <CardTaxi
             key={taxista.phone}

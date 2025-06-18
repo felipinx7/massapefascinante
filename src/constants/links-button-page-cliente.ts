@@ -16,27 +16,27 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
   {
     name: 'Destinos',
     Icon: IconMontain,
-    href: '#destination',
+    href: '/destination',
   },
   {
     name: 'Restaurantes',
     Icon: IconFork,
-    href: '#restaurant',
+    href: '/restaurant',
   },
   {
     name: 'Hospedagens',
     Icon: IconBed,
-    href: '#hotel',
+    href: '/hotel',
   },
   {
     name: 'Atração Turisticas',
     Icon: IconCamera,
-    href: '#atraction',
+    href: '/destination',
   },
   {
     name: 'Eventos',
     Icon: IconCalendary,
-    href: '#events',
+    href: '/events',
   },
   {
     name: 'Taxistas',
