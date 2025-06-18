@@ -47,7 +47,7 @@ export function SectionRestaurant() {
       </div>
 
       {/* Conteúdo principal */}
-      <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center p-4">
+      <section className="m-0 mt-24 flex w-[100%] gap-8 max-w-[1280px] flex-col items-start justify-center p-4">
         <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Principais Restaurantes da Cidade

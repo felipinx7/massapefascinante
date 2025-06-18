@@ -76,7 +76,7 @@ export const SectionEvents = () => {
       </div>
 
       {/* Conteúdo com padding-top para não ficar atrás do cabeçalho */}
-      <section className="mt-24 flex w-full max-w-[1280px] flex-col items-start justify-start p-4">
+      <section className="mt-24 gap-8 flex w-full max-w-[1280px] flex-col items-start justify-start p-4">
         <div className="mb-6 flex w-full flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Conheça os melhores eventos da cidade

@@ -47,7 +47,7 @@ export const SectionAtractionTouristic = () => {
         </div>
       </div>
 
-      <section className='max-w-[1280px] p-4 mt-24 w-[100%] m-0 flex items-start justify-center flex-col'>
+      <section className='max-w-[1280px] gap-8 p-4 mt-24 w-[100%] m-0 flex items-start justify-center flex-col'>
         <div className="flex items-start flex-col justify-start m-0">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Conheça os Principais Destinos da cidade
