@@ -60,6 +60,7 @@ export const PageCliente = () => {
             {LinksButtonPageCliente.map((card, index) => (
               <div
                 key={index}
+                onClick={() => handleNavigatePage(card.href)}
                 className={`animate-slideUp group relative flex h-[154px] w-full items-center justify-center overflow-hidden rounded-[0.2rem] bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl max-sm:w-full`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
