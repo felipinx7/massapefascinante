@@ -33,11 +33,21 @@ export default {
           '0%, 100%': { borderColor: 'transparent' },
           '50%': { borderColor: 'white' },
         },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
         typing: 'typing 3s steps(30, end) forwards',
         blink: 'blink 0.75s step-end infinite',
         'typing-with-cursor': 'typing 3s steps(30, end) forwards, blink 0.75s step-end infinite',
+        fadeIn: 'fadeIn 1s ease-in-out both',
+        slideUp: 'slideUp 1.2s ease-out both',
       },
     },
   },
