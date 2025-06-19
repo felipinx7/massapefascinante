@@ -71,7 +71,7 @@ export const PageCliente = () => {
                 />
                 <a
                   href={card.href}
-                  className="animate-slideUp bg-primargreen/80 absolute flex items-center gap-4 rounded-full px-4 py-2 text-[1.2rem] font-[600] text-white transition-all duration-300 group-hover:bg-primargreen max-md:flex-col"
+                  className="animate-slideUp bg-primargreen/80 absolute flex items-center gap-4 rounded-full px-4 py-2 text-[1.2rem] font-[600] text-white transition-all duration-300 max-md:flex-col"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {card.name}
