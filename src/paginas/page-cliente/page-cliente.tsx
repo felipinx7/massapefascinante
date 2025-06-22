@@ -10,7 +10,7 @@ export const PageCliente = () => {
   const routes = useRouter()
 
   const handleNavigatePage = (href: string) => {
-    routes.push(`https://massapefascinante.vercel.app/${href}`)
+    routes.push(`https://www.massapefascinante.com.br/${href}`)
   }
   return (
     <main className="flex min-h-[100vh] w-full flex-col justify-between">
@@ -92,7 +92,7 @@ export const PageCliente = () => {
           alt="Image Logo"
           className="transition-transform duration-300 hover:scale-105"
         />
-        <p className="font-poppins text-center text-sm font-[400] text-white opacity-80 transition-opacity hover:opacity-100">
+        <p className="font-poppins text-center text-sm font-[400] text-primargreen transition-opacity">
           Copyright © 2025 Massape Fascinante. All Rights Reserved.
         </p>
       </footer>
