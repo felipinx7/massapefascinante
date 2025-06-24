@@ -4,7 +4,7 @@ import { LinksButtonPageCliente } from '@/constants/links-button-page-cliente'
 import { SideBarCliente } from './components/side-bar'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { imageLogo } from '@/assets/image'
+import {  logoprefeituramassape } from '@/assets/image'
 
 export const PageCliente = () => {
   const routes = useRouter()
@@ -75,8 +75,8 @@ export const PageCliente = () => {
       {/* FOOTER */}
       <footer className="mt-14 flex min-h-[20vh] w-full animate-fadeIn flex-col items-center justify-center gap-3 bg-primarygray p-8 max-lg:min-h-[14vh]">
         <Image
-          src={imageLogo}
-          width={200}
+          src={logoprefeituramassape}
+          width={400}
           alt="Image Logo"
           className="transition-transform duration-300 hover:scale-105"
         />

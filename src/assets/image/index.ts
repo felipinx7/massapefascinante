@@ -23,6 +23,7 @@ import bannercategoriaevento from "./banner-categoria-evento.jpg"
 import bannercategoriahoteis from "./banner-categoria-hoteis.jpg"
 import bannercategoriarestaurant from "./banner-categoria-restaurante.jpg"
 import bannercategoriaatracaoturistica from "./banner-categoria-atracao-turistiscas.jpg"
+import logoprefeituramassape from "./logo-prefeitura-massape.png"
 
 export {
   imageLogo,
@@ -49,5 +50,6 @@ export {
   photomassapefourth,
   photomassapefifth,
   imagecitymassape,
-  logomassapemonocromatica
+  logomassapemonocromatica,
+  logoprefeituramassape
 }
