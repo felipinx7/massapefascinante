@@ -23,7 +23,7 @@ interface LinksButtonPageClienteProps {
 
 export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
   {
-    name: 'Atração Turisticas',
+    name: 'Atrações Turisticas',
     Icon: IconCamera,
     href: '/destination',
     photo: bannercategoriaatracaoturistica,
