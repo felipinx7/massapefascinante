@@ -3,8 +3,8 @@
 import { LinksButtonPageCliente } from '@/constants/links-button-page-cliente'
 import { SideBarCliente } from './components/side-bar'
 import Image from 'next/image'
-import { imagecitymassape, imageLogo } from '@/assets/image'
 import { useRouter } from 'next/navigation'
+import { imageLogo } from '@/assets/image'
 
 export const PageCliente = () => {
   const routes = useRouter()
@@ -25,11 +25,7 @@ export const PageCliente = () => {
           Conheça melhor a cidade de Massapê
         </h1>
 
-        <h1 className="mb-5 hidden w-full text-center text-[2.5rem] font-bold leading-[70px] text-primargreen max-lg:block">
-          Conheça melhor a cidade de Massapê
-        </h1>
-
-        <p className="w-full text-center text-[1.1rem] font-[400] text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
+        <p className="w-full text-center text-[1.1rem] font-[400] max-md:text-[1.3rem] text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
           Veja abaixo as categorias que vão guiar sua próxima descoberta.
         </p>
 
