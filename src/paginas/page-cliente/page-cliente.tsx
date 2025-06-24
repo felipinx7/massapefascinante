@@ -25,7 +25,7 @@ export const PageCliente = () => {
           Conheça melhor a cidade de Massapê
         </h1>
 
-        <p className="w-full text-center text-[1.1rem] font-[400] max-md:text-[1.3rem] text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
+        <p className="w-full text-center text-[1.1rem] font-[400]  text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
           Veja abaixo as categorias que vão guiar sua próxima descoberta.
         </p>
 
