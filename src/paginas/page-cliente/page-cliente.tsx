@@ -61,23 +61,15 @@ export const PageCliente = () => {
               <div
                 key={index}
                 onClick={() => handleNavigatePage(card.href)}
-                className={`animate-slideUp group relative flex h-[154px] w-full items-center justify-center overflow-hidden rounded-[0.2rem] bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl max-sm:w-full`}
+                className={`group relative flex h-[154px] w-full animate-slideUp items-center justify-center overflow-hidden rounded-[0.2rem] bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl max-sm:w-full`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <Image
-                  src={imagecitymassape}
+                  src={card.photo}
                   alt="Imagem cidade"
                   fill
-                  className="rounded object-cover transition-opacity duration-500 group-hover:opacity-80"
+                  className="rounded object-cover object-bottom transition-opacity duration-500 group-hover:opacity-80"
                 />
-                <a
-                  href={card.href}
-                  className="animate-slideUp bg-primargreen/80 absolute flex items-center gap-4 rounded-full px-4 py-2 text-[1.2rem] font-[600] text-white transition-all duration-300 max-md:flex-col"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {card.name}
-                  <card.Icon />
-                </a>
               </div>
             ))}
           </div>

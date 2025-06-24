@@ -1,4 +1,5 @@
 import imageLogo from './massap-logo-fascinante.png'
+import logomassapemonocromatica from "./logo-massape.png"
 import womanSitting from './woman-sitting.svg'
 import wavesDecored from './waves-coderate.svg'
 import wavesBackground from './waves-background.svg'
@@ -18,11 +19,18 @@ import photomassapethird from './photo-massape-third.jpeg'
 import photomassapefourth from './photo-massape-fourth.jpeg'
 import photomassapefifth from './photo-massape-fifth.jpeg'
 import imagecitymassape from './image-background-about-massape.png'
-
+import bannercategoriaevento from "./banner-categoria-evento.jpg"
+import bannercategoriahoteis from "./banner-categoria-hoteis.jpg"
+import bannercategoriarestaurant from "./banner-categoria-restaurante.jpg"
+import bannercategoriaatracaoturistica from "./banner-categoria-atracao-turistiscas.jpg"
 
 export {
   imageLogo,
+  bannercategoriaevento,
+  bannercategoriarestaurant,
   womanSitting,
+  bannercategoriaatracaoturistica,
+  bannercategoriahoteis,
   wavesDecored,
   wavesBackground,
   munckupMobile,
@@ -41,4 +49,5 @@ export {
   photomassapefourth,
   photomassapefifth,
   imagecitymassape,
+  logomassapemonocromatica
 }

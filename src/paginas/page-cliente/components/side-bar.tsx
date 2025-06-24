@@ -1,7 +1,7 @@
 'use client'
 
 import { IconClosed } from '@/assets/icons/icone-closed'
-import { logomonocromatic } from '@/assets/image'
+import { logomassapemonocromatica } from '@/assets/image'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -16,7 +16,7 @@ export const SideBarCliente = () => {
     <header className="relative z-10 flex w-full items-center justify-center px-5 py-8">
       {/* DESKTOP HEADER */}
       <div className="m-auto hidden w-full max-w-[1280px] items-center justify-between rounded-[1.6rem] bg-primargreen px-4 py-4 lg:flex">
-        <Image src={logomonocromatic} width={170} alt="logo do sistema" />
+        <Image src={logomassapemonocromatica} width={170} alt="logo do sistema" />
         <nav className="flex gap-8 text-[1.2rem] font-semibold text-white">
           <a href="#home">Início</a>
           <a href="/taxi">Taxistas</a>
@@ -28,7 +28,7 @@ export const SideBarCliente = () => {
 
       {/* MOBILE HEADER */}
       <div className="fixed left-1/2 top-0 z-50 mt-4 flex w-[95%] -translate-x-1/2 items-center justify-between rounded-[1.6rem] bg-primargreen px-4 py-4 lg:hidden">
-        <Image src={logomonocromatic} width={150} alt="logo do sistema" />
+        <Image src={logomassapemonocromatica} width={150} alt="logo do sistema" />
 
         <button onClick={handleToggleMenu} aria-label="Abrir menu" className="w-[2.5rem]">
           <svg
