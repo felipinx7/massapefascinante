@@ -9,6 +9,7 @@ import {
   bannercategoriaevento,
   bannercategoriahoteis,
   bannercategoriarestaurant,
+  bannercategoriataxistas,
   imagecitymassape,
 } from '@/assets/image'
 import { StaticImageData } from 'next/image'
@@ -56,6 +57,6 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
     name: 'Taxistas',
     Icon: IconTaxista,
     href: '/taxi',
-    photo: imagecitymassape,
+    photo: bannercategoriataxistas,
   },
 ]
