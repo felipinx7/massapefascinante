@@ -7,7 +7,7 @@ import { CardPlacesDTO } from '@/dto/places/data-card-placesDTO'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 import { useRouter } from 'next/navigation'
 
-export const SectionAtractionTouristic = () => {
+export const SectionHosting = () => {
   const [infoPlaces, setInfoPlaces] = useState<CardPlacesDTO[]>([])
   const routes = useRouter()
 

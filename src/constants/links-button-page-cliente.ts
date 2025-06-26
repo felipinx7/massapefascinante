@@ -11,7 +11,6 @@ import {
   bannercategoriarestaurant,
   bannercategoriataxistas,
   bannercategoriacasas,
-  imagecitymassape,
 
 } from '@/assets/image'
 import { StaticImageData } from 'next/image'

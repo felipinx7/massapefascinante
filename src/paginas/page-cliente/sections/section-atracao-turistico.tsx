@@ -7,7 +7,7 @@ import { CardPlacesDTO } from '@/dto/places/data-card-placesDTO'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 import { useRouter } from 'next/navigation'
 
-export const SectionAtractionTouristic = () => {
+export const SectionDestination = () => {
   const [infoPlaces, setInfoPlaces] = useState<CardPlacesDTO[]>([])
   const routes = useRouter()
 
@@ -25,14 +25,11 @@ export const SectionAtractionTouristic = () => {
   }, [])
 
   return (
-    <section
-      id="destination"
-      className="flex w-full flex-col items-center gap-5"
-    >
+    <section id="destination" className="flex w-full flex-col items-center gap-5">
       <div className="absolute flex w-full items-center justify-center bg-primargreen p-4">
         <div className="m-0 flex w-[100%] max-w-[1280px] flex-row-reverse items-center justify-end">
           {/* Título */}
-          <h2 className="text-xl font-bold text-white">Casas Alugáveis</h2>
+          <h2 className="text-xl font-bold text-white">Destinos</h2>
 
           {/* Botão de voltar/fechar */}
           <button
@@ -47,15 +44,13 @@ export const SectionAtractionTouristic = () => {
         </div>
       </div>
 
-      <section className='max-w-[1280px] gap-8 p-4 mt-24 w-[100%] m-0 flex items-start justify-center flex-col'>
-        <div className="flex items-start flex-col justify-start m-0">
+      <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center gap-8 p-4">
+        <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
-            Conheça as melhores casas que você pode alugar!
+            Conheça os melhores da Cidade de Masspaê!
           </h1>
           <p className="text-[1.1rem] font-[400] text-primargreen">
-         Conheça as casas disponíveis para alugar e aproveite o Chitão de Massapê com muito conforto!
-
-
+            Conheça os melhores destinos e pontos turisticos de Massapê!
           </p>
         </div>
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

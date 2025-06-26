@@ -1,5 +1,5 @@
-import { SectionAtractionTouristic } from "@/paginas/page-cliente/sections/section-hostings";
+import {  SectionDestination } from '@/paginas/page-cliente/sections/section-atracao-turistico'
 
-export default function Destination (){
-    <SectionAtractionTouristic/>
+export default function Destination() {
+  return <SectionDestination />
 }
