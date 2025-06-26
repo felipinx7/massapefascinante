@@ -32,7 +32,7 @@ export const SectionAtractionTouristic = () => {
       <div className="absolute flex w-full items-center justify-center bg-primargreen p-4">
         <div className="m-0 flex w-[100%] max-w-[1280px] flex-row-reverse items-center justify-end">
           {/* Título */}
-          <h2 className="text-xl font-bold text-white">Destinos</h2>
+          <h2 className="text-xl font-bold text-white">Casas Alugáveis</h2>
 
           {/* Botão de voltar/fechar */}
           <button
@@ -53,13 +53,15 @@ export const SectionAtractionTouristic = () => {
             Conheça os Principais Destinos da cidade
           </h1>
           <p className="text-[1.1rem] font-[400] text-primargreen">
-            Conheça os destinos preferidos por quem valoriza cultura, natureza e lazer.
+         Conheça as casas disponíveis para alugar e aproveite o Chitão de Massapê com muito conforto!
+
+
           </p>
         </div>
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.isArray(infoPlaces) &&
             infoPlaces
-              .filter((place) => place.category === 'TOURIST_ATTRACTIONS')
+              .filter((place) => place.category === 'HOSTING')
               .map((place) => <CardPLaces key={place.id} {...place} />)}
         </div>
       </section>

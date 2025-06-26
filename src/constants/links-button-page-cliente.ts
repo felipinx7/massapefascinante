@@ -10,7 +10,9 @@ import {
   bannercategoriahoteis,
   bannercategoriarestaurant,
   bannercategoriataxistas,
+  bannercategoriacasas,
   imagecitymassape,
+
 } from '@/assets/image'
 import { StaticImageData } from 'next/image'
 import React from 'react'
@@ -48,10 +50,10 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
     photo: bannercategoriaevento,
   },
   {
-    name: 'Destinos',
+    name: 'Casas Alugaveis',
     Icon: IconMontain,
-    href: '/destination',
-    photo: imagecitymassape,
+    href: '/hosts',
+    photo: bannercategoriacasas,
   },
   {
     name: 'Taxistas',
@@ -59,4 +61,5 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
     href: '/taxi',
     photo: bannercategoriataxistas,
   },
+  
 ]
