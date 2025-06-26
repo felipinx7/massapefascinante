@@ -60,6 +60,8 @@ export const ModalLocation: FC<ModalLocationProps> = ({
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
 
+  const photosUrls = photos.map(photo => baseUrlPhoto('place', photo.url))
+
   const whatsappLink = gerarLinkWhatsApp(phone)
 
   return (
@@ -95,7 +97,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
             slidesPerView={1}
             className="rounded-xl"
           >
-            {photos.map((photo, index) => (
+            {photosUrls.map((photo, index) => (
               <SwiperSlide key={index}>
                 <div className="h-[500px] w-full overflow-hidden rounded-xl">
                   <Image
