@@ -50,7 +50,7 @@ export const SectionAtractionTouristic = () => {
       <section className='max-w-[1280px] gap-8 p-4 mt-24 w-[100%] m-0 flex items-start justify-center flex-col'>
         <div className="flex items-start flex-col justify-start m-0">
           <h1 className="text-[2rem] font-[700] text-primargreen">
-            Conheça os Principais Destinos da cidade
+            Conheça as melhores casas que você pode alugar!
           </h1>
           <p className="text-[1.1rem] font-[400] text-primargreen">
          Conheça as casas disponíveis para alugar e aproveite o Chitão de Massapê com muito conforto!
