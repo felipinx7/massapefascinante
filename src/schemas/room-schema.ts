@@ -3,8 +3,7 @@ import { z } from "zod";
 export const roomSchema = z.object({
   price: z
     .number({ required_error: "O preço é obrigatório." })
-    .min(0)
-    .optional(),
+    .positive("O preço deve ser um número positivo."),
     
 available: z
   .boolean({ required_error: "Disponibilidade é obrigatória." })

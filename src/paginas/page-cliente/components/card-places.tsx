@@ -14,7 +14,7 @@ export function CardPLaces(data: CardPlacesDTO) {
 
   const photoURL = baseUrlPhoto('place', data.photos[0].url)
   let roomPrice = null
-  if (Array.isArray(data?.rooms) && data.rooms.length > 0 && data.rooms[0].price !== 0) {
+  if (Array.isArray(data?.rooms) && data.rooms.length > 1 && data.rooms[0].price !== 0) {
     roomPrice = data.rooms[0].price
   }
   return (
