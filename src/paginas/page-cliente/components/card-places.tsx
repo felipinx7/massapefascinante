@@ -13,10 +13,10 @@ export function CardPLaces(data: CardPlacesDTO) {
   }
 
   const photoURL = baseUrlPhoto('place', data.photos[0].url)
-  const roomPrice = data?.rooms[0]?.price;
-  console.log("neocio da rom", roomPrice)
-  console.log('photo dos lugar: ', photoURL)
-
+  let roomPrice = null
+  if (Array.isArray(data?.rooms) && data.rooms.length > 1 && data.rooms[0].price !== 0) {
+    roomPrice = data.rooms[0].price
+  }
   return (
     <>
       <article
@@ -33,7 +33,11 @@ export function CardPLaces(data: CardPlacesDTO) {
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-4">
-        {roomPrice ? ( <h6 className="line-clamp-2 text-xl font-semibold text-black">R$ {roomPrice}</h6>) : ""}
+          {roomPrice ? (
+            <h6 className="line-clamp-2 text-xl font-semibold text-black">R$ {roomPrice}</h6>
+          ) : (
+            ''
+          )}
           <h6 className="line-clamp-2 text-xl font-semibold text-black">{data.name}</h6>
           <p className="line-clamp-3 text-sm text-gray-700">{data.description}</p>
         </div>
