@@ -34,7 +34,7 @@ export function CardPLaces(data: CardPlacesDTO) {
 
         <div className="flex flex-1 flex-col gap-2 p-4">
           {roomPrice ? (
-            <h6 className="line-clamp-2 text-xl font-semibold text-black">R$ {roomPrice}</h6>
+            <h6 className="line-clamp-2 text-xl font-semibold text-black">R$ {roomPrice != 1 ? roomPrice : ""}</h6>
           ) : (
             ''
           )}
