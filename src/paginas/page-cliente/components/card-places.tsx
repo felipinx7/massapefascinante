@@ -50,7 +50,7 @@ export function CardPLaces(data: CardPlacesDTO) {
         id={data.id}
         phone={data.phone}
         instagram={data.instagram}
-        photos={photoURL}
+        photos={data.photos}
         handleDeleteEvent={handleShowModal}
         key={data.id}
         location={data.location}

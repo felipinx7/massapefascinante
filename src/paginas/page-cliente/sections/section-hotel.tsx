@@ -59,7 +59,7 @@ export function SectionHotel() {
 
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {infoPlaces
-            .filter((place) => place.category === 'HOTEL' || place.category === 'HOSTING')
+            .filter((place) => place.category === 'HOTEL' )
             .map((place) => (
               <CardPLaces key={place.id} {...place} />
             ))}

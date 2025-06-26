@@ -11,6 +11,16 @@ import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 import { CardPLaces } from './card-places'
 
+import Image from 'next/image'
+import { Pagination } from 'swiper/modules'
+
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
+
 interface ModalLocationProps extends CardEventPageAdministrative {
   onClose: () => void
   showModal: boolean
@@ -51,6 +61,8 @@ export const ModalLocation: FC<ModalLocationProps> = ({
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
 
+  const photosUrls = photos.map(photo => baseUrlPhoto('place', photo.url))
+
   const whatsappLink = gerarLinkWhatsApp(phone)
 
   return (
@@ -79,11 +91,27 @@ export const ModalLocation: FC<ModalLocationProps> = ({
           className="max-h-[500px] w-full overflow-hidden rounded-xl"
           style={{ height: '500px' }}
         >
-          <img
-            src={photos ? photos : backgroundloginpage}
-            alt={`Imagem de ${name}`}
-            className="h-full w-full rounded-xl object-cover"
-          />
+          <Swiper
+            modules={[Pagination]}
+            pagination={{ clickable: true }}
+
+            slidesPerView={1}
+            className="rounded-xl"
+          >
+            {photosUrls.map((photo, index) => (
+              <SwiperSlide key={index}>
+                <div className="h-[500px] w-full overflow-hidden rounded-xl">
+                  <Image
+                    src={photo}
+                    alt={`Foto ${index + 1} de Moraújo`}
+                    width={1200}
+                    height={500}
+                    className="h-full w-full rounded-xl object-cover"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
         {/* Título e descrição */}
