@@ -2,6 +2,7 @@ import { IconBed } from '@/assets/icons/icon-bed'
 import { IconCalendary } from '@/assets/icons/icon-calendary'
 import { IconCamera } from '@/assets/icons/icon-camera'
 import { IconFork } from '@/assets/icons/icon-fork'
+import { IconHouse } from '@/assets/icons/icon-house'
 import { IconMontain } from '@/assets/icons/icon-montain'
 import { IconTaxista } from '@/assets/icons/icon-taxista'
 import {
@@ -50,7 +51,7 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
   },
   {
     name: 'Casas Alugaveis',
-    Icon: IconMontain,
+    Icon: IconHouse,
     href: '/hosts',
     photo: bannercategoriacasas,
   },
