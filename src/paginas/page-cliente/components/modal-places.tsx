@@ -9,6 +9,7 @@ import { CardEventPageAdministrative } from '@/dto/event/data-card-event-DTO'
 import { getAllPlaces } from '@/services/routes/places/get-all-places'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
+import { CardPLaces } from './card-places'
 
 interface ModalLocationProps extends CardEventPageAdministrative {
   onClose: () => void
