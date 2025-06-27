@@ -154,7 +154,7 @@ export const ModalEvents: FC<ModalEventsProps> = ({
                 // </div>
                 <CardEvent
                   key={index}
-                  photoURLs={baseUrlPhoto('event', place?.photos?.[0]?.url)}
+                  photoURLs={baseUrlPhoto('event', place?.photos?.[0]?.url?.split('/').pop())}
                   {...place}
                 />
               )
