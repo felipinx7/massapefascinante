@@ -189,7 +189,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
                 <CardPLaces
                   key={index}
                   {...place}
-                  photos={baseUrlPhoto('event', place?.photos?.[0]?.url)}
+                  photos={photo('event', place?.photos?.[0]?.url)}
                 />
               )
             })}
