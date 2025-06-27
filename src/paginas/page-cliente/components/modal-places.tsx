@@ -14,12 +14,10 @@ import { CardPLaces } from './card-places'
 import Image from 'next/image'
 import { Pagination } from 'swiper/modules'
 
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
 
 interface ModalLocationProps extends CardEventPageAdministrative {
   onClose: () => void
@@ -61,7 +59,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
 
-  const photosUrls = photos.map(photo => baseUrlPhoto('place', photo.url))
+  const photosUrls = photos.map((photo) => baseUrlPhoto('place', photo.url))
 
   const whatsappLink = gerarLinkWhatsApp(phone)
 
@@ -94,7 +92,6 @@ export const ModalLocation: FC<ModalLocationProps> = ({
           <Swiper
             modules={[Pagination]}
             pagination={{ clickable: true }}
-
             slidesPerView={1}
             className="rounded-xl"
           >
@@ -117,7 +114,11 @@ export const ModalLocation: FC<ModalLocationProps> = ({
         {/* Título e descrição */}
         <div className="mt-6">
           <h1 className="text-[2rem] font-bold">{name}</h1>
-          {roomValue ? (<h1 className="text-[2rem] font-bold">R$ {roomValue != 1 ? roomValue : " "  }</h1>) : ""}
+          {roomValue ? (
+            <h1 className="text-[2rem] font-bold">R$ {roomValue != 1 ? roomValue : ' '}</h1>
+          ) : (
+            ''
+          )}
 
           <p className="mt-4 text-[1rem] leading-6 text-gray-700">{description}</p>
         </div>
@@ -125,7 +126,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
         {/* Contact */}
         <div className="mt-10">
           <h2 className="mb-4 text-lg font-bold">Contatos</h2>
-          <div className="flex  gap-4">
+          <div className="flex gap-4">
             {instagram && (
               <a
                 href={`https://instagram.com/${instagram}`}
@@ -172,20 +173,26 @@ export const ModalLocation: FC<ModalLocationProps> = ({
             {placesSimilar.map((place, index) => {
               const photo = baseUrlPhoto('place', place?.photos[0].url)
               return (
-              <div key={index} className="flex flex-col">
-                    <div key={index} className="h-[250px] w-full overflow-hidden rounded-lg">
-                      <img
-                        src={photo || backgroundloginpage}
-                        alt={`Imagem de ${place.name}`}
-                        className="h-full w-full object-cover"
-                        width={400}
-                        height={250}
-                      />
-                    </div>
-                <span className="mt-2 font-semibold">{place.name}</span>
-                <span className="text-sm text-gray-600">{place.location}</span>
-              </div>
-            )})}
+                // <div key={index} className="flex flex-col">
+                //       <div key={index} className="h-[250px] w-full overflow-hidden rounded-lg">
+                //         <img
+                //           src={photo || backgroundloginpage}
+                //           alt={`Imagem de ${place.name}`}
+                //           className="h-full w-full object-cover"
+                //           width={400}
+                //           height={250}
+                //         />
+                //       </div>
+                //   <span className="mt-2 font-semibold">{place.name}</span>
+                //   <span className="text-sm text-gray-600">{place.location}</span>
+                // </div>
+                <CardPLaces
+                  key={index}
+                  {...place}
+                  photos={baseUrlPhoto('event', place?.photos?.[0]?.url)}
+                />
+              )
+            })}
           </div>
         </div>
       </div>
