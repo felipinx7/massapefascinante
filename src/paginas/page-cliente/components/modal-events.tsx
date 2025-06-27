@@ -152,7 +152,7 @@ export const ModalEvents: FC<ModalEventsProps> = ({
                 //   <span className="mt-2 font-semibold">{place.name}</span>
                 //   <span className="text-sm text-gray-600">{place.location}</span>
                 // </div>
-                <CardEvent key={index} {...place}/>
+                <CardEvent key={index} photoURLs={baseUrlPhoto} {...place}/>
               )
             })}
           </div>
