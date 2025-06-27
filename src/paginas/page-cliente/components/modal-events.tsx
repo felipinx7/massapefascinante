@@ -9,6 +9,7 @@ import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { dataCardEventClientPage } from '@/dto/event/data-card-event-client-page-DTO'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 import { CardPLaces } from './card-places'
+import { CardEvent } from './card-event'
 
 interface DataCityInfo {
   name: string
@@ -151,7 +152,7 @@ export const ModalEvents: FC<ModalEventsProps> = ({
                 //   <span className="mt-2 font-semibold">{place.name}</span>
                 //   <span className="text-sm text-gray-600">{place.location}</span>
                 // </div>
-                <CardPLaces key={index} {...place}/>
+                <CardEvent key={index} {...place}/>
               )
             })}
           </div>
