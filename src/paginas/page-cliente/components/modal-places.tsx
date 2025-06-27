@@ -186,11 +186,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
                 //   <span className="mt-2 font-semibold">{place.name}</span>
                 //   <span className="text-sm text-gray-600">{place.location}</span>
                 // </div>
-                <CardPLaces
-                  key={index}
-                  {...place}
-                  photos={photo('event', place?.photos?.[0]?.url)}
-                />
+                <CardPLaces key={index} {...place} photos={photoUrl} />
               )
             })}
           </div>
