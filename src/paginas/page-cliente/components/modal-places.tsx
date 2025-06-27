@@ -171,23 +171,9 @@ export const ModalLocation: FC<ModalLocationProps> = ({
           <h2 className="mb-6 text-lg font-bold">Indicações de Lugares Semelhantes</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {placesSimilar.map((place, index) => {
-              const photo = baseUrlPhoto('place', place?.photos[0].url)
-              return (
-                // <div key={index} className="flex flex-col">
-                //       <div key={index} className="h-[250px] w-full overflow-hidden rounded-lg">
-                //         <img
-                //           src={photo || backgroundloginpage}
-                //           alt={`Imagem de ${place.name}`}
-                //           className="h-full w-full object-cover"
-                //           width={400}
-                //           height={250}
-                //         />
-                //       </div>
-                //   <span className="mt-2 font-semibold">{place.name}</span>
-                //   <span className="text-sm text-gray-600">{place.location}</span>
-                // </div>
-                <CardPLaces key={index} {...place} photos={photoUrl} />
-              )
+              const photo = baseUrlPhoto('place', place?.photos?.[0]?.url)
+
+              return <CardPLaces key={index} {...place} photos={photo} />
             })}
           </div>
         </div>
