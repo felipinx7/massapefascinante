@@ -7,7 +7,6 @@ import { getAllPlaces } from '@/services/routes/places/get-all-places'
 import { useRouter } from 'next/navigation'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 
-// Ordem "ideal" de exibição (você pode ajustar aqui conforme os nomes no banco)
 const ordemDesejada = [
   'SABOR DO SERTÃO',
   "LIRA'S BURGUER",
@@ -25,13 +24,12 @@ const ordemDesejada = [
   'BALNEÁRIO LILI E MESSIAS',
 ]
 
-// 🔧 Função que normaliza strings para comparação
 function normalizeString(str: string) {
   return str
-    .normalize('NFD') // remove acentos
-    .replace(/[\u0300-\u036f]/g, '') // remove marcas de acento
-    .replace(/[^\w\s]/gi, '') // remove pontuação
-    .replace(/\s+/g, ' ') // espaços múltiplos viram 1
+    .normalize('NFD')  
+    .replace(/[\u0300-\u036f]/g, '')  
+    .replace(/[^\w\s]/gi, '')  
+    .replace(/\s+/g, ' ')  
     .trim()
     .toUpperCase()
 }
