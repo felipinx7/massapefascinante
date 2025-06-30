@@ -18,8 +18,14 @@ export const SectionTaxiPage = () => {
   async function fetchTaxi() {
     const response = await GetAllTaxi()
     const taxi = response?.data ?? []
-    console.log('valores do taxi', taxi)
-    setShowTaxi(taxi)
+
+    const ordenado = taxi.sort((a, b) => {
+      if (a.name.toUpperCase().includes('KELSON LINO')) return -1
+      if (b.name.toUpperCase().includes('KELSON LINO')) return 1
+      return 0
+    })
+
+    setShowTaxi(ordenado)
   }
 
   useEffect(() => {
