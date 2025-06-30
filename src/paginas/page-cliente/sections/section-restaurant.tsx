@@ -7,9 +7,10 @@ import { getAllPlaces } from '@/services/routes/places/get-all-places'
 import { useRouter } from 'next/navigation'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 
+// Ordem "ideal" de exibição (você pode ajustar aqui conforme os nomes no banco)
 const ordemDesejada = [
   'SABOR DO SERTÃO',
-  'LIRA’S BURGUER',
+  "LIRA'S BURGUER",
   'RESTAURANTE PRIMEIRA PARADA',
   'RESTAURANTE SABOR DA SERRA',
   'RESTAURANTE BRANCA DE NEVE',
@@ -24,6 +25,17 @@ const ordemDesejada = [
   'BALNEÁRIO LILI E MESSIAS',
 ]
 
+// 🔧 Função que normaliza strings para comparação
+function normalizeString(str: string) {
+  return str
+    .normalize('NFD') // remove acentos
+    .replace(/[\u0300-\u036f]/g, '') // remove marcas de acento
+    .replace(/[^\w\s]/gi, '') // remove pontuação
+    .replace(/\s+/g, ' ') // espaços múltiplos viram 1
+    .trim()
+    .toUpperCase()
+}
+
 export function SectionRestaurant() {
   const [infoPlaces, setInfoPlaces] = useState<CardPlacesDTO[]>([])
   const routes = useRouter()
@@ -37,20 +49,26 @@ export function SectionRestaurant() {
       try {
         const response = await getAllPlaces()
 
-        // Apenas restaurantes + ordenação personalizada
-        const ordenado = response
-          .filter((place) => place.category === 'RESTAURANT')
-          .sort((a, b) => {
-            const indexA = ordemDesejada.indexOf(a.name.toUpperCase())
-            const indexB = ordemDesejada.indexOf(b.name.toUpperCase())
-            return indexA - indexB
-          })
-
-        console.log(
-          'Restaurantes ordenados:',
-          ordenado.map((p) => p.name),
+        const restaurantes = response.filter(
+          (place) => place.category === 'RESTAURANT'
         )
 
+        const ordenado = restaurantes.sort((a, b) => {
+          const nomeA = normalizeString(a.name)
+          const nomeB = normalizeString(b.name)
+
+          const indexA = ordemDesejada.findIndex(
+            (nome) => normalizeString(nome) === nomeA
+          )
+          const indexB = ordemDesejada.findIndex(
+            (nome) => normalizeString(nome) === nomeB
+          )
+
+          // Se o nome não está no array, coloca ele no final
+          return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
+        })
+
+        console.log('Restaurantes ordenados:', ordenado.map((p) => p.name))
         setInfoPlaces(ordenado)
       } catch (error) {
         console.error('Erro ao buscar os restaurantes:', error)
@@ -79,7 +97,7 @@ export function SectionRestaurant() {
       </div>
 
       {/* Conteúdo principal */}
-      <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center gap-8 p-4">
+      <section className="m-0 mt-24 flex w-[100%] gap-8 max-w-[1280px] flex-col items-start justify-center p-4">
         <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Principais Restaurantes da Cidade
