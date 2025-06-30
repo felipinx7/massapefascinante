@@ -10,6 +10,7 @@ import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 const ordemDesejada = [
   'SABOR DO SERTÃO',
   "LIRA'S BURGUER",
+  "BOTECO DO TORRESMO",
   'RESTAURANTE PRIMEIRA PARADA',
   'RESTAURANTE SABOR DA SERRA',
   'RESTAURANTE BRANCA DE NEVE',
