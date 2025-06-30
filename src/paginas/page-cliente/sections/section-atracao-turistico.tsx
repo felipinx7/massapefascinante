@@ -47,7 +47,7 @@ export const SectionDestination = () => {
       <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center gap-8 p-4">
         <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
-            Conheça os melhores da Cidade de Masspaê!
+            Conheça os melhores destinos da Cidade de Massapê!
           </h1>
           <p className="text-[1.1rem] font-[400] text-primargreen">
             Conheça os melhores destinos e pontos turisticos de Massapê!
