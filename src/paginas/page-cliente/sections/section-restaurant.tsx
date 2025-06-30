@@ -7,6 +7,24 @@ import { getAllPlaces } from '@/services/routes/places/get-all-places'
 import { useRouter } from 'next/navigation'
 import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 
+const ordemDesejada = [
+  'SABOR DO SERTÃO',
+  'LIRA’S BURGUER',
+  'RESTAURANTE PRIMEIRA PARADA',
+  'RESTAURANTE SABOR DA SERRA',
+  'RESTAURANTE BRANCA DE NEVE',
+  'RESTAURANTE PONTO DO SUSHI',
+  'RESTAURANTE O VALDIZÃO',
+  'RESTAURANTE DA BICA',
+  'BALNEÁRIO CONTENDAS',
+  'RESTAURANTE BANZEIRO',
+  'BARRACA DOS IRMÃOS',
+  'CARLINHOS DA GALERIA',
+  'CLUBE TANGENTE',
+  'BALNEÁRIO LILI E MESSIAS',
+]
+
+
 export function SectionRestaurant() {
   const [infoPlaces, setInfoPlaces] = useState<CardPlacesDTO[]>([])
   const routes = useRouter()
@@ -17,14 +35,22 @@ export function SectionRestaurant() {
 
   useEffect(() => {
     const fetchPlaces = async () => {
-      try {
-        const response = await getAllPlaces()
-        setInfoPlaces(response)
-      } catch (error) {
-        console.error('Erro ao buscar os restaurantes:', error)
-      }
-    }
+  try {
+    const response = await getAllPlaces()
 
+    const ordenado = response
+      .filter((place) => place.category === 'RESTAURANT')
+      .sort((a, b) => {
+        const indexA = ordemDesejada.indexOf(a.name.toUpperCase())
+        const indexB = ordemDesejada.indexOf(b.name.toUpperCase())
+        return indexA - indexB
+      })
+
+    setInfoPlaces(ordenado)
+  } catch (error) {
+    console.error('Erro ao buscar os restaurantes:', error)
+  }
+}
     fetchPlaces()
   }, [])
 
