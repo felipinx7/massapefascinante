@@ -24,7 +24,6 @@ const ordemDesejada = [
   'BALNEÁRIO LILI E MESSIAS',
 ]
 
-
 export function SectionRestaurant() {
   const [infoPlaces, setInfoPlaces] = useState<CardPlacesDTO[]>([])
   const routes = useRouter()
@@ -35,22 +34,29 @@ export function SectionRestaurant() {
 
   useEffect(() => {
     const fetchPlaces = async () => {
-  try {
-    const response = await getAllPlaces()
+      try {
+        const response = await getAllPlaces()
 
-    const ordenado = response
-      .filter((place) => place.category === 'RESTAURANT')
-      .sort((a, b) => {
-        const indexA = ordemDesejada.indexOf(a.name.toUpperCase())
-        const indexB = ordemDesejada.indexOf(b.name.toUpperCase())
-        return indexA - indexB
-      })
+        // Apenas restaurantes + ordenação personalizada
+        const ordenado = response
+          .filter((place) => place.category === 'RESTAURANT')
+          .sort((a, b) => {
+            const indexA = ordemDesejada.indexOf(a.name.toUpperCase())
+            const indexB = ordemDesejada.indexOf(b.name.toUpperCase())
+            return indexA - indexB
+          })
 
-    setInfoPlaces(ordenado)
-  } catch (error) {
-    console.error('Erro ao buscar os restaurantes:', error)
-  }
-}
+        console.log(
+          'Restaurantes ordenados:',
+          ordenado.map((p) => p.name),
+        )
+
+        setInfoPlaces(ordenado)
+      } catch (error) {
+        console.error('Erro ao buscar os restaurantes:', error)
+      }
+    }
+
     fetchPlaces()
   }, [])
 
@@ -73,7 +79,7 @@ export function SectionRestaurant() {
       </div>
 
       {/* Conteúdo principal */}
-      <section className="m-0 mt-24 flex w-[100%] gap-8 max-w-[1280px] flex-col items-start justify-center p-4">
+      <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center gap-8 p-4">
         <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Principais Restaurantes da Cidade
@@ -85,9 +91,7 @@ export function SectionRestaurant() {
 
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.isArray(infoPlaces) &&
-            infoPlaces
-              .filter((place) => place.category === 'RESTAURANT')
-              .map((place) => <CardPLaces key={place.id} {...place} />)}
+            infoPlaces.map((place) => <CardPLaces key={place.id} {...place} />)}
         </div>
       </section>
     </section>
