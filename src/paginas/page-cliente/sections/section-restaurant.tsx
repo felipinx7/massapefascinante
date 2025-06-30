@@ -68,7 +68,6 @@ export function SectionRestaurant() {
           return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
         })
 
-        console.log('Restaurantes ordenados:', ordenado.map((p) => p.name))
         setInfoPlaces(ordenado)
       } catch (error) {
         console.error('Erro ao buscar os restaurantes:', error)
