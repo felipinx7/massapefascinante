@@ -7,6 +7,7 @@ import 'swiper/css/pagination'
 
 import { Albert_Sans, Poppins, Sora } from 'next/font/google'
 import { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     title: 'Massapê Fascinante',
     description: 'Explore Massapê-CE com nosso sistema de turismo digital e responsivo.',
     images: ['/opengraph-image.png'],
-    creator: '@prefeituramassape', 
+    creator: '@prefeituramassape',
   },
   icons: {
     icon: '/logo-brasao-massape.png',
@@ -87,6 +88,7 @@ export default function RootLayout({
       <link rel="icon" href="./logo-brasao-massape" />
       <body className={`${sora.variable} ${albertSans.variable} ${poppins.variable} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
