@@ -2,8 +2,6 @@ import { IconBed } from '@/assets/icons/icon-bed'
 import { IconCalendary } from '@/assets/icons/icon-calendary'
 import { IconCamera } from '@/assets/icons/icon-camera'
 import { IconFork } from '@/assets/icons/icon-fork'
-import { IconHouse } from '@/assets/icons/icon-house'
-import { IconMontain } from '@/assets/icons/icon-montain'
 import { IconTaxista } from '@/assets/icons/icon-taxista'
 import {
   bannercategoriaatracaoturistica,
@@ -11,7 +9,6 @@ import {
   bannercategoriahoteis,
   bannercategoriarestaurant,
   bannercategoriataxistas,
-  bannercategoriacasas,
 
 } from '@/assets/image'
 import { StaticImageData } from 'next/image'
@@ -48,12 +45,6 @@ export const LinksButtonPageCliente: LinksButtonPageClienteProps[] = [
     Icon: IconCalendary,
     href: '/events',
     photo: bannercategoriaevento,
-  },
-  {
-    name: 'Casas Alugaveis',
-    Icon: IconHouse,
-    href: '/hosts',
-    photo: bannercategoriacasas,
   },
   {
     name: 'Taxistas',
