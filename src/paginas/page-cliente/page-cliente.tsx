@@ -47,7 +47,7 @@ export const PageCliente = () => {
             </div>
             <div className="flex flex-col">
               <div className='flex'>
-                <p className="font-bold text-primargreen">{Math.round(temp)}C°</p>
+                <p className="font-bold text-primargreen">{Math.round(temp)}°C</p>
                 <h1 className="font-bold text-primargreen"> Massapê, CE</h1>
               </div>
               <div>
