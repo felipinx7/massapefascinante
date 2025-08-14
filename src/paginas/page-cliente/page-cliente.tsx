@@ -40,7 +40,7 @@ export const PageCliente = () => {
       <div className="justify-baseline flex w-full max-w-[1280px] flex-col items-center">
         <SideBarCliente />
         <div className="flex w-full px-4 max-lg:mt-10 max-lg:px-5">
-          <div className="justify-baseline flex w-full translate-y-[-1rem] max-lg:translate-y-[1rem] items-center justify-start gap-2 pl-4">
+          <div className="justify-baseline max-lg:justify-center flex w-full translate-y-[-1rem] max-lg:translate-y-[1rem] items-center justify-start gap-2 pl-4">
             <div className="h-10 w-10">
               <IconCloud />
             </div>
