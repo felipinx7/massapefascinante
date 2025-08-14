@@ -1,6 +1,7 @@
 'use client'
 
 import { IconClosed } from '@/assets/icons/icone-closed'
+import { IconCloud } from '@/assets/icons/incon-cloud'
 import { logomassapemonocromatica } from '@/assets/image'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -19,15 +20,19 @@ export const SideBarCliente = () => {
         <Image src={logomassapemonocromatica} width={170} alt="logo do sistema" />
         <nav className="flex gap-8 text-[1.2rem] font-semibold text-white">
           <a href="#home">Início</a>
-          <a href="/history-city">História</a>
+          <a href="/historia-cidade">História</a>
           <a href="/about-city">Sobre a cidade</a>
-          
         </nav>
       </div>
 
       {/* MOBILE HEADER */}
       <div className="fixed left-1/2 top-0 z-50 mt-4 flex w-[95%] -translate-x-1/2 items-center justify-between rounded-[1.6rem] bg-primargreen px-4 py-4 lg:hidden">
         <Image src={logomassapemonocromatica} width={150} alt="logo do sistema" />
+        <div>
+          <div>
+            <IconCloud />
+          </div>
+        </div>
 
         <button onClick={handleToggleMenu} aria-label="Abrir menu" className="w-[2.5rem]">
           <svg
@@ -67,9 +72,8 @@ export const SideBarCliente = () => {
           <a href="#home" onClick={handleToggleMenu}>
             Início
           </a>
-          <a href="/taxi">
-           Taxistas
-
+          <a href="/historia-cidade" onClick={handleToggleMenu}>
+            História
           </a>
           <a href="#explorer" onClick={handleToggleMenu}>
             Explorar
@@ -78,7 +82,6 @@ export const SideBarCliente = () => {
           <a href="/about-city" onClick={handleToggleMenu}>
             Sobre a cidade
           </a>
-
         </nav>
       </div>
 

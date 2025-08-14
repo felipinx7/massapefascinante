@@ -4,17 +4,59 @@ import { LinksButtonPageCliente } from '@/constants/links-button-page-cliente'
 import { SideBarCliente } from './components/side-bar'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import {  logoprefeituramassape } from '@/assets/image'
+import { logoprefeituramassape } from '@/assets/image'
+import { IconCloud } from '@/assets/icons/incon-cloud'
+import { useState } from 'react'
 
 export const PageCliente = () => {
   const routes = useRouter()
+  const city = 'Massapê'
+  const apiKey = '8a60b2de14f7a17c7a11706b2cfcd87c'
+  const apiWeath = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)}&appid=${apiKey}&units=metric&lang=pt_br`
+  const [temp, setTemp] = useState<string | number>('')
+  const [clima, setClima] = useState('')
+
+  async function fetchApi() {
+    try {
+      const response = await fetch(apiWeath)
+      const resultapi = await response.json()
+      const temperatura = resultapi.main.temp
+      const descricaoClima = resultapi.weather[0].description
+      setTemp(temperatura)
+      setClima(descricaoClima)
+      console.log('Deu bom', resultapi)
+      return temp
+    } catch (error) {
+      console.log('Error ao consumir a api', error)
+    }
+  }
+
+  fetchApi()
 
   const handleNavigatePage = (href: string) => {
     routes.push(`https://www.massapefascinante.com.br/${href}`)
   }
   return (
-    <main className="flex min-h-[100vh] w-full flex-col justify-between">
-      <SideBarCliente />
+    <main className="flex min-h-[100vh] w-full flex-col items-center justify-between">
+      <div className="justify-baseline flex w-full max-w-[1280px] flex-col items-center">
+        <SideBarCliente />
+        <div className="flex w-full px-4 max-lg:mt-10 max-lg:px-5">
+          <div className="justify-baseline flex w-full translate-y-[-1rem] items-center justify-start gap-2 pl-4">
+            <div className="h-10 w-10">
+              <IconCloud />
+            </div>
+            <div className="flex flex-col">
+              <div className='flex'>
+                <p className="font-bold text-primargreen">{Math.round(temp)}C°</p>
+                <h1 className="font-bold text-primargreen"> Massapê, CE</h1>
+              </div>
+              <div>
+                <h5 className="text-[0.8rem] text-primargreen">{clima}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* CONTAINER INFO MAIN */}
       <div
@@ -25,7 +67,7 @@ export const PageCliente = () => {
           Conheça melhor a cidade de Massapê
         </h1>
 
-        <p className="w-full text-center text-[1.1rem] font-[400]  text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
+        <p className="w-full text-center text-[1.1rem] font-[400] text-primargreen transition-opacity duration-700 ease-in hover:opacity-80">
           Veja abaixo as categorias que vão guiar sua próxima descoberta.
         </p>
 
