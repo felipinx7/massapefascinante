@@ -24,7 +24,6 @@ export const PageCliente = () => {
       const descricaoClima = resultapi.weather[0].description
       setTemp(temperatura)
       setClima(descricaoClima)
-      console.log('Deu bom', resultapi)
       return temp
     } catch (error) {
       console.log('Error ao consumir a api', error)
@@ -46,7 +45,7 @@ export const PageCliente = () => {
               <IconCloud />
             </div>
             <div className="flex flex-col">
-              <div className='flex'>
+              <div className='flex gap-1'>
                 <p className="font-bold text-primargreen">{Math.round(temp)}°C</p>
                 <h1 className="font-bold text-primargreen"> Massapê, CE</h1>
               </div>
