@@ -1,5 +1,5 @@
 import imageLogo from './massap-logo-fascinante.png'
-import logomassapemonocromatica from "./logo-massape.png"
+import logomassapemonocromatica from './logo-massape.png'
 import womanSitting from './woman-sitting.svg'
 import wavesDecored from './waves-coderate.svg'
 import wavesBackground from './waves-background.svg'
@@ -19,13 +19,17 @@ import photomassapethird from './photo-massape-third.jpeg'
 import photomassapefourth from './photo-massape-fourth.jpeg'
 import photomassapefifth from './photo-massape-fifth.jpeg'
 import imagecitymassape from './image-background-about-massape.png'
-import bannercategoriaevento from "./banner-categoria-evento.jpg"
-import bannercategoriahoteis from "./banner-categoria-hoteis.jpg"
-import bannercategoriarestaurant from "./banner-categoria-restaurante.jpg"
-import bannercategoriaatracaoturistica from "./banner-categoria-atracao-turistiscas.jpg"
-import logoprefeituramassape from "./logo-prefeitura-massape.png"
-import bannercategoriataxistas from "./banner-categoria-taxistas.jpeg"
+import bannercategoriaevento from './banner-categoria-evento.jpg'
+import bannercategoriahoteis from './banner-categoria-hoteis.jpg'
+import bannercategoriarestaurant from './banner-categoria-restaurante.jpg'
+import bannercategoriaatracaoturistica from './banner-categoria-atracao-turistiscas.jpg'
+import logoprefeituramassape from './logo-prefeitura-massape.png'
+import bannercategoriataxistas from './banner-categoria-taxistas.jpeg'
 import bannercategoriacasas from './imagemcasaschitao.jpeg'
+import imagem01 from './imagem-historia-massape-01.jpg'
+import imagem02 from './imagem-historia-massape-02.jpg'
+import imagem03 from './imagem-historia-massape-03.jpg'
+import imagem04 from './imagem-historia-massape-04.jpg'
 
 export {
   imageLogo,
@@ -55,5 +59,9 @@ export {
   logomassapemonocromatica,
   logoprefeituramassape,
   bannercategoriataxistas,
-  bannercategoriacasas
+  bannercategoriacasas,
+  imagem01,
+  imagem02,
+  imagem03,
+  imagem04,
 }
