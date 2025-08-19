@@ -9,6 +9,12 @@ import Image from 'next/image'
 import { Footer } from '../home-page/sections/footer'
 import CardMaisNoticias from './components/card-mais-noticias'
 
+import { Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
 export default function PaginaNoticia() {
   // States usados no componente
   const router = useRouter()
@@ -95,10 +101,19 @@ export default function PaginaNoticia() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className="mt-4 grid grid-cols-3 gap-4 max-md:grid-cols-2 max-sm:grid-cols-1">
-              {noticias.map((card) => (
-                <CardMaisNoticias key={card.titulo} {...card} />
-              ))}
+            <div className="mt-4">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                slidesPerView={1}
+                className="rounded-xl"
+              >
+                {noticias.map((card) => (
+                  <SwiperSlide key={card.titulo}>
+                    <CardMaisNoticias key={card.titulo} {...card} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
         </div>
