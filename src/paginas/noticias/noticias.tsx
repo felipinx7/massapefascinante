@@ -101,11 +101,30 @@ export default function PaginaNoticia() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className="mt-4">
+            <div className=" mt-4">
               <Swiper
                 modules={[Pagination]}
                 pagination={{ clickable: true }}
-                slidesPerView={1}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                  },
+                  600: {
+                    slidesPerView: 4,
+                  },
+                  720: {
+                    slidesPerView: 4,
+                  },
+                  860: {
+                    slidesPerView: 4.5,
+                  },
+                  1024: {
+                    slidesPerView: 4.5,
+                  },
+                  1360: {
+                    slidesPerView: 5.5,
+                  },
+                }}
                 className="rounded-xl"
               >
                 {noticias.map((card) => (
