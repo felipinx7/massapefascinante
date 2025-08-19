@@ -30,6 +30,7 @@ import imagem01 from './imagem-historia-massape-01.jpg'
 import imagem02 from './imagem-historia-massape-02.jpg'
 import imagem03 from './imagem-historia-massape-03.jpg'
 import imagem04 from './imagem-historia-massape-04.jpg'
+import imagemnoticia from './imagem-noticia.png'
 
 export {
   imageLogo,
@@ -64,4 +65,5 @@ export {
   imagem02,
   imagem03,
   imagem04,
+  imagemnoticia,
 }

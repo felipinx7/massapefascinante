@@ -35,7 +35,7 @@ export const Footer = () => {
         <hr className="bg-primargreen my-2 h-[0.2rem] w-full" />
         <div className="flex w-full items-center justify-center">
           <h3 className="text-primargreen mt-4 font-[--font-sora] font-[300]">
-            Copyright © 2025 CocoTour All Rigths Reserved
+            Copyright © 2025 MassapeFascinante All Rigths Reserved
           </h3>
         </div>
       </div>
