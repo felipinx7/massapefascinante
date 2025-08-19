@@ -2,7 +2,7 @@ import { cardNoticiasDTO } from '@/dto/noticias/DTO-noticias-card'
 
 export default function CardMaisNoticias(data: cardNoticiasDTO) {
   return (
-    <article className="group relative flex w-full cursor-pointer items-start justify-start gap-2 transition-all duration-500 ease-in-out hover:scale-105 max-lg:flex-col max-lg:justify-between">
+    <article className="group relative flex w-full cursor-pointer items-start gap-2  transition-all duration-500 ease-in-out hover:scale-105 flex-col justify-between">
       <div className="h-full w-full overflow-clip rounded-[5.97px]">
         <img
           src={data.foto}

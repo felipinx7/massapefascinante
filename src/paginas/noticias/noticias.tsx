@@ -9,11 +9,14 @@ import Image from 'next/image'
 import { Footer } from '../home-page/sections/footer'
 import CardMaisNoticias from './components/card-mais-noticias'
 
-import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import { Navigation } from 'swiper/modules'
+
+import '../../config/globals.css'
+
+import imagemCruel from "../../assets/image/banner-categoria-evento.jpg"
 
 export default function PaginaNoticia() {
   // States usados no componente
@@ -22,14 +25,14 @@ export default function PaginaNoticia() {
     {
       titulo: 'Tecnologia 5G chega a mais cidades brasileiras',
       data_de_envio: '2025-08-10',
-      foto: 'https://picsum.photos/400/250?random=1',
+      foto: 'https://picsum.photos/400/250?random=2',
       descricao:
         'O avanço da tecnologia 5G promete maior velocidade de conexão e novas oportunidades para empresas e usuários.',
     },
     {
       titulo: 'Inteligência Artificial revoluciona a medicina',
       data_de_envio: '2025-08-09',
-      foto: 'https://picsum.photos/400/250?random=2',
+      foto: 'https://picsum.photos/400/250?random=5',
       descricao:
         'Pesquisadores desenvolvem IA capaz de detectar doenças com mais precisão do que métodos tradicionais.',
     },
@@ -46,6 +49,69 @@ export default function PaginaNoticia() {
       foto: 'https://picsum.photos/400/250?random=4',
       descricao:
         'O ecossistema de inovação no Brasil atraiu bilhões de dólares em aportes no primeiro semestre de 2025.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      titulo: 'Exploração espacial avança com nova missão lunar',
+      data_de_envio: '2025-08-06',
+      foto: 'https://picsum.photos/400/250?random=5',
+      descricao:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
     },
     {
       titulo: 'Exploração espacial avança com nova missão lunar',
@@ -80,17 +146,27 @@ export default function PaginaNoticia() {
         <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
-            <div className="relative h-[500px] w-[90%] overflow-hidden rounded-[5px] bg-black max-lg:h-[300px] max-lg:w-full">
-              <Image
-                src={imagemnoticia}
-                className="absolute right-0 top-0 h-full w-full rounded-[5px] object-cover"
-                alt="Foto da noticia mais relevante"
-              />
-            </div>
+            {noticias.slice(0, 1).map((card) => (
+              <div
+                key={card.titulo}
+                style={{ backgroundImage: `url(${card.foto})`, backgroundSize: 'cover' }}
+                className="relative flex p-8 items-start justify-end flex-col h-[500px] w-[90%] overflow-hidden rounded-[5px] bg-slate-950 max-lg:h-[300px] max-lg:w-full"
+              >
+                 <h1 className='text-2xl z-10 text-white font-semibold'>{card.titulo}</h1>
+                 <h1 className='text-base z-10 text-white mt-2'>{card.descricao}</h1>
+                 <div className='w-full z-10 flex justify-between'>
+                 {// <h1 className='text-sm text-white'>{card.autor}</h1>
+                 }
+                  <h1 className='text-sm text-white mt-3'>{card.data_de_envio}</h1>
+
+                 </div>
+                 <div className='absolute bg-gradient-to-t  bottom-0 left-0 h-full w-full from-slate-950 to-transparent from-10%'></div>
+              </div>
+            ))}
 
             {/* container de noticias relevantes  */}
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
-              {noticias.map((card) => (
+              {noticias.slice(0, 5).map((card) => (
                 <CardNoticiasRelevantes key={card.titulo} {...card} />
               ))}
             </div>
@@ -101,35 +177,31 @@ export default function PaginaNoticia() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className=" mt-4">
+            <div className="mt-4">
               <Swiper
-                modules={[Pagination]}
+                modules={[Navigation]}
                 pagination={{ clickable: true }}
                 breakpoints={{
                   0: {
                     slidesPerView: 3,
                   },
                   600: {
-                    slidesPerView: 4,
+                    slidesPerView: 3.5,
                   },
                   720: {
                     slidesPerView: 4,
                   },
                   860: {
-                    slidesPerView: 4.5,
-                  },
-                  1024: {
-                    slidesPerView: 4.5,
-                  },
-                  1360: {
-                    slidesPerView: 5.5,
+                    slidesPerView: 4.3,
                   },
                 }}
-                className="rounded-xl"
+                className="gap-8 rounded-xl px-8 py-8"
               >
                 {noticias.map((card) => (
                   <SwiperSlide key={card.titulo}>
-                    <CardMaisNoticias key={card.titulo} {...card} />
+                    <div className="w-68 mr-12 flex h-80 items-start justify-center">
+                      <CardMaisNoticias key={card.titulo} {...card} />
+                    </div>
                   </SwiperSlide>
                 ))}
               </Swiper>

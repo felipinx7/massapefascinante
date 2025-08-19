@@ -35,6 +35,18 @@
   overflow: hidden;
 }
 
+
+.swiper-button-next {
+  right: -40px;        /* joga pra fora do swiper */
+}
+
+.swiper-button-prev {
+  left: -40px;         /* joga pra fora do swiper */
+}
+
+
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+
