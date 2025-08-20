@@ -88,7 +88,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
       <div className="m-auto w-full max-w-[1280px] px-4 py-8">
         {/* Imagem do local */}
         <div
-          className="max-h-[500px] w-full overflow-hidden rounded-xl"
+          className="max-h-[350px] w-full overflow-hidden rounded-xl"
           style={{ height: '500px' }}
         >
           <Swiper
