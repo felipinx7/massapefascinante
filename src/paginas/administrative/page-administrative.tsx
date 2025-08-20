@@ -27,6 +27,8 @@ export const PageAdiminstrative = () => {
         {activeSection === 'location' && <SectionLocation />}
         {activeSection === 'taxis' && <SectionTaxi />}
         {activeSection === 'room' && <SectionRoom />}
+        {activeSection === 'news' && <SectionRoom />}
+
       </div>
     </section>
   )
