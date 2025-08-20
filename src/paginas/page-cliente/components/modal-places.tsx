@@ -89,7 +89,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
         {/* Imagem do local */}
         <div
           className="max-h-[350px] w-full overflow-hidden rounded-xl"
-          style={{ height: '500px' }}
+          style={{ height: '350px' }}
         >
           <Swiper
             modules={[Pagination]}
@@ -100,7 +100,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
           >
             {photosUrls.map((photo, index) => (
               <SwiperSlide key={index}>
-                <div className="h-[500px] w-full overflow-hidden rounded-xl">
+                <div className="h-[350px] w-full overflow-hidden rounded-xl">
                   <Image
                     src={photo}
                     alt={`Foto ${index + 1} de Moraújo`}
