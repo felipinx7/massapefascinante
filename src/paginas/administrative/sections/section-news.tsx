@@ -14,7 +14,7 @@ import { createNews } from '@/services/routes/news/create'
 import { DeleteNews } from '@/services/routes/news/delete'
 import { CardNews } from '../components/layouts/card-news'
 
-export const SectionLocation = () => {
+export const SectionNews = () => {
   const [isVisibility, setIsVisibility] = useState(false)
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
@@ -72,7 +72,7 @@ export const SectionLocation = () => {
     await DeleteNews(id)
     console.log('Card Excluido com sucesso!')
 
-    // Update list of News with alters
+    // Update list of News with alter
     setShowNews((prev) => prev?.filter((place) => place.id !== id) ?? null)
     setFilteredNews((prev) => prev?.filter((place) => place.id !== id) ?? null)
   }
@@ -96,7 +96,6 @@ export const SectionLocation = () => {
           Buscar
         </button>
       </div>
-
       {/* Botton of add location */}
       <button
         onClick={handleVisibility}
@@ -212,7 +211,7 @@ export const SectionLocation = () => {
             <CardNews
               key={index}
               {...news}
-              handleDeletePlace={() => FunctiondeleteNews(news.id)}
+              handleDeleteNoticie={() => FunctiondeleteNews(news.id ?? "")}
             />
           ))
         ) : (
