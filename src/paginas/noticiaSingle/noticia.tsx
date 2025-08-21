@@ -1,7 +1,7 @@
 'use client'
 
 import { IconeSetaVoltando } from '@/assets/icons/icone-de-seta-voltando'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import CardNoticiasRelevantes from './components/card-noticias-relevantes'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { Footer } from '../home-page/sections/footer'
@@ -13,30 +13,43 @@ import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 
 import '../../config/globals.css'
+import { GetUniqueNews } from '@/services/routes/news/getUnique'
 import { useEffect, useState } from 'react'
+import { ParamValue } from 'next/dist/server/request/params'
 
-
-export default function PaginaNoticia() {
-
+export default function PaginaNoticiaUnica() {
+  const params = useParams()
+  const { id } = params
   //Estados
 
-  const [news,setNews] = useState<CardNoticiasDTO[]>();
+  const [news, setNews] = useState<CardNoticiasDTO[]>()
+  const [uniqueNews, setUniqueNews] = useState<CardNoticiasDTO>()
+
   const router = useRouter()
 
-  //Funções 
-  async function FetchNews(){
-      const res = await GetAllNews();
-      setNews(res)
+  //Funções
+  async function FetchNews(id: ParamValue) {
+    const res = await GetAllNews()
+    setNews(res)
 
+    if (id) {
+      const card = await GetUniqueNews(id.toString())
+      setUniqueNews(card)
+    }
+
+    setNews(res)
   }
 
-  FetchNews();
+  useEffect(() => {
+    if (id) {
+      FetchNews(id)
+    }
+  }, [id])
 
   const handleChangePage = () => {
     router.back()
   }
   // HTML
-
 
   return (
     <main className="flex h-full w-full flex-col items-center gap-4">
@@ -59,31 +72,33 @@ export default function PaginaNoticia() {
         <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
-            {news?.slice(0, 1).map((card) => (
+            <div className="flex w-full flex-col items-center justify-start gap-3">
               <div
-                key={card.title}
-                style={{ backgroundImage: `url(${card.photoURLs[0].url})`, backgroundSize: 'cover' }}
-                className="relative flex p-8 items-start justify-end flex-col h-[500px] w-[90%] overflow-hidden rounded-[5px] bg-slate-950 max-lg:h-[300px] max-lg:w-full"
-              >
-                 <h1 className='text-2xl z-10 text-white font-semibold'>{card.title}</h1>
-                 <h1 className='text-base z-10 text-white mt-2'>{card.content}</h1>
-                 <div className='w-full z-10 flex justify-between mt-3'>
-                  <h1 className='text-sm text-white'>{card.author}</h1>
-                 
-                  <h1 className='text-sm text-white'>{card.date}</h1>
+                style={{
+                  backgroundImage: `url(${uniqueNews?.photoURLs[0].url})`,
+                  backgroundSize: 'cover',
+                }}
+                className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
+              ></div>
 
-                 </div>
-                 <div className='absolute bg-gradient-to-t  bottom-0 left-0 h-full w-full from-slate-950 to-transparent from-10%'></div>
+              <div className="flex flex-row items-center justify-between">
+                <h1>{uniqueNews?.author}</h1>
+                <h1>{uniqueNews?.date}</h1>
               </div>
-            ))}
+              <div className="flex w-full justify-start bg-slate-950 text-3xl font-bold">
+                {uniqueNews?.title}
+              </div>
+              <div className="flex w-full justify-start bg-slate-950 text-base">
+                {uniqueNews?.content}
+              </div>
+            </div>
 
             {/* container de noticias relevantes  */}
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
-              {news?.slice(1, 6).map((card) => (
-                <div className='flex 'key={card.title} onClick={() => router.push(`/noticias/${card.id}`)}>
-                <CardNoticiasRelevantes key={card.title} {...card} />
-                </div>
-              ))}
+              {news
+                ?.filter((card) => card.id !== uniqueNews?.id)
+                .slice(0, 5)
+                .map((card) => <div key={card.id} className='flex' onClick={() => router.push(`/noticias/${card.id}`)}> <CardNoticiasRelevantes  {...card} /> </div> )}
             </div>
           </div>
           {/* container mais noticias */}
@@ -112,13 +127,16 @@ export default function PaginaNoticia() {
                 }}
                 className="gap-8 rounded-xl px-8 py-8"
               >
-                {news?.slice(6).map((card) => (
-                  <SwiperSlide key={card.title}>
-                    <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
-                      <CardMaisNoticias key={card.title} {...card} />
-                    </div>
-                  </SwiperSlide>
-                ))}
+                {news
+                  ?.filter((card) => card.id !== uniqueNews?.id)
+                  ?.slice(5)
+                  .map((card) => (
+                    <SwiperSlide key={card.title}>
+                      <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
+                        <CardMaisNoticias key={card.title} {...card} />
+                      </div>
+                    </SwiperSlide>
+                  ))}
               </Swiper>
             </div>
           </div>
