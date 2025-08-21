@@ -319,10 +319,11 @@ export const CardPlaces = (props: CardPlacesDTO) => {
                   className="w-full rounded border border-gray-300 p-2 text-sm"
                   aria-invalid={errors.category ? 'true' : 'false'}
                 >
-                  <option value="RESTAURANT">Restaurant</option>
-                  <option value="BAR">Bar</option>
-                  <option value="EVENT">Event</option>
-                  <option value="STORE">Store</option>
+                  <option value="RESTAURANT">Restaurante</option>
+                  <option value="LANDSCAPE">Paisagem</option>
+                  <option value="HOTEL">Hotel</option>
+                  <option value="TOURIST_ATTRACTIONS">Turismo</option>
+                  <option value="HOSTING">Hospedagem</option>
                 </select>
                 {errors.category && (
                   <p className="text-sm text-red-500">{errors.category.message}</p>
@@ -345,7 +346,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
 
               {/* Submit button */}
               <button type="submit" className="w-full rounded bg-primargreen py-2 text-white">
-                 Atualizar Local
+                Atualizar Local
               </button>
             </form>
           </article>
