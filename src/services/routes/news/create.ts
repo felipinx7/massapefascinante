@@ -1,22 +1,25 @@
-import { newsDTO } from "@/dto/news/DTO-news";
-import { api } from "../../../config/axios";
+import { newsDTO } from '@/dto/news/DTO-news'
+import { api } from '../../../config/axios'
 
-export async function createNews(data : newsDTO){
-    try {
-        const formData = new FormData();
+export async function createNews(data: newsDTO) {
+  try {
+    const formData = new FormData()
 
-        formData.append("author", data.author);
-        formData.append("title", data.title);
-        formData.append("content", data.content);
-        data.photoURLs.forEach((file) => {
-        formData.append('photoURLs', file)
-        })
+    formData.append('author', data.author)
+    formData.append('title', data.title)
+    formData.append('content', data.content)
+    data.photoURLs.forEach((file) => {
+      formData.append('photoURLs', file)
+    })
 
-
-        const res = await api.post(`/news`, data);
-        console.log("data: ", res);
-        return res.data;
-    }catch (error) {
-        console.log("Erro ao criar noticia:", error);
-    }
+    const res = await api.post(`/news`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    console.log('data: ', res)
+    return res.data
+  } catch (error) {
+    console.log('Erro ao criar noticia:', error)
   }
+}

@@ -29,6 +29,7 @@ export const SectionNews = () => {
 
     const arrayFile = Array.from(event.target.files)
     setValue('photoURLs', arrayFile, { shouldValidate: true })
+    console.log('Dados da foto', arrayFile)
     setPreview(arrayFile[0])
   }
 
