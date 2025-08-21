@@ -11,4 +11,5 @@ export type CardNoticiasDTO = {
     content: string,
     date:string,
     photoURLs: Photo[],
+    handleDeleteNoticie?: () => void
 }
