@@ -186,7 +186,7 @@ export const SectionNews = () => {
             {/* Botão de envio */}
             <div>
               <button
-                disabled={isValid ? true : false}
+                disabled={!isValid}
                 type="submit"
                 className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'text-whitecursor-pointer bg-primargreen text-white' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
               >
