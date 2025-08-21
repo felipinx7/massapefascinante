@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NameAdminstrative } from '../components/layouts/header-info-adm'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -13,25 +13,44 @@ import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { createNews } from '@/services/routes/news/create'
 import { DeleteNews } from '@/services/routes/news/delete'
 import { CardNews } from '../components/layouts/card-news'
+import Image from 'next/image'
 
 export const SectionNews = () => {
   const [isVisibility, setIsVisibility] = useState(false)
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const [filteredNews, setFilteredNews] = useState<CardNoticiasDTO[] | null>(null)
+  const [preview, setPreview] = useState<File | null>(null)
+  const newsFilter = filteredNews?.filter(
+    (news) =>
+      news.title.toUpperCase().includes(searchValue.toUpperCase()) ||
+      news.author.toUpperCase().includes(searchValue.toUpperCase()),
+  )
+
+  function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) return
+
+    const arrayFile = Array.from(event.target.files)
+    setValue('photoURLs', arrayFile, { shouldValidate: true })
+    setPreview(arrayFile[0])
+  }
 
   const handleVisibility = () => {
+    reset()
+    setPreview(null)
     setIsVisibility((prev) => !prev)
   }
 
   const {
     control,
     register,
+    setValue,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof newsSchema>>({
     resolver: zodResolver(newsSchema),
+    mode: 'onChange',
   })
 
   async function onSubmit(data: newsDTO) {
@@ -42,6 +61,10 @@ export const SectionNews = () => {
   }
 
   useEffect(() => {
+    console.log('Erros', errors)
+  }, [errors])
+
+  useEffect(() => {
     const fetchInfoEvents = async () => {
       const News = await getInfoCity()
       setShowNews(News.News)
@@ -50,61 +73,31 @@ export const SectionNews = () => {
     fetchInfoEvents()
   }, [])
 
-  const handleFilter = () => {
-    if (!searchValue.trim()) {
-      setFilteredNews(null)
-      return
-    }
-
-    const filtered = showNews?.filter((news) =>
-      news.title.toLowerCase().includes(searchValue.toLowerCase()),
-    )
-
-    setFilteredNews(filtered ?? [])
-  }
-
-  useEffect(() => {
-    handleFilter()
-  }, [searchValue])
-                                   
-
-  const FunctiondeleteNews = async (id: string) => {
-    await DeleteNews(id)
-    console.log('Card Excluido com sucesso!')
-
-    // Update list of News with alter
-    setShowNews((prev) => prev?.filter((place) => place.id !== id) ?? null)
-    setFilteredNews((prev) => prev?.filter((place) => place.id !== id) ?? null)
-  }
-
   return (
     <section className="w-[cacl(100%-20%)]">
       <div className="max-lg:hidden">
         <NameAdminstrative SibeBarMobile={false} />
       </div>
 
-      {/* Inpurt for Search */}
+      {/* Input for Search */}
       <div className="relative w-[80%] max-lg:w-full">
         <input
           type="text"
-          placeholder="Pesquise pelo local"
+          placeholder="Pesquise pela a Notícia"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="w-[100%] rounded-[1rem] bg-primarygray p-5 outline-none focus:border-[2px] focus:border-primargreen"
         />
-        <button className="absolute right-2 top-1.5 w-auto rounded-[1rem] bg-primargreen p-3.5 font-[700] text-white">
-          Buscar
-        </button>
       </div>
       {/* Botton of add location */}
       <button
         onClick={handleVisibility}
         className="mt-4 rounded bg-primargreen p-3 font-bold text-white"
       >
-        Adicionar um Local
+        Adicionar uma Notícia
       </button>
 
-      {/* Modal */}
+      {/* Modal de criação de noticia */}
       <div
         className={`${
           isVisibility ? 'fixed' : 'hidden'
@@ -113,7 +106,7 @@ export const SectionNews = () => {
         <article className="relative max-h-[90vh] w-[95%] max-w-lg overflow-y-auto rounded-xl bg-white p-5 shadow-lg">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-800">New Place</h2>
+              <h2 className="text-lg font-semibold text-gray-800">Nova Notícia</h2>
               <button
                 onClick={handleVisibility}
                 type="button"
@@ -124,39 +117,42 @@ export const SectionNews = () => {
             </div>
 
             {/* Upload de fotos */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Upload Photos</label>
-              <div className="relative flex h-48 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-sm text-gray-500">
-                <Controller
-                  name="photoURLs"
-                  control={control}
-                  defaultValue={[]}
-                  render={({ field }) => (
-                    <>
-                      <input
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                        onChange={(e) => {
-                          const files = e.target.files
-                          field.onChange(files ? Array.from(files) : [])
-                        }}
-                      />
-                      <span>Click to upload images</span>
-                    </>
-                  )}
-                />
-              </div>
+            <div className="">
+              <label className="relative mb-1 block text-sm font-medium text-gray-700">
+                Adicionar Foto
+              </label>
+              {preview ? (
+                //  Preview of Photo
+                <div className="h-[250px] w-full rounded-sm">
+                  <img
+                    className="h-full w-full rounded-[1rem] object-cover"
+                    src={preview === null ? '' : URL.createObjectURL(preview)}
+                    alt="Visualização da Foto"
+                  />
+                </div>
+              ) : (
+                <div className="relative flex h-48 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-sm text-gray-500">
+                  <input
+                    type="file"
+                    {...register('photoURLs')}
+                    onChange={handleChangePhoto}
+                    accept="image/*"
+                    className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                  />
+                  <span>Clique aqui para adicionar Foto</span>
+                </div>
+              )}
               {errors.photoURLs && (
                 <p className="text-sm text-red-500">{errors.photoURLs.message}</p>
               )}
             </div>
 
             {/* Campos de Titulo da noticia e conteúdo da noticia */}
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               <div className="flex-1">
-                <label className="mb-1 block text-sm font-medium text-gray-700">Titulo da Noticia</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700">
+                  Titulo da Noticia
+                </label>
                 <input
                   {...register('title')}
                   type="text"
@@ -166,38 +162,39 @@ export const SectionNews = () => {
                 {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
               </div>
               <div className="flex-1">
-                <label className="mb-1 block text-sm font-medium text-gray-700">Conteúdo da Noticia</label>
-                <input
+                <label className="mb-1 block text-sm font-medium text-gray-700">
+                  Conteúdo da Noticia
+                </label>
+                <textarea
                   {...register('content')}
-                  type="text"
-                  placeholder='Digite o conteúdo da noticia'
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                />
+                  className="h-[100px] w-full resize-none rounded border border-gray-300 p-2 text-sm"
+                  placeholder="Digite o conteúdo da noticia"
+                  id=""
+                ></textarea>
                 {errors.content && <p className="text-sm text-red-500">{errors.content.message}</p>}
               </div>
             </div>
 
             {/* Campos de nome do autor */}
-              <div className="flex-1">
-                <label className="mb-1 block text-sm font-medium text-gray-700">Nome do Autor</label>
-                <input
-                  {...register('author')}
-                  type="text"
-                  placeholder="Street, Neighborhood"
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                />
-                {errors.author && (
-                  <p className="text-sm text-red-500">{errors.author.message}</p>
-                )}
-              </div>
+            <div className="flex-1">
+              <label className="mb-1 block text-sm font-medium text-gray-700">Nome do Autor</label>
+              <input
+                {...register('author')}
+                type="text"
+                placeholder="Street, Neighborhood"
+                className="w-full rounded border border-gray-300 p-2 text-sm"
+              />
+              {errors.author && <p className="text-sm text-red-500">{errors.author.message}</p>}
+            </div>
 
             {/* Botão de envio */}
             <div>
               <button
+                disabled={isValid ? true : false}
                 type="submit"
-                className="w-full rounded bg-primargreen px-4 py-2 font-semibold text-white transition hover:bg-green-600"
+                className={`w-full rounded bg-primargreen px-4 py-2 font-semibold text-white transition ${isValid ? 'cursor-pointer bg-primargreen' : 'bg-primaryWhite500'}`}
               >
-                Register News
+                Registra notícia
               </button>
             </div>
           </form>
@@ -205,17 +202,19 @@ export const SectionNews = () => {
       </div>
 
       {/* Filtered cards or all */}
-      <div className="mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
-        {(filteredNews ?? showNews)?.length ? (
-          (filteredNews ?? showNews)?.map((news, index) => (
+      <div className="relative mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
+        {newsFilter ? (
+          newsFilter.map((news) => (
             <CardNews
-              key={index}
+              key={news.id}
               {...news}
-              handleDeleteNoticie={() => FunctiondeleteNews(news.id ?? "")}
+              handleDeleteNoticie={() => console.log('noticia deletada')}
             />
           ))
         ) : (
-          <p className="col-span-full text-center">Nenhuma notícia encontrado.</p>
+          <div className="absolute flex w-full items-center justify-center">
+            <p>Nenhuma noticias encontradas</p>
+          </div>
         )}
       </div>
     </section>
