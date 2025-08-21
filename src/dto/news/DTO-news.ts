@@ -5,7 +5,7 @@ import { Photo } from "../city/data-info-city-DTO";
 export type newsDTO = z.infer<typeof newsSchema>
 
 export type CardNoticiasDTO = {
-    id: string,
+    id?: string,
     author: string,
     title: string,
     content: string,

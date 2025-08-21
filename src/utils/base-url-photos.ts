@@ -1,7 +1,7 @@
 export const BASE_URL_BACK_END = 'https://api.massapefascinante.com.br/api/uploads/'
 
 export function baseUrlPhoto(
-  type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room',
+  type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news',
   photoName: string,
 ) {
   if (!photoName) return null

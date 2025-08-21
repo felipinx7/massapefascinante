@@ -7,13 +7,14 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconClosed } from '@/assets/icons/icone-closed'
 import { getInfoCity } from '@/services/routes/city/get-info-city'
-import { formatPhoneNumber } from '@/utils/formatPhone'
 
 import { newsSchema } from '@/schemas/news-schema'
-import { CardNoticiasDTO } from '@/dto/news/DTO-news'
+import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
+import { createNews } from '@/services/routes/news/create'
+import { DeleteNews } from '@/services/routes/news/delete'
+import { CardNews } from '../components/layouts/card-news'
 
 export const SectionLocation = () => {
-  const [valuePhone, setValuePhone] = useState('')
   const [isVisibility, setIsVisibility] = useState(false)
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
@@ -33,8 +34,8 @@ export const SectionLocation = () => {
     resolver: zodResolver(newsSchema),
   })
 
-  async function onSubmit(data: CardNoticiasDTO) {
-    const response = await createPlace(data)
+  async function onSubmit(data: newsDTO) {
+    const response = await createNews(data)
     console.log('Resposta da API:', response)
     reset()
     setIsVisibility(false)
@@ -67,8 +68,8 @@ export const SectionLocation = () => {
   }, [searchValue])
                                    
 
-  const FunctiondeletePlace = async (id: string) => {
-    await DeletePlace(id)
+  const FunctiondeleteNews = async (id: string) => {
+    await DeleteNews(id)
     console.log('Card Excluido com sucesso!')
 
     // Update list of News with alters
@@ -197,7 +198,7 @@ export const SectionLocation = () => {
                 type="submit"
                 className="w-full rounded bg-primargreen px-4 py-2 font-semibold text-white transition hover:bg-green-600"
               >
-                Register Place
+                Register News
               </button>
             </div>
           </form>
@@ -211,11 +212,11 @@ export const SectionLocation = () => {
             <CardNews
               key={index}
               {...news}
-              handleDeletePlace={() => FunctiondeletePlace(news.id)}
+              handleDeletePlace={() => FunctiondeleteNews(news.id)}
             />
           ))
         ) : (
-          <p className="col-span-full text-center">Nenhum local encontrado.</p>
+          <p className="col-span-full text-center">Nenhuma notícia encontrado.</p>
         )}
       </div>
     </section>
