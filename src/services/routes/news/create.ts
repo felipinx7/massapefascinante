@@ -8,7 +8,6 @@ export async function createNews(data : newsDTO){
         formData.append("author", data.author);
         formData.append("title", data.title);
         formData.append("content", data.content);
-        formData.append("date", data.date);
         data.photoURLs.forEach((file) => {
         formData.append('photoURLs', file)
         })

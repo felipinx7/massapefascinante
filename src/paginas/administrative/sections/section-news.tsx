@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { NameAdminstrative } from '../components/layouts/header-info-adm'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconClosed } from '@/assets/icons/icone-closed'
@@ -11,17 +11,14 @@ import { getInfoCity } from '@/services/routes/city/get-info-city'
 import { newsSchema } from '@/schemas/news-schema'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { createNews } from '@/services/routes/news/create'
-import { DeleteNews } from '@/services/routes/news/delete'
 import { CardNews } from '../components/layouts/card-news'
-import Image from 'next/image'
 
 export const SectionNews = () => {
   const [isVisibility, setIsVisibility] = useState(false)
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
-  const [filteredNews, setFilteredNews] = useState<CardNoticiasDTO[] | null>(null)
   const [preview, setPreview] = useState<File | null>(null)
-  const newsFilter = filteredNews?.filter(
+  const newsFilter = showNews?.filter(
     (news) =>
       news.title.toUpperCase().includes(searchValue.toUpperCase()) ||
       news.author.toUpperCase().includes(searchValue.toUpperCase()),
@@ -180,7 +177,7 @@ export const SectionNews = () => {
               <input
                 {...register('author')}
                 type="text"
-                placeholder="Street, Neighborhood"
+                placeholder="Nome do autor"
                 className="w-full rounded border border-gray-300 p-2 text-sm"
               />
               {errors.author && <p className="text-sm text-red-500">{errors.author.message}</p>}
