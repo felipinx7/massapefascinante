@@ -13,7 +13,7 @@ export async function createNews(data : newsDTO){
         })
 
 
-        const res = await api.post(`/news`, {withCredentials: true, data: FormData});
+        const res = await api.post(`/news`, data);
         console.log("data: ", res);
         return res.data;
     }catch (error) {
