@@ -42,7 +42,6 @@ export const SectionNews = () => {
   }
 
   const {
-    control,
     register,
     setValue,
     handleSubmit,
