@@ -192,7 +192,7 @@ export const SectionNews = () => {
               <button
                 disabled={isValid ? true : false}
                 type="submit"
-                className={`w-full rounded bg-primargreen px-4 py-2 font-semibold text-white transition ${isValid ? 'cursor-pointer bg-primargreen' : 'bg-primaryWhite500'}`}
+                className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'text-whitecursor-pointer bg-primargreen' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
               >
                 Registra notícia
               </button>
