@@ -4,7 +4,7 @@ import { CardEventPageAdministrative } from "@/dto/event/data-card-event-DTO";
 export function BaseUrl (photoURL: string, props: CardEventPageAdministrative){
      const photoUrl =
     props.photos.length > 0
-      ? `http://localhost:4444/${photoURL}`
+      ? `https://api.massapefascinante.com.br/api/${photoURL}`
       : backgroundloginpage
 
       return photoUrl
