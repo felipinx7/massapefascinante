@@ -16,125 +16,46 @@ import { backgroundloginpage } from '@/assets/image'
 import { placeSchema } from '@/schemas/places-schema'
 import { updatePlace } from '@/services/routes/places/update-place'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import { formatPhoneNumber } from '@/utils/formatPhone'
 import { newsSchema } from '@/schemas/news-schema'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 
 export const CardNews = (props: CardNoticiasDTO) => {
-  // State to control modal visibility
+  // State utils in component
   const [showModalUpdate, setShowModalUpdate] = useState(false)
-
-
-  // State to store image previews (URLs or local blob URLs)
   const [previewImages, setPreviewImages] = useState<string[]>([])
-
-  // Initialize react-hook-form with Zod schema validation
   const {
     control,
     register,
-    handleSubmit,
+    // handleSubmit,
     reset,
     setValue,
-    watch,
     formState: { errors },
-  } = useForm<z.infer<typeof newsSchema>>({
-    resolver: zodResolver(newsSchema),
-  })
+  } = useForm<z.infer<typeof newsSchema>>({ resolver: zodResolver(newsSchema) })
+  const photo = props.photoURLs?.[0]?.url
+    ? baseUrlPhoto('place', props.photoURLs[0].url) || backgroundloginpage
+    : backgroundloginpage
 
-  // Watch the photos field to sync removals and additions
-  const watchedPhotos = watch('photoURLs')
+  // Functions Utils in Component
+  const handleOpenModalUpdate = () => {}
 
-  // Toggle modal visibility and initialize/reset form fields and preview images accordingly
-  const handleOpenModalUpdate = () => {
-    if (!showModalUpdate) {
-      // Opening modal: populate form with existing place data
-      reset({
-        title: props.title,
-        content: props.content || '',
-        author: props.author || '',
-        date: props.date || '',
-        photoURLs: [], // We'll handle photos separately
-      })
+  // const onSubmit = async (data: z.infer<typeof placeSchema>) => {
+  //   try {
+  //     const response = await updatePlace(props.id ?? '', data)
+  //     console.log('Update successful!', response)
+  //     reset()
+  //     setPreviewImages([])
+  //     setShowModalUpdate(false)
+  //   } catch (error) {
+  //     console.error('Error updating place:', error)
+  //   }
+  // }
 
-      // Set formatted phone number state
-
-      // Load current photos into previewImages for display
-      if (props.photoURLs && props.photoURLs.length > 0) {
-        // Cria URLs filtrando possíveis nulls
-        const urls = props.photoURLs
-          .map((photo) => baseUrlPhoto('place', photo.url))
-          .filter((url): url is string => url !== null)
-        setPreviewImages(urls)
-
-        // Atualiza o campo photoURLs com os objetos File simulados (não temos arquivos reais, então vazio)
-        setValue('photoURLs', [])
-      } else {
-        setPreviewImages([])
-        setValue('photoURLs', [])
-      }
-    } else {
-      // Closing modal: clear form and previews
-      reset()
-      setPreviewImages([])
-      setValuePhone('')
-    }
-
-    setShowModalUpdate((prev) => !prev)
-  }
-
-  // Handle form submission - update place data via API call
-  const onSubmit = async (data: z.infer<typeof placeSchema>) => {
-    try {
-      // Call service to update place information
-      const response = await updatePlace(props.id, data)
-      console.log('Update successful!', response)
-
-      // Reset form and UI state after update
-      reset()
-      setPreviewImages([])
-      setShowModalUpdate(false)
-      setValuePhone('')
-    } catch (error) {
-      console.error('Error updating place:', error)
-    }
-  }
-
-  // Format phone input on change and update form and state accordingly
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhoneNumber(e.target.value)
-    setValue('phone', formatted) // update react-hook-form field
-    setValuePhone(formatted) // update local state for controlled input
-  }
-
-  // When user selects new images, generate preview URLs and update form state
   const handlePreviewImages = (files: File[]) => {
-    // Create blob URLs for local preview
     const urls = files.map((file) => URL.createObjectURL(file))
     setPreviewImages(urls)
 
-    // Update react-hook-form field with FileList for submission
     setValue('photoURLs', files)
   }
-
-  // Remove an image from the preview list by index
-  const handleRemovePreviewImage = (indexToRemove: number) => {
-    setPreviewImages((prev) => {
-      URL.revokeObjectURL(prev[indexToRemove])
-      const newPreview = prev.filter((_, i) => i !== indexToRemove)
-
-      // Também removemos do campo photoURLs
-      const currentFiles = watchedPhotos instanceof Array ? watchedPhotos : []
-      const newFiles = currentFiles.filter((_, i) => i !== indexToRemove)
-      setValue('photoURLs', newFiles)
-
-      return newPreview
-    })
-  }
-
-  // Main photo to display on the card - either first photo or a placeholder image
-  const photo = props.photos?.[0]?.url
-    ? baseUrlPhoto('place', props.photos[0].url) || backgroundloginpage
-    : backgroundloginpage
 
   return (
     <article className="flex h-[300px] w-[280px] flex-col rounded-[0.9rem] shadow-shadowCardEventLocation">
@@ -150,7 +71,7 @@ export const CardNews = (props: CardNoticiasDTO) => {
         <div className="absolute bottom-0 right-0 flex w-full items-center justify-end gap-3 p-2">
           {/* Delete button */}
           <button
-            onClick={() => props.handleDeletePlace?.(props.id)}
+            // onClick={() => props.handleDeleteNoticie()}
             className="flex h-[30px] w-[30px] items-center justify-center rounded-[0.3rem] bg-white"
             title="Delete place"
           >
@@ -170,15 +91,16 @@ export const CardNews = (props: CardNoticiasDTO) => {
 
       {/* Summary info */}
       <div className="flex h-[70%] flex-col p-3">
-        <h1 className="w-[95%] truncate text-[1.1rem] font-medium text-black">{props.name}</h1>
-        <p className="line-clamp-3 h-full text-secundarygray900">{props.description}</p>
+        <h1 className="w-[95%] truncate text-[1.1rem] font-medium text-black">{props.title}</h1>
+        <p className="line-clamp-3 h-full text-secundarygray900">{props.author}</p>
       </div>
 
       {/* Update modal */}
       {showModalUpdate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <article className="relative max-h-[90vh] w-[95%] max-w-lg overflow-y-auto rounded-xl bg-white p-5 shadow-lg">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+            {/* onSubmit={handleSubmit(onSubmit)} */}
+            <form className="space-y-3">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-gray-800">Atualizar Lugar</h2>
@@ -226,16 +148,15 @@ export const CardNews = (props: CardNoticiasDTO) => {
                     {previewImages.map((url, index) => (
                       <SwiperSlide key={index}>
                         <div className="relative h-[250px] w-full overflow-hidden rounded-md">
-                          <Image
+                          <img
                             src={url}
                             alt={`Preview ${index + 1}`}
-                            fill
                             className="object-cover"
                           />
                           {/* Remove image button */}
                           <button
                             type="button"
-                            onClick={() => handleRemovePreviewImage(index)}
+                            onClick={() => console.log('Olá')}
                             className="absolute right-2 top-2 z-10 rounded bg-white p-1 text-gray-700 hover:text-red-600"
                             title="Remove image"
                           >
@@ -252,96 +173,45 @@ export const CardNews = (props: CardNoticiasDTO) => {
                 )}
               </div>
 
-              {/* Text inputs */}
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Name</label>
-                <input
-                  {...register('name')}
-                  type="text"
-                  placeholder="Example: Winter Festival"
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                  aria-invalid={errors.name ? 'true' : 'false'}
-                />
-                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-              </div>
-
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Telefone</label>
-                <input
-                  {...register('phone')}
-                  type="text"
-                  value={valuePhone}
-                  maxLength={15}
-                  onChange={handleChange}
-                  placeholder="(00) 00000-0000"
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                  aria-invalid={errors.phone ? 'true' : 'false'}
-                />
-                {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
-              </div>
-
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Instagram</label>
                 <input
-                  {...register('instagram')}
+                  {...register('title')}
                   type="text"
                   placeholder="@event"
                   className="w-full rounded border border-gray-300 p-2 text-sm"
-                  aria-invalid={errors.instagram ? 'true' : 'false'}
+                  aria-invalid={errors.title ? 'true' : 'false'}
                 />
-                {errors.instagram && (
-                  <p className="text-sm text-red-500">{errors.instagram.message}</p>
-                )}
+                {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
               </div>
 
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Localização</label>
                 <input
-                  {...register('location')}
+                  {...register('author')}
                   type="text"
                   placeholder="Location here"
                   className="w-full rounded border border-gray-300 p-2 text-sm"
-                  aria-invalid={errors.location ? 'true' : 'false'}
+                  aria-invalid={errors.author ? 'true' : 'false'}
                 />
-                {errors.location && (
-                  <p className="text-sm text-red-500">{errors.location.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Categoria</label>
-                <select
-                  {...register('category')}
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                  aria-invalid={errors.category ? 'true' : 'false'}
-                >
-                  <option value="RESTAURANT">Restaurant</option>
-                  <option value="BAR">Bar</option>
-                  <option value="EVENT">Event</option>
-                  <option value="STORE">Store</option>
-                </select>
-                {errors.category && (
-                  <p className="text-sm text-red-500">{errors.category.message}</p>
-                )}
+                {errors.author && <p className="text-sm text-red-500">{errors.author.message}</p>}
               </div>
 
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Descrição</label>
                 <textarea
-                  {...register('description')}
+                  {...register('content')}
                   placeholder="Description here"
                   className="w-full rounded border border-gray-300 p-2 text-sm"
                   rows={4}
-                  aria-invalid={errors.description ? 'true' : 'false'}
+                  aria-invalid={errors.content ? 'true' : 'false'}
                 />
-                {errors.description && (
-                  <p className="text-sm text-red-500">{errors.description.message}</p>
-                )}
+                {errors.content && <p className="text-sm text-red-500">{errors.content.message}</p>}
               </div>
 
               {/* Submit button */}
               <button type="submit" className="w-full rounded bg-primargreen py-2 text-white">
-                 Atualizar Local
+                Atualizar Local
               </button>
             </form>
           </article>

@@ -1,4 +1,4 @@
-export const BASE_URL_BACK_END = 'https://api.massapefascinante.com.br/api/uploads/'
+export const BASE_URL_BACK_END = 'http://localhost:4444/uploads/'
 
 export function baseUrlPhoto(
   type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news',

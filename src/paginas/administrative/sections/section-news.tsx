@@ -18,11 +18,7 @@ export const SectionNews = () => {
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const [preview, setPreview] = useState<File | null>(null)
-  const newsFilter = showNews?.filter(
-    (news) =>
-      news.title.toUpperCase().includes(searchValue.toUpperCase()) ||
-      news.author.toUpperCase().includes(searchValue.toUpperCase()),
-  )
+  const newsFilter = showNews?.filter((news) => news.title.toUpperCase().includes(searchValue.toUpperCase()) || news.author.toUpperCase().includes(searchValue.toUpperCase()))
 
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
