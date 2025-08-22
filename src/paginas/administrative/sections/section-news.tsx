@@ -10,8 +10,8 @@ import { IconClosed } from '@/assets/icons/icone-closed'
 import { newsSchema } from '@/schemas/news-schema'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { createNews } from '@/services/routes/news/create'
-import { CardNews } from '../components/layouts/card-news'
 import { GetAllNews } from '@/services/routes/news/getAll'
+import CardNews from '../components/layouts/card-news'
 
 export const SectionNews = () => {
   const [isVisibility, setIsVisibility] = useState(false)
