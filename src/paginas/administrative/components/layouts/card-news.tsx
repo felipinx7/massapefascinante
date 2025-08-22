@@ -27,7 +27,7 @@ export const CardNews = (props: CardNoticiasDTO) => {
     control,
     register,
     // handleSubmit,
-    reset,
+    // reset,
     setValue,
     formState: { errors },
   } = useForm<z.infer<typeof newsSchema>>({ resolver: zodResolver(newsSchema) })
@@ -61,10 +61,9 @@ export const CardNews = (props: CardNoticiasDTO) => {
     <article className="flex h-[300px] w-[280px] flex-col rounded-[0.9rem] shadow-shadowCardEventLocation">
       {/* Cover image with action buttons */}
       <div className="relative h-[80%] w-full">
-        <Image
+        <img
           src={photo}
           alt="Place photo"
-          fill
           className="h-full w-full rounded-tl-[0.9rem] rounded-tr-[0.9rem] object-cover"
         />
 
