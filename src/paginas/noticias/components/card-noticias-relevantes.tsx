@@ -1,11 +1,16 @@
+import { backgroundloginpage } from "@/assets/image"
 import { CardNoticiasDTO } from "@/dto/news/DTO-news"
+import { baseUrlPhoto } from "@/utils/base-url-photos"
 
 export default function CardNoticiasRelevantes(data: CardNoticiasDTO) {
+    const photo = data.photo?.[0]?.url
+    ? baseUrlPhoto('news', data.photo[0].url) || backgroundloginpage
+    : backgroundloginpage
   return (
     <article className="group relative cursor-pointer flex items-start justify-start gap-2 max-lg:flex-col max-lg:justify-between">
       <div className="h-[100px] overflow-clip w-[250px] rounded-[5.97px] max-lg:h-auto">
         <img
-          src={data.photo[0].url}
+          src={photo}
           className="max-h-[100px] group-hover:scale-125 duration-500 transition-all max-w-[250px] rounded-lg object-cover ease-in-out hover:scale-105 max-lg:max-h-none max-lg:w-full max-lg:max-w-none"
           alt=""
         />
