@@ -19,6 +19,108 @@ export const SectionNews = () => {
   const [searchValue, setSearchValue] = useState('')
   const [preview, setPreview] = useState<File | null>(null)
   const newsFilter = showNews?.filter((news) => news.title.toUpperCase().includes(searchValue.toUpperCase()) || news.author.toUpperCase().includes(searchValue.toUpperCase()))
+   const noticias = [
+    {
+      
+      title: 'Tecnologia 5G chega a mais cidades brasileiras',
+      photoURLs: 'https://picsum.photos/400/250?random=2',
+      content:
+        'O avanço da tecnologia 5G promete maior velocidade de conexão e novas oportunidades para empresas e usuários.',
+    },
+    {
+      
+      title: 'Inteligência Artificial revoluciona a medicina',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Pesquisadores desenvolvem IA capaz de detectar doenças com mais precisão do que métodos tradicionais.',
+    },
+    {
+      
+      title: 'Carros elétricos ganham espaço nas ruas',
+      photoURLs: 'https://picsum.photos/400/250?random=3',
+      content:
+        'As vendas de veículos elétricos aumentaram 35% no último trimestre, segundo dados de mercado.',
+    },
+    {
+      
+      title: 'Startups brasileiras recebem investimentos recordes',
+      photoURLs: 'https://picsum.photos/400/250?random=4',
+      content:
+        'O ecossistema de inovação no Brasil atraiu bilhões de dólares em aportes no primeiro semestre de 2025.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+    {
+      
+      title: 'Exploração espacial avança com nova missão lunar',
+      photoURLs: 'https://picsum.photos/400/250?random=5',
+      content:
+        'Agência internacional lança foguete rumo à Lua com objetivo de estabelecer base permanente.',
+    },
+  ]
+
+
 
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
@@ -196,10 +298,10 @@ export const SectionNews = () => {
 
       {/* Filtered cards or all */}
       <div className="relative mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
-        {newsFilter ? (
-          newsFilter.map((news) => (
-            <CardNews
-              key={news.id}
+        {noticias ? (
+          noticias.map((news) => (
+            <CardNews 
+              key={news.title}
               {...news}
               handleDeleteNoticie={() => console.log('noticia deletada')}
             />
