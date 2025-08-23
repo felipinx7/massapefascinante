@@ -6,7 +6,7 @@ import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import ModalUpdateNews from './modal/modal-update-news'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function CardNews(data: CardNoticiasDTO) {
   // State utils in component
@@ -14,17 +14,24 @@ export default function CardNews(data: CardNoticiasDTO) {
   const photo = data.photoURLs?.[0]?.url
     ? baseUrlPhoto('news', data.photoURLs[0].url) || backgroundloginpage
     : backgroundloginpage
-    
 
   // Function utils in component
   function handleVisibilityModalUpdate() {
     setOpenModalVisibilityModalUpdate((prev) => !prev)
   }
+
+  useEffect(() => {
+    console.log('Valor da Foto', photo)
+  }, [])
   return (
     <article className="flex h-[300px] w-[280px] flex-col justify-between rounded-[0.9rem] shadow-shadowCardEventLocation">
       {/* Container Foto  */}
       <div className="relative mb-1 h-[50%] w-full overflow-hidden rounded-tl-[0.9rem] rounded-tr-[0.9rem]">
-        <img src={photo ? photo.src : backgroundloginpage.src } className="h-full w-full object-cover" alt="Foto da Notícia" />
+        <img
+          src={photo ? photo.src : backgroundloginpage.src}
+          className="h-full w-full object-cover"
+          alt="Foto da Notícia"
+        />
 
         {/* container de controles */}
         <div className="left-0-0 absolute bottom-0 flex w-full items-center justify-end gap-3 p-2">
@@ -43,15 +50,17 @@ export default function CardNews(data: CardNoticiasDTO) {
       {/* container Informações principais  */}
       <div className="flex h-[50%] w-full flex-col items-start gap-2 px-2">
         <h1 className="w-full truncate text-[1.1rem] font-medium text-black">{data.title}</h1>
-        <p className="w-full h-full line-clamp-3 break-words text-secundarygray900">{data.content}</p>
+        <p className="line-clamp-3 h-full w-full break-words text-secundarygray900">
+          {data.content}
+        </p>
       </div>
 
       {/* Modais De Controles  */}
-        <ModalUpdateNews
-          data={data}
-          handleVisibilityModalUpdate={handleVisibilityModalUpdate}
-          openModalVisibilityModalUpdate={openModalVisibilityModalUpdate}
-        />
+      <ModalUpdateNews
+        data={data}
+        handleVisibilityModalUpdate={handleVisibilityModalUpdate}
+        openModalVisibilityModalUpdate={openModalVisibilityModalUpdate}
+      />
     </article>
   )
 }
