@@ -15,28 +15,27 @@ import { Navigation } from 'swiper/modules'
 import '../../config/globals.css'
 import { useEffect, useState } from 'react'
 
-
 export default function PaginaNoticia() {
-
   //Estados
 
-  const [news,setNews] = useState<CardNoticiasDTO[]>();
+  const [news, setNews] = useState<CardNoticiasDTO[]>()
   const router = useRouter()
 
-  //Funções 
-  async function FetchNews(){
-      const res = await GetAllNews();
-      setNews(res)
-
+  //Funções
+  async function FetchNews() {
+    const res = await GetAllNews()
+    setNews(res.response)
   }
 
-  FetchNews();
+  FetchNews()
 
   const handleChangePage = () => {
     router.back()
   }
-  // HTML
 
+  useEffect(() => {
+    console.log("Noticias", news)
+  }, [])
 
   return (
     <main className="flex h-full w-full flex-col items-center gap-4">
@@ -62,26 +61,27 @@ export default function PaginaNoticia() {
             {news?.slice(0, 1).map((card) => (
               <div
                 key={card.title}
-                style={{ backgroundImage: `url(${card.photoURLs[0].url})`, backgroundSize: 'cover' }}
-                className="relative flex p-8 items-start justify-end flex-col h-[500px] w-[90%] overflow-hidden rounded-[5px] bg-slate-950 max-lg:h-[300px] max-lg:w-full"
+                style={{ backgroundImage: `url(${card.photo[0].url})`, backgroundSize: 'cover' }}
+                className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
               >
-                 <h1 className='text-2xl z-10 text-white font-semibold'>{card.title}</h1>
-                 <h1 className='text-base z-10 text-white mt-2'>{card.content}</h1>
-                 <div className='w-full z-10 flex justify-between mt-3'>
-                  <h1 className='text-sm text-white'>{card.author}</h1>
-                 
-                  <h1 className='text-sm text-white'>{card.date}</h1>
-
-                 </div>
-                 <div className='absolute bg-gradient-to-t  bottom-0 left-0 h-full w-full from-slate-950 to-transparent from-10%'></div>
+                <h1 className="z-10 text-2xl font-semibold text-white">{card.title}</h1>
+                <h1 className="z-10 mt-2 text-base text-white">{card.content}</h1>
+                <div className="z-10 mt-3 flex w-full justify-between">
+                  <h1 className="text-sm text-white">{card.author}</h1>
+                </div>
+                <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
               </div>
             ))}
 
             {/* container de noticias relevantes  */}
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
               {news?.slice(1, 6).map((card) => (
-                <div className='flex 'key={card.title} onClick={() => router.push(`/noticias/${card.id}`)}>
-                <CardNoticiasRelevantes key={card.title} {...card} />
+                <div
+                  className="flex"
+                  key={card.title}
+                  onClick={() => router.push(`/noticias/${card.id}`)}
+                >
+                  <CardNoticiasRelevantes key={card.title} {...card} />
                 </div>
               ))}
             </div>
@@ -114,7 +114,10 @@ export default function PaginaNoticia() {
               >
                 {news?.slice(6).map((card) => (
                   <SwiperSlide key={card.title}>
-                    <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
+                    <div
+                      className="w-68 mr-12 flex h-80 items-start justify-center"
+                      onClick={() => router.push(`/noticias/${card.id}`)}
+                    >
                       <CardMaisNoticias key={card.title} {...card} />
                     </div>
                   </SwiperSlide>
