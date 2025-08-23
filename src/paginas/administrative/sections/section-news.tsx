@@ -18,9 +18,11 @@ export const SectionNews = () => {
   const [showNews, setShowNews] = useState<CardNoticiasDTO[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const [preview, setPreview] = useState<File | null>(null)
-  const newsFilter = showNews?.filter((news) => news.title.toUpperCase().includes(searchValue.toUpperCase()) || news.author.toUpperCase().includes(searchValue.toUpperCase()))
-
-
+  const newsFilter = showNews?.filter(
+    (news) =>
+      news.title.toUpperCase().includes(searchValue.toUpperCase()) ||
+      news.author.toUpperCase().includes(searchValue.toUpperCase()),
+  )
 
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
@@ -58,11 +60,14 @@ export const SectionNews = () => {
   useEffect(() => {
     const fetchGetAllNews = async () => {
       const News = await GetAllNews()
-      console.log("Resposta da API, Notícias", News)
       setShowNews(News)
     }
 
     fetchGetAllNews()
+  }, [])
+
+  useEffect(() => {
+    console.log("Valores do Estados", newsFilter )
   }, [])
 
   return (
@@ -197,7 +202,7 @@ export const SectionNews = () => {
       <div className="relative mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
         {newsFilter && newsFilter.length > 0 ? (
           newsFilter.map((news) => (
-            <CardNews 
+            <CardNews
               key={news.title}
               {...news}
               handleDeleteNoticie={() => console.log('noticia deletada')}
