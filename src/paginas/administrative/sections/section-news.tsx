@@ -66,10 +66,6 @@ export const SectionNews = () => {
     fetchGetAllNews()
   }, [])
 
-  useEffect(() => {
-    console.log("Valores do Estados", newsFilter )
-  }, [])
-
   return (
     <section className="w-[calc(100%-20%)]">
       <div className="max-lg:hidden">
