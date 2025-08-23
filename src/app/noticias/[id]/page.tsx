@@ -14,9 +14,9 @@ export default function UniqueNews() {
   useEffect(() => {
     async function fetchUniqueNews() {
       try {
-        const response = await GetUniqueNews(String(noticieId))
-        setNews(response)
-        console.log('O id da Noticia é ', response)
+        const data = await GetUniqueNews(String(noticieId))
+        setNews(data.response)
+        console.log('O id da Noticia é ', data.response)
       } catch (error) {
         console.log('Error ao pegar o id', error)
       }
@@ -25,8 +25,7 @@ export default function UniqueNews() {
   }, [])
 
   useEffect(() => {
-    console.log("O valor do Estado", news);
-    
+    console.log('O valor do Estado', news)
   }, [])
 
   return (
