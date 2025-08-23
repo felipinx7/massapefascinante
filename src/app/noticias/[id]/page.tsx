@@ -18,22 +18,22 @@ export default function UniqueNews() {
   // Generate photo URL
   const photo = baseUrlPhoto('news', String(news?.photo))
 
-  //   useEffect(() => {
-  //     async function fetchUniqueNews() {
-  //       try {
-  //         const data = await GetUniqueNews(String(newsId))
-  //         setNews(data.response)
-  //         console.log('O id da Noticia é ', data.response)
-  //       } catch (error) {
-  //         console.log('Erro ao pegar o id', error)
-  //       }
-  //     }
-  //     fetchUniqueNews()
-  //   }, [])
+    useEffect(() => {
+      async function fetchUniqueNews() {
+        try {
+          const data = await GetUniqueNews(String(newsId))
+          setNews(data.response)
+          console.log('O id da Noticia é ', data.response)
+        } catch (error) {
+          console.log('Erro ao pegar o id', error)
+        }
+      }
+      fetchUniqueNews()
+    }, [])
 
-  //   useEffect(() => {
-  //     console.log('O valor do Estado', news)
-  //   }, [])
+    useEffect(() => {
+      console.log('O valor do Estado', news)
+    }, [])
 
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-start">
