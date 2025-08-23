@@ -42,7 +42,7 @@ export default function CardNews(data: CardNoticiasDTO) {
       {/* container Informações principais  */}
       <div className="flex h-[50%] w-full flex-col items-start gap-2 px-2">
         <h1 className="w-full truncate text-[1.1rem] font-medium text-black">{data.title}</h1>
-        <p className="w-full¨h-full line-clamp-3 text-secundarygray900">{data.content}</p>
+        <p className="w-full h-full line-clamp-3 text-secundarygray900">{data.content}</p>
       </div>
 
       {/* Modais De Controles  */}
