@@ -12,7 +12,7 @@ export default function CardNews(data: CardNoticiasDTO) {
   // State utils in component
   const [openModalVisibilityModalUpdate, setOpenModalVisibilityModalUpdate] = useState(false)
   const photo = data.photoURLs?.[0]?.url
-    ? baseUrlPhoto('place', data.photoURLs[0].url) || backgroundloginpage
+    ? baseUrlPhoto('news', data.photoURLs[0].url) || backgroundloginpage
     : backgroundloginpage
 
   // Function utils in component

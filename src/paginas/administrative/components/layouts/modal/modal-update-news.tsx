@@ -18,7 +18,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   const [removePhoto, setRemovePhoto] = useState(false)
 
   const photo = props.data.photoURLs?.[0]?.url
-    ? baseUrlPhoto('place', props.data.photoURLs[0].url) || backgroundloginpage
+    ? baseUrlPhoto('news', props.data.photoURLs[0].url) || backgroundloginpage
     : backgroundloginpage
 
   // Function Utils in componente

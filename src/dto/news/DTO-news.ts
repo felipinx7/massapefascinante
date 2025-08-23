@@ -9,7 +9,6 @@ export type CardNoticiasDTO = {
     author: string,
     title: string,
     content: string,
-    date:string,
     photoURLs: Photo[],
     handleDeleteNoticie?: () => void
 }
