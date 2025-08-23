@@ -32,12 +32,12 @@ export default function UniqueNews() {
   }, [])
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="w-full h-screen flex flex-col gap-4">
       <div className="m-0 flex w-full max-w-[1280px] flex-col gap-4">
         {/* photo  */}
         <div className="max-h-[280px] w-full overflow-hidden">
           <img
-            src={photo ? photo : backgroundloginpage}
+            src={photo ? photo.src : backgroundloginpage.src}
             className="h-full w-full rounded-[0.9rem] object-cover"
             alt="Imagem da Notícia"
           />
