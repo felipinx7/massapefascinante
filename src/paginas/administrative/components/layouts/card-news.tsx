@@ -24,7 +24,7 @@ export default function CardNews(data: CardNoticiasDTO) {
     <article className="flex h-[300px] w-[280px] flex-col justify-between rounded-[0.9rem] shadow-shadowCardEventLocation">
       {/* Container Foto  */}
       <div className="relative mb-1 h-[50%] w-full overflow-hidden rounded-tl-[0.9rem] rounded-tr-[0.9rem]">
-        <img src={photo === null ? backgroundloginpage.src : photo} className="h-full w-full object-cover" alt="Foto da Notícia" />
+        <img src={photo === null ? backgroundloginpage.src : photo.src} className="h-full w-full object-cover" alt="Foto da Notícia" />
 
         {/* container de controles */}
         <div className="left-0-0 absolute bottom-0 flex w-full items-center justify-end gap-3 p-2">
