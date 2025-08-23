@@ -10,6 +10,7 @@ export default function UniqueNews() {
   const params = useParams()
   const noticieId = params.id
   const [news, setNews] = useState<CardNoticiasDTO[]>([])
+  const arrayNews = Array.from(news)
 
   useEffect(() => {
     async function fetchUniqueNews() {
@@ -30,7 +31,7 @@ export default function UniqueNews() {
 
   return (
     <section>
-      {news.map((card) => (
+      {arrayNews.map((card) => (
         <div key={card.id}>
           <h1>{card.author}</h1>
           <h1>{card.content}</h1>
