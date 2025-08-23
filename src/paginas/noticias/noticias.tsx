@@ -77,6 +77,7 @@ export default function PaginaNoticia() {
                 style={{ backgroundImage: `url(${photo})`, backgroundSize: 'cover' }}
                 className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
               >
+                <img src={photo ? photo : backgroundloginpage} className='w-full h-full absolute z-0 object-cover' alt="" />
                 <h1 className="z-10 text-2xl font-semibold text-white">{card.title}</h1>
                 <h1 className="z-10 mt-2 text-base text-white">{card.content}</h1>
                 <div className="z-10 mt-3 flex w-full justify-between">
