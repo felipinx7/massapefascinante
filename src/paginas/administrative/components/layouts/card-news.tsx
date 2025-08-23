@@ -28,7 +28,7 @@ export default function CardNews(data: CardNoticiasDTO) {
       {/* Container Foto  */}
       <div className="relative mb-1 h-[50%] w-full overflow-hidden rounded-tl-[0.9rem] rounded-tr-[0.9rem]">
         <img
-          src={photo ? photo.src : backgroundloginpage.src}
+          src={photo ? photo : backgroundloginpage.src}
           className="h-full w-full object-cover"
           alt="Foto da Notícia"
         />
