@@ -19,36 +19,37 @@ export default function UniqueNews() {
 
   const photo = baseUrlPhoto('news', String(news?.photo))
 
-    useEffect(() => {
-      async function fetchUniqueNews() {
-        try {
-          const data = await GetUniqueNews(String(newsId))
-          setNews(data.response)
-          console.log('O id da Noticia é ', data.response)
-        } catch (error) {
-          console.log('Erro ao pegar o id', error)
-        }
+  useEffect(() => {
+    async function fetchUniqueNews() {
+      try {
+        const data = await GetUniqueNews(String(newsId))
+        setNews(data.response)
+        console.log('O id da Noticia é ', data.response)
+      } catch (error) {
+        console.log('Erro ao pegar o id', error)
       }
-      fetchUniqueNews()
-    }, [])
-
-    useEffect(() => {
-      console.log('O valor do Estado', news)
-    }, [])
-
-
-    function handleBackPage(){
-        router.back()
     }
+    fetchUniqueNews()
+  }, [])
+
+  useEffect(() => {
+    console.log('O valor do Estado', news)
+  }, [])
+
+  function handleBackPage() {
+    router.back()
+  }
 
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-start">
       {/* Header */}
       <header className="flex w-full items-center justify-center bg-primargreen px-7 py-3">
         <div className="m-0 flex w-full max-w-[1280px] items-center justify-between px-4">
-          <h2 className="text-xl font-bold text-white">{news?.title}</h2>
-          <div onClick={handleBackPage}>
-            <IconArrowLeft />
+          <div className="flex items-center justify-center gap-2">
+            <h2 className="text-xl font-bold text-white">{news?.title}</h2>
+            <div onClick={handleBackPage}>
+              <IconArrowLeft />
+            </div>
           </div>
         </div>
       </header>
