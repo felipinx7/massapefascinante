@@ -24,6 +24,11 @@ export default function UniqueNews() {
     fetchUniqueNews()
   }, [])
 
+  useEffect(() => {
+    console.log("O valor do Estado", news);
+    
+  }, [])
+
   return (
     <section>
       {news.map((card) => (
