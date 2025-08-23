@@ -14,10 +14,11 @@ import { Navigation } from 'swiper/modules'
 
 import '../../config/globals.css'
 import { useEffect, useState } from 'react'
+import { baseUrlPhoto } from '@/utils/base-url-photos'
+import { backgroundloginpage } from '@/assets/image'
 
 export default function PaginaNoticia() {
   //Estados
-
   const [news, setNews] = useState<CardNoticiasDTO[]>()
   const router = useRouter()
 
@@ -39,6 +40,13 @@ export default function PaginaNoticia() {
   useEffect(() => {
     console.log('Noticias', news)
   }, [news])
+
+  const photo = news.map((card) => (
+    card.photo[0]?.url
+    ? baseUrlPhoto('news', card.photo[0].url) || backgroundloginpage
+    : backgroundloginpage
+  ))
+
 
   return (
     <main className="flex h-full w-full flex-col items-center gap-4">
@@ -64,7 +72,7 @@ export default function PaginaNoticia() {
             {news?.slice(0, 1).map((card) => (
               <div
                 key={card.title}
-                style={{ backgroundImage: `url(${card.photo[0].url})`, backgroundSize: 'cover' }}
+                style={{ backgroundImage: `url(${photo})`, backgroundSize: 'cover' }}
                 className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
               >
                 <h1 className="z-10 text-2xl font-semibold text-white">{card.title}</h1>
