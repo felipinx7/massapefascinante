@@ -58,7 +58,7 @@ export const SectionNews = () => {
   useEffect(() => {
     const fetchGetAllNews = async () => {
       const News = await GetAllNews()
-      console.log("Resposta da API, Notícias", News.data)
+      console.log("Resposta da API, Notícias", News)
       setShowNews(News)
     }
 
