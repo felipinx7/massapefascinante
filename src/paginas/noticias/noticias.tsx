@@ -23,10 +23,10 @@ export default function PaginaNoticia() {
 
   //Funções
   async function FetchNews() {
-    const response = await GetAllNews()
-    console.log("Resposta da API", response);
+    const res = await GetAllNews()
+    console.log("Resposta da API", res.response);
     
-    setNews(response.response)
+    setNews(res.response)
   }
 
   FetchNews()
@@ -36,7 +36,7 @@ export default function PaginaNoticia() {
   }
 
   useEffect(() => {
-    console.log("Valor do Estado", news)
+    console.log("Noticias", news)
   }, [])
 
   return (
