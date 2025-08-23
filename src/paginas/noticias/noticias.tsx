@@ -22,14 +22,13 @@ export default function PaginaNoticia() {
   const router = useRouter()
 
   //Funções
-  async function FetchNews() {
-    const res = await GetAllNews()
-    console.log('Resposta da API', res.response)
-
-    setNews(res.response)
-  }
-
   useEffect(() => {
+    async function FetchNews() {
+      const res = await GetAllNews()
+      console.log('Resposta da API', res.response)
+
+      setNews(res.response)
+    }
     FetchNews()
   }, [])
 
@@ -39,7 +38,7 @@ export default function PaginaNoticia() {
 
   useEffect(() => {
     console.log('Noticias', news)
-  }, [])
+  }, [news])
 
   return (
     <main className="flex h-full w-full flex-col items-center gap-4">
