@@ -97,7 +97,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
                <div className="relative h-[200px] w-full overflow-hidden">
                 {props.data.photoURLs && (
                   <img
-                    src={photo}
+                    src={photo === null ? backgroundloginpage : photo}
                     className="h-full w-full rounded-[0.5rem] object-cover"
                     alt=""
                   />
