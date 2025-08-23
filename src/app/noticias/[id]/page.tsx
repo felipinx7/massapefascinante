@@ -1,21 +1,22 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { GetUniqueNews } from '@/services/routes/news/getUnique'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
+import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 
 export default function UniqueNews() {
   // State for news data
   const params = useParams()
   const newsId = params.id
   const [news, setNews] = useState<CardNoticiasDTO>()
+  const router = useRouter()
 
-  // Generate photo URL
   const photo = baseUrlPhoto('news', String(news?.photo))
 
     useEffect(() => {
@@ -35,12 +36,20 @@ export default function UniqueNews() {
       console.log('O valor do Estado', news)
     }, [])
 
+
+    function handleBackPage(){
+        router.back()
+    }
+
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-start">
       {/* Header */}
       <header className="flex w-full items-center justify-center bg-primargreen px-7 py-3">
-        <div className="m-0 flex w-full max-w-[1280px] items-center justify-start px-4">
+        <div className="m-0 flex w-full max-w-[1280px] items-center justify-between px-4">
           <h2 className="text-xl font-bold text-white">{news?.title}</h2>
+          <div onClick={handleBackPage}>
+            <IconArrowLeft />
+          </div>
         </div>
       </header>
 
