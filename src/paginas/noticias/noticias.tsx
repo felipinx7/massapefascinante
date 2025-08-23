@@ -24,19 +24,21 @@ export default function PaginaNoticia() {
   //Funções
   async function FetchNews() {
     const res = await GetAllNews()
-    console.log("Resposta da API", res.response);
-    
+    console.log('Resposta da API', res.response)
+
     setNews(res.response)
   }
 
-  FetchNews()
+  useEffect(() => {
+    FetchNews()
+  }, [])
 
   const handleChangePage = () => {
     router.back()
   }
 
   useEffect(() => {
-    console.log("Noticias", news)
+    console.log('Noticias', news)
   }, [])
 
   return (
