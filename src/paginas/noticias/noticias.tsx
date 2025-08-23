@@ -23,8 +23,10 @@ export default function PaginaNoticia() {
 
   //Funções
   async function FetchNews() {
-    const res = await GetAllNews()
-    setNews(res.response)
+    const response = await GetAllNews()
+    console.log("Resposta da API", response);
+    
+    setNews(response.data)
   }
 
   FetchNews()
