@@ -17,8 +17,8 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   const [preview, setPreview] = useState<File | null>(null)
   const [removePhoto, setRemovePhoto] = useState(false)
 
-  const photo = props.data.photoURLs?.[0]?.url
-    ? baseUrlPhoto('news', props.data.photoURLs[0].url) || backgroundloginpage
+  const photo = props.data.photo?.[0]?.url
+    ? baseUrlPhoto('news', props.data.photo[0].url) || backgroundloginpage
     : backgroundloginpage
 
   // Function Utils in componente
@@ -74,7 +74,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             {preview ? (
               //  Visualização da Nova Foto Adicionado
               <div className="relative h-[200px] w-full overflow-hidden">
-                {props.data.photoURLs && (
+                {props.data.photo && (
                   <img
                     src={preview ? URL.createObjectURL(preview) : photo}
                     className="h-full w-full rounded-[0.5rem] object-cover"
@@ -95,7 +95,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             ) : !removePhoto && photo ? (
               // renderiza Photo backend 
                <div className="relative h-[200px] w-full overflow-hidden">
-                {props.data.photoURLs && (
+                {props.data.photo && (
                   <img
                     src={photo === null ? backgroundloginpage : photo}
                     className="h-full w-full rounded-[0.5rem] object-cover"

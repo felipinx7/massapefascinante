@@ -11,8 +11,8 @@ import { useEffect, useState } from 'react'
 export default function CardNews(data: CardNoticiasDTO) {
   // State utils in component
   const [openModalVisibilityModalUpdate, setOpenModalVisibilityModalUpdate] = useState(false)
-  const photo = data.photoURLs?.[0]?.url
-    ? baseUrlPhoto('news', data.photoURLs[0].url) || backgroundloginpage
+  const photo = data.photo?.[0]?.url
+    ? baseUrlPhoto('news', data.photo[0].url) || backgroundloginpage
     : backgroundloginpage
 
   // Function utils in component
@@ -21,7 +21,7 @@ export default function CardNews(data: CardNoticiasDTO) {
   }
 
   useEffect(() => {
-    console.log('Valor da Foto', data.photoURLs)
+    console.log('Valor da Foto', data.photo)
   }, [])
   return (
     <article className="flex h-[300px] w-[280px] flex-col justify-between rounded-[0.9rem] shadow-shadowCardEventLocation">
