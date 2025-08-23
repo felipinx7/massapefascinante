@@ -41,11 +41,13 @@ export default function PaginaNoticia() {
     console.log('Noticias', news)
   }, [news])
 
-  const photo = news.map((card) => (
-    card.photo[0]?.url
-    ? baseUrlPhoto('news', card.photo[0].url) || backgroundloginpage
-    : backgroundloginpage
-  ))
+  const photo = news
+    ? news.map((card) => (
+        card.photo[0]?.url
+          ? baseUrlPhoto('news', card.photo[0].url) || backgroundloginpage
+          : backgroundloginpage
+      ))
+    : []
 
 
   return (
