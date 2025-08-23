@@ -9,8 +9,7 @@ export default function UniqueNews() {
   //State utils in section page
   const params = useParams()
   const noticieId = params.id
-  const [news, setNews] = useState<CardNoticiasDTO[]>([])
-  const arrayNews = Array.from(news)
+  const [news, setNews] = useState<CardNoticiasDTO>()
 
   useEffect(() => {
     async function fetchUniqueNews() {
@@ -31,14 +30,16 @@ export default function UniqueNews() {
 
   return (
     <section>
-      {arrayNews.map((card) => (
-        <div key={card.id}>
-          <h1>{card.author}</h1>
-          <h1>{card.content}</h1>
-          <h1>{card.title}</h1>
-          <h1>{card.id}</h1>
+      {news ? (
+        <div>
+          <h1>{news.author}</h1>
+          <h1>{news.content}</h1>
+          <h1>{news.title}</h1>
+          <h1>{news.id}</h1>
         </div>
-      ))}
+      ) : (
+        []
+      )}
     </section>
   )
 }
