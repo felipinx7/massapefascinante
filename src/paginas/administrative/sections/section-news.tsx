@@ -65,7 +65,7 @@ export const SectionNews = () => {
   }, [])
 
   return (
-    <section className="w-[cacl(100%-20%)]">
+    <section className="w-[calc(100%-20%)]">
       <div className="max-lg:hidden">
         <NameAdminstrative SibeBarMobile={false} />
       </div>
@@ -183,7 +183,7 @@ export const SectionNews = () => {
               <button
                 disabled={!isValid}
                 type="submit"
-                className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'text-whitecursor-pointer bg-primargreen text-white' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
+                className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'cursor-pointer bg-primargreen text-white' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
               >
                 Registra notícia
               </button>
@@ -194,7 +194,7 @@ export const SectionNews = () => {
 
       {/* Filtered cards or all */}
       <div className="relative mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
-        {newsFilter ? (
+        {newsFilter && newsFilter.length > 0 ? (
           newsFilter.map((news) => (
             <CardNews 
               key={news.title}
