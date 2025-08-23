@@ -1,7 +1,9 @@
 'use client'
 
+import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { GetUniqueNews } from '@/services/routes/news/getUnique'
+import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -10,6 +12,7 @@ export default function UniqueNews() {
   const params = useParams()
   const noticieId = params.id
   const [news, setNews] = useState<CardNoticiasDTO>()
+  const photo = baseUrlPhoto('news', String(news?.photo))
 
   useEffect(() => {
     async function fetchUniqueNews() {
@@ -29,17 +32,26 @@ export default function UniqueNews() {
   }, [])
 
   return (
-    <section>
-      {news ? (
-        <div>
-          <h1>{news.author}</h1>
-          <h1>{news.content}</h1>
-          <h1>{news.title}</h1>
-          <h1>{news.id}</h1>
+    <section className="flex flex-col gap-4">
+      <div className="m-0 flex w-full max-w-[1280px] flex-col gap-4">
+        {/* photo  */}
+        <div className="max-h-[280px] w-full overflow-hidden">
+          <img
+            src={photo ? photo : backgroundloginpage}
+            className="h-full w-full rounded-[0.9rem] object-cover"
+            alt="Imagem da Notícia"
+          />
         </div>
-      ) : (
-        []
-      )}
+
+        {/* data news  */}
+        <div className="flex flex-col">
+          <h1 className="text-[1.4rem] text-black/60">{news?.title}</h1>
+          <p className="text-[1.1rem] text-black/30">{news?.content}</p>
+        </div>
+
+        {/* more news  */}
+        <div></div>
+      </div>
     </section>
   )
 }
