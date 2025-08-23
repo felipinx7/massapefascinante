@@ -21,7 +21,7 @@ export default function CardNews(data: CardNoticiasDTO) {
   }
 
   useEffect(() => {
-    console.log('Valor da Foto', photo)
+    console.log('Valor da Foto', data.photoURLs)
   }, [])
   return (
     <article className="flex h-[300px] w-[280px] flex-col justify-between rounded-[0.9rem] shadow-shadowCardEventLocation">
