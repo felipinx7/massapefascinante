@@ -47,7 +47,7 @@ export default function UniqueNews() {
         <div className="m-0 flex w-full max-w-[1280px] items-center justify-between px-4">
           <div className="flex items-center flex-row-reverse justify-center gap-2">
             <h2 className="text-xl font-bold text-white">{news?.title}</h2>
-            <div onClick={handleBackPage}>
+            <div onClick={handleBackPage} className='cursor-pointer'>
               <IconArrowLeft />
             </div>
           </div>
