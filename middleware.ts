@@ -4,6 +4,7 @@ export default function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value
 
   console.log('Middleware executado!')
+  console.log('Todos os cookies:', request.cookies)
   console.log('Path:', request.nextUrl.pathname)
   console.log('Token:', token)
 
