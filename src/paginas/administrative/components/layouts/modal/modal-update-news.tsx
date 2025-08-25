@@ -20,11 +20,9 @@ interface ModalUpdateNewsProps {
 
 export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   // State utils in componente
-  const [preview, setPreview] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
   const [removePhoto, setRemovePhoto] = useState(false)
-
-    ? baseUrlPhoto('news', props.data.photo[0].url) || backgroundloginpage
-    : backgroundloginpage
+  
 
   // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
@@ -33,7 +31,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     const arrayFile = Array.from(event.target.files)
     setValue('photoURLs', arrayFile, { shouldValidate: true })
     console.log('Dados da foto', arrayFile)
-    setPreview(arrayFile[0])
+    setPreview(URL.createObjectURL(arrayFile[0]))
     setRemovePhoto(false)
   }
 
@@ -53,10 +51,15 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     setValue,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<z.infer<typeof newsSchema>>({
     resolver: zodResolver(newsSchema),
     mode: 'onChange',
+    defaultValues: {
+    title: props.data.title,
+    author: props.data.author,
+    content: props.data.content,
+  }
   })
 
   async function onSubmit(data: newsDTO) {
@@ -81,7 +84,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           <h1 className="text-lg font-semibold text-gray-800">Atualizar Notícia</h1>
           <div
             className="h-[30px] w-[30px] text-gray-600 hover:text-gray-800"
-            onClick={handleVisibilityModal}
+            onClick={props.handleVisibilityModalUpdate}
           >
             <IconClosed />
           </div>
@@ -101,7 +104,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
               <div className="h-[250px] w-full rounded-sm">
                 <img
                   className="h-full w-full rounded-[1rem] object-cover"
-                  src={preview === null ? '' : URL.createObjectURL(preview)}
+                  src={preview}
                   alt="Visualização da Foto"
                 />
 
@@ -125,6 +128,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
                   accept="image/*"
                   className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
+                
                 <span>Clique aqui para adicionar Foto</span>
               </div>
             )}
