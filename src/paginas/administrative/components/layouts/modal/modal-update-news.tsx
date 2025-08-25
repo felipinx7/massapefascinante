@@ -23,20 +23,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   const [preview, setPreview] = useState<string | null>(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
   const [removePhoto, setRemovePhoto] = useState(false)
 
-  function OpeningModal(){
-    setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
-    setRemovePhoto(false)
 
-      reset({
-      title: props.data.title || "",
-      author: props.data.author || "",
-      content: props.data.content || "",
-      photoURLs: [],
-    })
-  }
-  
-  OpeningModal()
-  
 
   // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
@@ -73,6 +60,21 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     mode: 'onChange',
 
   })
+
+  useEffect(() => {
+  if (props.openModalVisibilityModalUpdate && props.data) {
+    setPreview(baseUrlPhoto("news", props.data.photo?.[0]?.url))
+    setRemovePhoto(false)
+
+    reset({
+      title: props.data.title || "",
+      author: props.data.author || "",
+      content: props.data.content || "",
+      photoURLs: [],
+    })
+  }
+}, [props.openModalVisibilityModalUpdate, props.data, reset])
+  
 
   async function onSubmit(data: newsDTO) {
     if (removePhoto) register('photoURLs', { value: [] })
@@ -113,7 +115,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             </label>
             {preview ? (
               //  Preview of Photo
-              <div className="h-[250px] w-full rounded-sm">
+              <div className="h-[250px] w-full rounded-sm relative">
                 <img
                   className="h-full w-full rounded-[1rem] object-cover"
                   src={preview}
