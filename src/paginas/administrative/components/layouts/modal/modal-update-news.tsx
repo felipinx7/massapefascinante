@@ -62,19 +62,12 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   })
 
   useEffect(() => {
-  if (props.openModalVisibilityModalUpdate && props.data) {
-    setPreview(baseUrlPhoto("news", props.data.photo?.[0]?.url))
-    setRemovePhoto(false)
+    setValue('author', props.data.author)
+    setValue('title', props.data.title)
+    setValue('content', props.data.content)
 
-    reset({
-      title: props.data.title || "",
-      author: props.data.author || "",
-      content: props.data.content || "",
-      photoURLs: [],
-    })
-  }
-}, [props.openModalVisibilityModalUpdate, props.data, reset])
-  
+    setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url) || null)
+  }, [props.data, setValue])
 
   async function onSubmit(data: newsDTO) {
     if (removePhoto) register('photoURLs', { value: [] })
