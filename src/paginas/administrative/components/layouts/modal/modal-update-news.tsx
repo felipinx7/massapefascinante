@@ -4,7 +4,7 @@ import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { useForm } from 'react-hook-form'
@@ -22,6 +22,20 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   // State utils in componente
   const [preview, setPreview] = useState<string | null>(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
   const [removePhoto, setRemovePhoto] = useState(false)
+
+  function OpeningModal(){
+    setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
+    setRemovePhoto(false)
+
+      reset({
+      title: props.data.title || "",
+      author: props.data.author || "",
+      content: props.data.content || "",
+      photoURLs: [],
+    })
+  }
+  
+  OpeningModal()
   
 
   // Function Utils in componente
@@ -46,6 +60,8 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     props.handleVisibilityModalUpdate()
   }
 
+  console.log(props.data)
+
   const {
     register,
     setValue,
@@ -55,11 +71,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   } = useForm<z.infer<typeof newsSchema>>({
     resolver: zodResolver(newsSchema),
     mode: 'onChange',
-    defaultValues: {
-    title: props.data.title,
-    author: props.data.author,
-    content: props.data.content,
-  }
+
   })
 
   async function onSubmit(data: newsDTO) {
@@ -84,7 +96,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           <h1 className="text-lg font-semibold text-gray-800">Atualizar Notícia</h1>
           <div
             className="h-[30px] w-[30px] text-gray-600 hover:text-gray-800"
-            onClick={props.handleVisibilityModalUpdate}
+            onClick={() => props.handleVisibilityModalUpdate()}
           >
             <IconClosed />
           </div>
