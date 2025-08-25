@@ -65,6 +65,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     setValue('author', props.data.author)
     setValue('title', props.data.title)
     setValue('content', props.data.content)
+    setValue('photoURLs', props.data.photo)
 
     setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url) || null)
   }, [props.data, setValue])

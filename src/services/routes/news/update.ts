@@ -9,9 +9,11 @@ export async function updateNews(data: newsDTO, id: string) {
     formData.append('title', data.title)
     formData.append('content', data.content)
 
-    data.photoURLs.forEach((file) => {
-      formData.append('photoURLs', file)
-    })
+    if (data.photoURLs && data.photoURLs.length > 0) {
+      data.photoURLs.forEach((file) => {
+        formData.append('photoURLs', file)
+      })
+    }
 
     const res = await api.put(`/news/${id}`, formData, {
       headers: {
