@@ -183,9 +183,8 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           {/* Botão de envio */}
           <div>
             <button
-              disabled={!isValid}
               type="submit"
-              className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'cursor-pointer bg-primargreen text-white' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
+              className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition cursor-pointer hover:bg-blue-600 text-white `}
             >
               Atualizar notícia
             </button>
