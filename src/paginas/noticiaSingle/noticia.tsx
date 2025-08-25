@@ -75,7 +75,7 @@ export default function PaginaNoticiaUnica() {
             <div className="flex w-full flex-col items-center justify-start gap-3">
               <div
                 style={{
-                  backgroundImage: `url(${uniqueNews?.photoURLs[0].url})`,
+                  backgroundImage: `url(${uniqueNews?.photo[0].url})`,
                   backgroundSize: 'cover',
                 }}
                 className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"

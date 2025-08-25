@@ -10,5 +10,6 @@ export type CardNoticiasDTO = {
   title: string
   content: string
   photo: Photo[]
+  date: string
   handleDeleteNoticie?: () => void
 }

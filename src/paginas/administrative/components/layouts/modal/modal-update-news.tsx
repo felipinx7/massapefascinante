@@ -1,10 +1,16 @@
 import { IconTrash } from '@/assets/icons/icon-trash'
 import { IconClosed } from '@/assets/icons/icone-closed'
 import { backgroundloginpage } from '@/assets/image'
-import { CardNoticiasDTO } from '@/dto/news/DTO-news'
+import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
+import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { updateNews } from '@/services/routes/news/update'
 
 interface ModalUpdateNewsProps {
   handleVisibilityModalUpdate: () => void
@@ -17,7 +23,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   const [preview, setPreview] = useState<File | null>(null)
   const [removePhoto, setRemovePhoto] = useState(false)
 
-  const photo = props.data.photo?.[0]?.url
     ? baseUrlPhoto('news', props.data.photo[0].url) || backgroundloginpage
     : backgroundloginpage
 
@@ -25,22 +30,41 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
 
-    const ArrayFile = Array.from(event.target.files)
-    setPreview(ArrayFile[0])
+    const arrayFile = Array.from(event.target.files)
+    setValue('photoURLs', arrayFile, { shouldValidate: true })
+    console.log('Dados da foto', arrayFile)
+    setPreview(arrayFile[0])
+    setRemovePhoto(false)
   }
 
   function deletePreviewPhoto() {
     setPreview(null)
-  }
-
-  function markPhotoForDeleteion() {
     setRemovePhoto(true)
   }
 
-  function handleVisibilityModal(){
+  function handleVisibilityModal() {
     setPreview(null)
     setRemovePhoto(false)
     props.handleVisibilityModalUpdate()
+  }
+
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<z.infer<typeof newsSchema>>({
+    resolver: zodResolver(newsSchema),
+    mode: 'onChange',
+  })
+
+  async function onSubmit(data: newsDTO) {
+    if (removePhoto) register('photoURLs', { value: [] })
+    const response = await updateNews(data)
+    console.log('Resposta da API:', response)
+    reset()
+    handleVisibilityModal()
   }
 
   return ReactDOM.createPortal(
@@ -64,48 +88,36 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
         </div>
 
         {/* container Formulário  */}
-        <form className="flex w-full flex-col items-center gap-3">
-          {/*Update Foto */}
-          <div className="flex w-full flex-col items-start">
-            <label htmlFor="foto" className="mb-1 block text-sm font-medium text-gray-700">
-              Foto da Noticia
-            </label>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-800">Nova Notícia</h2>
+            <button
+              onClick={handleVisibilityModal}
+              type="button"
+              className="h-[30px] w-[30px] text-gray-600 hover:text-gray-800"
+            >
+              <IconClosed />
+            </button>
+          </div>
 
+          {/* Upload de fotos */}
+          <div className="">
+            <label className="relative mb-1 block text-sm font-medium text-gray-700">
+              Adicionar Foto
+            </label>
             {preview ? (
-              //  Visualização da Nova Foto Adicionado
-              <div className="relative h-[200px] w-full overflow-hidden">
-                {props.data.photo && (
-                  <img
-                    src={preview ? URL.createObjectURL(preview) : photo}
-                    className="h-full w-full rounded-[0.5rem] object-cover"
-                    alt=""
-                  />
-                )}
+              //  Preview of Photo
+              <div className="h-[250px] w-full rounded-sm">
+                <img
+                  className="h-full w-full rounded-[1rem] object-cover"
+                  src={preview === null ? '' : URL.createObjectURL(preview)}
+                  alt="Visualização da Foto"
+                />
+
                 <div className="absolute left-0 top-0 h-full w-full p-2">
                   <div className="flex w-full items-end justify-end">
                     <div
-                      onClick={preview ? deletePreviewPhoto : markPhotoForDeleteion}
-                      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500"
-                    >
-                      <IconTrash />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : !removePhoto && photo ? (
-              // renderiza Photo backend 
-               <div className="relative h-[200px] w-full overflow-hidden">
-                {props.data.photo && (
-                  <img
-                    src={photo === null ? backgroundloginpage : photo}
-                    className="h-full w-full rounded-[0.5rem] object-cover"
-                    alt=""
-                  />
-                )}
-                <div className="absolute left-0 top-0 h-full w-full p-2">
-                  <div className="flex w-full items-end justify-end">
-                    <div
-                      onClick={markPhotoForDeleteion}
+                      onClick={deletePreviewPhoto}
                       className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500"
                     >
                       <IconTrash />
@@ -114,59 +126,70 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
                 </div>
               </div>
             ) : (
-              // Adicionar Nova Foto 
-              <div className="relative flex h-48 w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-500">
+              <div className="relative flex h-48 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-sm text-gray-500">
                 <input
                   type="file"
+                  {...register('photoURLs')}
                   onChange={handleChangePhoto}
-                  accept="image*\"
-                  className="absolute h-full w-full cursor-pointer opacity-0"
+                  accept="image/*"
+                  className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
-                <p>Escolha a Nova Foto da Notícia</p>
+                <span>Clique aqui para adicionar Foto</span>
               </div>
             )}
+            {errors.photoURLs && <p className="text-sm text-red-500">{errors.photoURLs.message}</p>}
           </div>
 
-          {/* Update Title  */}
-          <div className="flex w-full flex-col items-start justify-start">
-            <label className="mb-1 block text-sm font-medium text-gray-700" htmlFor="title news">
-              Título da Notícia
-            </label>
+          {/* Campos de Titulo da noticia e conteúdo da noticia */}
+          <div className="flex flex-col gap-2">
+            <div className="flex-1">
+              <label className="mb-1 block text-sm font-medium text-gray-700">
+                Titulo da Noticia
+              </label>
+              <input
+                {...register('title')}
+                type="text"
+                placeholder="Digite o nome da notícia"
+                className="w-full rounded border border-gray-300 p-2 text-sm"
+              />
+              {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
+            </div>
+            <div className="flex-1">
+              <label className="mb-1 block text-sm font-medium text-gray-700">
+                Conteúdo da Noticia
+              </label>
+              <textarea
+                {...register('content')}
+                className="h-[100px] w-full resize-none rounded border border-gray-300 p-2 text-sm"
+                placeholder="Digite o conteúdo da noticia"
+                id=""
+              ></textarea>
+              {errors.content && <p className="text-sm text-red-500">{errors.content.message}</p>}
+            </div>
+          </div>
+
+          {/* Campos de nome do autor */}
+          <div className="flex-1">
+            <label className="mb-1 block text-sm font-medium text-gray-700">Nome do Autor</label>
             <input
+              {...register('author')}
               type="text"
+              placeholder="Nome do autor"
               className="w-full rounded border border-gray-300 p-2 text-sm"
-              placeholder="Digite o titulo da Noítica"
             />
+            {errors.author && <p className="text-sm text-red-500">{errors.author.message}</p>}
           </div>
 
-          {/* Update Content  */}
-          <div className="flex w-full flex-col">
-            <label htmlFor="content author" className="block text-sm font-medium text-gray-700">
-              Conteúdo da Notícia
-            </label>
-            <textarea
-              className="h-[100px] w-full resize-none rounded border border-gray-300 p-2 text-sm"
-              placeholder="Digite o conteúdo da noticia"
-              id=""
-            ></textarea>
+          {/* Botão de envio */}
+          <div>
+            <button
+              disabled={!isValid}
+              type="submit"
+              className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition ${isValid ? 'cursor-pointer bg-primargreen text-white' : 'bg-primaryWhite500 text-[#bab9b9]'}`}
+            >
+              Atualizar notícia
+            </button>
           </div>
-
-          {/* Update Name Author  */}
-          <div className="flex w-full flex-col items-start justify-start">
-            <label className="mb-1 block text-sm font-medium text-gray-700" htmlFor="name author">
-              Nome do Autor
-            </label>
-            <input
-              type="text"
-              className="w-full rounded border border-gray-300 p-2 text-sm"
-              placeholder="Digite o nome do Author"
-            />
-          </div>
-
-          {/* button of submited  */}
-          <button className="w-full rounded bg-primargreen py-2 text-white">
-            Atualizar Notícia
-          </button>
         </form>
       </article>
     </section>,
