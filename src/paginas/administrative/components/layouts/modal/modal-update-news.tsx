@@ -69,9 +69,9 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url) || null)
   }, [props.data, setValue])
 
-  async function onSubmit(data: newsDTO) {
+  async function onSubmit(data: newsDTO, id: string = props.data.id || '') {
     if (removePhoto) register('photoURLs', { value: [] })
-    const response = await updateNews(data)
+    const response = await updateNews(data, id)
     console.log('Resposta da API:', response)
     reset()
     handleVisibilityModal()
