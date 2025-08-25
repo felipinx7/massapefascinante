@@ -89,16 +89,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
 
         {/* container Formulário  */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-800">Nova Notícia</h2>
-            <button
-              onClick={handleVisibilityModal}
-              type="button"
-              className="h-[30px] w-[30px] text-gray-600 hover:text-gray-800"
-            >
-              <IconClosed />
-            </button>
-          </div>
+
 
           {/* Upload de fotos */}
           <div className="">
