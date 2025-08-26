@@ -1,9 +1,9 @@
-import { json } from "stream/consumers";
 import { api } from "../../../config/axios";
 
 export async function DeleteNews(id: string | undefined) {
     try {
-        const json = {};
+        const json = {
+        };
         const res = await api.delete(`/news/${id}`, json );
         console.log("data: ", res);
         return res.data;
