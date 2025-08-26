@@ -1,6 +1,6 @@
 import { api } from "../../../config/axios";
 
-export async function DeleteNews(id: string){
+export async function DeleteNews(id: string | undefined) {
     try {
         const res = await api.delete(`/news/${id}`);
         console.log("data: ", res);
