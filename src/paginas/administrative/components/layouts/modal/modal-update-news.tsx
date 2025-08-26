@@ -33,6 +33,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     const arrayFile = Array.from(event.target.files)
     console.log('Dados da foto', arrayFile)
     setPreview(URL.createObjectURL(arrayFile[0]))
+    setValue('photoURLs', arrayFile, { shouldValidate: true })
 
     setRemovePhoto(false)
   }
