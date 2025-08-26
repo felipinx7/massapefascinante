@@ -73,6 +73,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   }, [props.data, setValue])
 
   async function onSubmit(data: newsDTO, ) {
+    console.log('data do request:', data)
     if (removePhoto) register('photoURLs', { value: [] })
     const response = await updateNews(data, id)
     console.log('Resposta da API:', response)
