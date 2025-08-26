@@ -48,7 +48,7 @@ export default function CardNews(data: CardNoticiasDTO) {
           >
             <IconPencil />
           </div>
-          <div onClick={() => handleDeleteNews} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500">
+          <div onClick={() => handleDeleteNews()} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500">
             <IconTrash />
           </div>
         </div>
