@@ -1,6 +1,5 @@
 import { IconTrash } from '@/assets/icons/icon-trash'
 import { IconClosed } from '@/assets/icons/icone-closed'
-import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
@@ -22,6 +21,8 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   // State utils in componente
   const [preview, setPreview] = useState<string | null>(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
   const [removePhoto, setRemovePhoto] = useState(false)
+
+  const id = props.data.id;
 
 
 
@@ -65,12 +66,12 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     setValue('author', props.data.author)
     setValue('title', props.data.title)
     setValue('content', props.data.content)
-    setValue('photoURLs', props.data.photo)
+
 
     setPreview(baseUrlPhoto("news" , props.data.photo?.[0]?.url) || null)
   }, [props.data, setValue])
 
-  async function onSubmit(data: newsDTO, id: string = props.data.id || '') {
+  async function onSubmit(data: newsDTO, ) {
     if (removePhoto) register('photoURLs', { value: [] })
     const response = await updateNews(data, id)
     console.log('Resposta da API:', response)
