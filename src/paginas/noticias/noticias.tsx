@@ -79,7 +79,7 @@ export default function PaginaNoticia() {
             ))}
 
             {/* container de noticias relevantes  */}
-            <div className="flex w-full justify-between max-lg:justify-start flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
+            <div className="flex w-80 justify-between max-lg:justify-start flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
               {news?.slice(1, 6).map((card) => (
                 <div
                   className="flex"
