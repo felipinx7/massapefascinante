@@ -8,7 +8,7 @@ export default function CardNoticiasRelevantes(data: CardNoticiasDTO) {
     : backgroundloginpage
   return (
     <article className="w-96 flex h-32 cursor-pointer items-start gap-2 transition-all duration-300 ease-in-out hover:scale-105">
-        <div className="w-64 h-32 flex" style={{backgroundImage: `url(${photo})`, backgroundSize: "cover"}}></div>
+        <div className="w-56 h-40 flex" style={{backgroundImage: `url(${photo})`, backgroundSize: "cover"}}></div>
         <div className="flex flex-col w-32 items-start h-full">
         <h1 className="line-clamp-2 text-slate-950 font-normal">{data.title}</h1>
         <h1 className="line-clamp-2 text-slate-950 font-normal text-sm">{data.author}</h1>
