@@ -1,5 +1,7 @@
 'use client'
 
+import { baseUrlPhoto } from '@/utils/base-url-photos'
+
 import { IconeSetaVoltando } from '@/assets/icons/icone-de-seta-voltando'
 import { useRouter } from 'next/navigation'
 import CardNoticiasRelevantes from './components/card-noticias-relevantes'
@@ -64,11 +66,11 @@ export default function PaginaNoticia() {
             {news?.slice(0, 1).map((card) => (
               <div
                 key={card.title}
-                style={{ backgroundImage: `url(${card.photo[0].url})`, backgroundSize: 'cover' }}
+                style={{ backgroundImage: `url(${baseUrlPhoto("news" , card.photo[0].url)})`, backgroundSize: 'cover' }}
                 className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
               >
                 <h1 className="z-10 text-2xl font-semibold text-white">{card.title}</h1>
-                <h1 className="z-10 mt-2 text-base text-white">{card.content}</h1>
+                <h1 className="z-10 mt-2 text-base text-white line-clamp-2">{card.content}</h1>
                 <div className="z-10 mt-3 flex w-full justify-between">
                   <h1 className="text-sm text-white">{card.author}</h1>
                 </div>
