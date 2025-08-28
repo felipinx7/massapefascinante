@@ -73,7 +73,7 @@ export function PaginaNoticiaUnica() {
                     backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
                     backgroundSize: 'cover',
                   }}
-                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
+                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full"
                 ></div>
 
 
@@ -81,10 +81,10 @@ export function PaginaNoticiaUnica() {
                 <h1>{uniqueNews?.author}</h1>
                 <h1>{uniqueNews?.date}</h1>
               </div>
-              <div className="flex w-full justify-start bg-slate-950 text-3xl font-bold">
+              <div className="flex w-full justify-start  text-3xl font-bold">
                 {uniqueNews?.title}
               </div>
-              <div className="flex w-full justify-start bg-slate-950 text-base">
+              <div className="flex w-full justify-start  text-base">
                 {uniqueNews?.content}
               </div>
             </div> ) : (

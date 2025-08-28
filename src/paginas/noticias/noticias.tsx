@@ -92,6 +92,8 @@ export default function PaginaNoticia() {
               ))}
             </div>
           </div>
+
+          
           {/* container mais noticias */}
           <div className="mt-4 flex w-full flex-col">
             <h1 className="text-[1.5rem] font-bold text-primargreen">Mais Notícias</h1>
