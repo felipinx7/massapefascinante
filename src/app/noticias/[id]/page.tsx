@@ -1,83 +1,148 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { IconeSetaVoltando } from '@/assets/icons/icone-de-seta-voltando'
 import { useParams, useRouter } from 'next/navigation'
-import Image from 'next/image'
-
-import { backgroundloginpage } from '@/assets/image'
+import CardNoticiasRelevantes from '../../../paginas/noticias/components/card-noticias-relevantes'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
-import { GetUniqueNews } from '@/services/routes/news/getUnique'
-import { baseUrlPhoto } from '@/utils/base-url-photos'
-import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
+import { Footer } from '../../../paginas/home-page/sections/footer'
+import CardMaisNoticias from '../../../paginas/noticias/components/card-mais-noticias'
+import { GetAllNews } from '@/services/routes/news/getAll'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import { Navigation } from 'swiper/modules'
 
-export default function UniqueNews() {
-  // State for news data
+import '../../config/globals.css'
+import { GetUniqueNews } from '@/services/routes/news/getUnique'
+import { useEffect, useState } from 'react'
+import { ParamValue } from 'next/dist/server/request/params'
+
+import { baseUrlPhoto } from '@/utils/base-url-photos'
+
+export default function PaginaNoticiaUnica() {
   const params = useParams()
-  const newsId = params.id
-  const [news, setNews] = useState<CardNoticiasDTO>()
+  const { id } = params
+  //Estados
+
+  const [news, setNews] = useState<CardNoticiasDTO[]>()
+  const [uniqueNews, setUniqueNews] = useState<CardNoticiasDTO>()
+
   const router = useRouter()
 
-  const photo = baseUrlPhoto('news', String(news?.photo))
+  //Funções
+  async function FetchNews(id: ParamValue) {
+    const res = await GetAllNews()
+    setNews(res)
 
-  useEffect(() => {
-    async function fetchUniqueNews() {
-      try {
-        const data = await GetUniqueNews(String(newsId))
-        setNews(data.response)
-        console.log('O id da Noticia é ', data.response)
-      } catch (error) {
-        console.log('Erro ao pegar o id', error)
-      }
+    if (id) {
+      const card = await GetUniqueNews(id.toString())
+      setUniqueNews(card)
     }
-    fetchUniqueNews()
-  }, [])
 
-  useEffect(() => {
-    console.log('O valor do Estado', news)
-  }, [])
-
-  function handleBackPage() {
-    router.back()
+    setNews(res)
   }
 
+  useEffect(() => {
+    if (id) {
+      FetchNews(id)
+    }
+  }, [id])
+
+  const handleChangePage = () => {
+    router.back()
+  }
+  // HTML
+
   return (
-    <section className="flex min-h-screen w-full flex-col items-center justify-start">
-      {/* Header */}
-      <header className="flex w-full items-center justify-center bg-primargreen px-7 py-3">
-        <div className="m-0 flex w-full max-w-[1280px] items-center justify-between px-4">
-          <div className="flex items-center flex-row-reverse justify-center gap-2">
-            <h2 className="text-xl font-bold text-white">{news?.title}</h2>
-            <div onClick={handleBackPage} className='cursor-pointer'>
-              <IconArrowLeft />
-            </div>
+    <main className="flex h-full w-full flex-col items-center gap-4">
+      {/* header  */}
+      <header className="flex w-full items-center justify-center bg-primargreen">
+        <div className="m-0 flex w-[100%] max-w-[1280px] items-center justify-start gap-3 px-3 py-4">
+          <div onClick={handleChangePage} className="cursor-pointer">
+            <IconeSetaVoltando className="h-[30px] w-[30px]" />
           </div>
+          <h1 className="text-[1.3rem] font-bold text-white">Voltar</h1>
         </div>
       </header>
 
-      {/* Main content */}
-      <main className="m-0 flex w-full max-w-[1280px] flex-col items-start gap-6 px-4 py-6">
-        {/* Photo */}
-        <div
-          className="w-full overflow-hidden rounded-xl"
-          style={{ height: '350px', minHeight: '220px' }}
-        >
-          <Image
-            src={photo || backgroundloginpage.src}
-            alt="Imagem da Notícia"
-            width={1200}
-            height={500}
-            className="h-full w-full rounded-xl object-cover"
-          />
+      {/* container main  */}
+      <section className="m-0 mt-3 h-full w-[100%] max-w-[1280px] px-5">
+        <h1 className="text-[1.5rem] font-bold text-primargreen max-md:text-center">
+          Veja as notícias mais relevantes de Massapê!
+        </h1>
+        {/* container noticias  */}
+        <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
+          {/* container noticias relevantes  */}
+          <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
+            <div className="flex w-full flex-col items-center justify-start gap-3">
+              <div
+                style={{ backgroundImage: `url(${baseUrlPhoto("news" , uniqueNews?.photo[0]?.url)})`, backgroundSize: 'cover' }}
+                className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
+              ></div>
+
+              <div className="flex flex-row items-center justify-between">
+                <h1>{uniqueNews?.author}</h1>
+                <h1>{uniqueNews?.date}</h1>
+              </div>
+              <div className="flex w-full justify-start bg-slate-950 text-3xl font-bold">
+                {uniqueNews?.title}
+              </div>
+              <div className="flex w-full justify-start bg-slate-950 text-base">
+                {uniqueNews?.content}
+              </div>
+            </div>
+
+            {/* container de noticias relevantes  */}
+            <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
+              {news
+                ?.filter((card) => card.id !== uniqueNews?.id)
+                .slice(0, 5)
+                .map((card) => <div key={card.id} className='flex' onClick={() => router.push(`/noticias/${card.id}`)}> <CardNoticiasRelevantes  {...card} /> </div> )}
+            </div>
+          </div>
+          {/* container mais noticias */}
+          <div className="mt-4 flex w-full flex-col">
+            <h1 className="text-[1.5rem] font-bold text-primargreen">Mais Notícias</h1>
+
+            {/* container das demais noticias */}
+            {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
+            <div className="mt-4">
+              <Swiper
+                modules={[Navigation]}
+                pagination={{ clickable: true }}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                  },
+                  600: {
+                    slidesPerView: 3.5,
+                  },
+                  720: {
+                    slidesPerView: 4,
+                  },
+                  860: {
+                    slidesPerView: 4.3,
+                  },
+                }}
+                className="gap-8 rounded-xl px-8 py-8"
+              >
+                {news
+                  ?.filter((card) => card.id !== uniqueNews?.id)
+                  ?.slice(5)
+                  .map((card) => (
+                    <SwiperSlide key={card.title}>
+                      <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
+                        <CardMaisNoticias key={card.title} {...card} />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          </div>
         </div>
 
-        <article className="flex w-full flex-col">
-          <h1 className="text-[2rem] font-bold text-black/70">{news?.title}</h1>
-          <p className="mt-4 text-[1.1rem] leading-7 text-black/60">{news?.content}</p>
-        </article>
-
-        {/* More news */}
-        <div></div>
-      </main>
-    </section>
+        <Footer />
+      </section>
+    </main>
   )
 }
