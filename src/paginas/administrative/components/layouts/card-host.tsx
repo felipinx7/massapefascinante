@@ -18,6 +18,7 @@ import { dataHostingSchema } from '@/schemas/places-schema'
 import { updatePlace } from '@/services/routes/places/update-place'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { formatPhoneNumber } from '@/utils/formatPhone'
+import updatePhoto from '@/services/routes/news/update-photo'
 
 export const CardHost = (props: HostingCardData) => {
   const [showModalUpdate, setShowModalUpdate] = useState(false)

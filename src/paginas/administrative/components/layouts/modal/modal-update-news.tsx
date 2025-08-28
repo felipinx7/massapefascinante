@@ -1,6 +1,5 @@
 import { IconTrash } from '@/assets/icons/icon-trash'
 import { IconClosed } from '@/assets/icons/icone-closed'
-import { backgroundloginpage } from '@/assets/image'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
@@ -11,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { updateNews } from '@/services/routes/news/update'
+import updatePhoto from '@/services/routes/news/update-photo'
 
 interface ModalUpdateNewsProps {
   handleVisibilityModalUpdate: () => void
@@ -20,9 +20,10 @@ interface ModalUpdateNewsProps {
 
 export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   // State utils in componente
-  const [preview, setPreview] = useState<string | null>(baseUrlPhoto("news" , props.data.photo?.[0]?.url))
+  const [preview, setPreview] = useState<string | null>(
+    baseUrlPhoto('news', props.data.photo?.[0]?.url),
+  )
   const [removePhoto, setRemovePhoto] = useState(false)
-  
 
   // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
@@ -56,14 +57,20 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     resolver: zodResolver(newsSchema),
     mode: 'onChange',
     defaultValues: {
-    title: props.data.title,
-    author: props.data.author,
-    content: props.data.content,
-  }
+      title: props.data.title,
+      author: props.data.author,
+      content: props.data.content,
+    },
   })
 
   async function onSubmit(data: newsDTO) {
     if (removePhoto) register('photoURLs', { value: [] })
+
+    if (preview !== props.data.photo?.[0]?.url) {
+      const response = await updatePhoto(props.data.photo?.[0].url, preview)
+      console.log('Valor da Foto Atualizado', response)
+      return response
+    }
     const response = await updateNews(data)
     console.log('Resposta da API:', response)
     reset()
@@ -92,8 +99,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
 
         {/* container Formulário  */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-
-
           {/* Upload de fotos */}
           <div className="">
             <label className="relative mb-1 block text-sm font-medium text-gray-700">
@@ -128,7 +133,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
                   accept="image/*"
                   className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
-                
+
                 <span>Clique aqui para adicionar Foto</span>
               </div>
             )}
@@ -179,7 +184,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           <div>
             <button
               type="submit"
-              className={`w-full rounded bg-primargreen px-4 py-2 font-semibold transition cursor-pointer hover:bg-blue-600 text-white `}
+              className={`w-full cursor-pointer rounded bg-primargreen px-4 py-2 font-semibold text-white transition hover:bg-blue-600`}
             >
               Atualizar notícia
             </button>
