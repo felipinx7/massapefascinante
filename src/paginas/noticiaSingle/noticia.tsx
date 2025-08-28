@@ -16,7 +16,6 @@ import CardMaisNoticias from './components/card-mais-noticias'
 import '../../config/globals.css'
 import { GetUniqueNews } from '@/services/routes/news/getUnique'
 import { useEffect, useState } from 'react'
-import { ParamValue } from 'next/dist/server/request/params'
 
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 
@@ -68,8 +67,7 @@ export default function PaginaNoticiaUnica() {
         <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
-            <div className="flex w-full flex-col items-center justify-start gap-3">
-              {uniqueNews?.photo[0] ? (
+       {uniqueNews != undefined ? (     <div className="flex w-full flex-col items-center justify-start gap-3">
                 <div
                   style={{
                     backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
@@ -77,11 +75,7 @@ export default function PaginaNoticiaUnica() {
                   }}
                   className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
                 ></div>
-              ) : (
-                <div className="flex h-[500px] w-full items-center justify-center rounded-[5px] bg-slate-950 p-8 text-white max-lg:h-[300px] max-lg:w-full">
-                  Imagem não disponível
-                </div>
-              )}
+
 
               <div className="flex flex-row items-center justify-between">
                 <h1>{uniqueNews?.author}</h1>
@@ -93,7 +87,9 @@ export default function PaginaNoticiaUnica() {
               <div className="flex w-full justify-start bg-slate-950 text-base">
                 {uniqueNews?.content}
               </div>
-            </div>
+            </div> ) : (
+              <div>Carregando...</div>
+            )}
 
             {/* container de noticias relevantes  */}
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
