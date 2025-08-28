@@ -67,16 +67,37 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
 
   async function onSubmit(data: newsDTO) {
     console.log('data do request:', data)
-    if (photoFile) {
-      const response = await updatePhoto(props.data.photo?.[0]?.url, photoFile)
-      console.log('Atualizado viu', response)
-      return response
+
+    try {
+      if (photoFile) {
+        if (!props.data.photo?.[0]?.url) {
+          console.error('Tentando atualizar foto mas não existe ID/URL da foto antiga')
+          return
+        }
+
+        const response = await updatePhoto(props.data.photo[0].url, photoFile)
+        console.log('Foto atualizada com sucesso:', response)
+      }
+
+      if (removePhoto) {
+        setValue('photoURLs', [], { shouldValidate: true })
+      }
+
+      const payload = {
+        ...data,
+        photoURLs: data.photoURLs ?? [],
+      }
+
+      console.log('Payload final:', payload)
+
+      const response = await updateNews(payload)
+      console.log('Notícia atualizada com sucesso:', response)
+
+      reset()
+      handleVisibilityModal()
+    } catch (err) {
+      console.error('Erro ao atualizar:', err)
     }
-    if (removePhoto) register('photoURLs', { value: [] })
-    const response = await updateNews(data)
-    console.log('Resposta da API:', response)
-    reset()
-    handleVisibilityModal()
   }
 
   return ReactDOM.createPortal(
