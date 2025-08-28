@@ -2,7 +2,7 @@ export const BASE_URL_BACK_END = 'https://api.massapefascinante.com.br/api/uploa
 
 export function baseUrlPhoto(
   type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news',
-  photoName: string,
+  photoName: string | undefined,
 ) {
   if (!photoName) return null
 
