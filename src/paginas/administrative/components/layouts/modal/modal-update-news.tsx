@@ -75,7 +75,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
         } else {
           const responsePhoto = await updatePhoto(props.data.photo[0].url, photoFile)
           console.log('Tentando atualizar foto com:', props.data.photo[0].url, photoFile)
-          return responsePhot
+          return responsePhoto
         }
       }
 
