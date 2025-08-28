@@ -19,27 +19,26 @@ interface ModalUpdateNewsProps {
 }
 
 export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
-  // State utils in componente
   const [preview, setPreview] = useState<string | null>(
     baseUrlPhoto('news', props.data.photo?.[0]?.url),
   )
   const [removePhoto, setRemovePhoto] = useState(false)
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
 
-  // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
-
     const arrayFile = Array.from(event.target.files)
     console.log('Dados da foto', arrayFile)
     setPreview(URL.createObjectURL(arrayFile[0]))
+    setPhotoFile(arrayFile[0])
     setValue('photoURLs', arrayFile, { shouldValidate: true })
-
     setRemovePhoto(false)
   }
 
   function deletePreviewPhoto() {
     setPreview(null)
     setRemovePhoto(true)
+    setPhotoFile(null)
   }
 
   function handleVisibilityModal() {
@@ -68,12 +67,11 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
 
   async function onSubmit(data: newsDTO) {
     console.log('data do request:', data)
-    if (preview !== props.data.photo?.[0]?.url) {
-      const response = await updatePhoto(props.data.photo?.[0]?.url, preview)
+    if (photoFile) {
+      const response = await updatePhoto(props.data.photo?.[0]?.url, photoFile)
       console.log('Atualizado viu', response)
       return response
     }
-    
     if (removePhoto) register('photoURLs', { value: [] })
     const response = await updateNews(data)
     console.log('Resposta da API:', response)
@@ -88,9 +86,10 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
       }`}
     >
       <article
-        className={`${props.openModalVisibilityModalUpdate ? 'scale-100 opacity-100' : 'scale-125 opacity-0'} relative z-[20000] flex max-h-[90vh] w-[95%] max-w-lg flex-col gap-4 overflow-y-auto rounded-xl bg-white p-5 px-5 py-4 shadow-lg transition-all duration-500 ease-in-out`}
+        className={`${
+          props.openModalVisibilityModalUpdate ? 'scale-100 opacity-100' : 'scale-125 opacity-0'
+        } relative z-[20000] flex max-h-[90vh] w-[95%] max-w-lg flex-col gap-4 overflow-y-auto rounded-xl bg-white p-5 px-5 py-4 shadow-lg transition-all duration-500 ease-in-out`}
       >
-        {/* container Header  */}
         <div className="z-50 flex w-full items-center justify-between">
           <h1 className="text-lg font-semibold text-gray-800">Atualizar Notícia</h1>
           <div
@@ -101,22 +100,18 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           </div>
         </div>
 
-        {/* container Formulário  */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          {/* Upload de fotos */}
           <div className="">
             <label className="relative mb-1 block text-sm font-medium text-gray-700">
               Adicionar Foto
             </label>
             {preview ? (
-              //  Preview of Photo
               <div className="relative h-[250px] w-full rounded-sm">
                 <img
                   className="h-full w-full rounded-[1rem] object-cover"
                   src={preview}
                   alt="Visualização da Foto"
                 />
-
                 <div className="absolute left-0 top-0 h-full w-full p-2">
                   <div className="flex w-full items-end justify-end">
                     <div
@@ -137,14 +132,12 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
                   accept="image/*"
                   className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
-
                 <span>Clique aqui para adicionar Foto</span>
               </div>
             )}
             {errors.photoURLs && <p className="text-sm text-red-500">{errors.photoURLs.message}</p>}
           </div>
 
-          {/* Campos de Titulo da noticia e conteúdo da noticia */}
           <div className="flex flex-col gap-2">
             <div className="flex-1">
               <label className="mb-1 block text-sm font-medium text-gray-700">
@@ -172,7 +165,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             </div>
           </div>
 
-          {/* Campos de nome do autor */}
           <div className="flex-1">
             <label className="mb-1 block text-sm font-medium text-gray-700">Nome do Autor</label>
             <input
@@ -184,7 +176,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             {errors.author && <p className="text-sm text-red-500">{errors.author.message}</p>}
           </div>
 
-          {/* Botão de envio */}
           <div>
             <button
               type="submit"
@@ -196,7 +187,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
         </form>
       </article>
     </section>,
-
     document.body,
   )
 }

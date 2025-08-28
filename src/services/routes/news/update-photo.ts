@@ -1,10 +1,12 @@
 import { api } from '@/config/axios'
 
-export default async function updatePhoto(id: string, data: string | null) {
+export default async function updatePhoto(id: string, file: File) {
   try {
-    const response = api.put(`/news/photo/${id}`, data, {
+    const formdata = new FormData()
+    formdata.append("photoURLs", file)
+    const response = api.put(`/news/photo/${id}`, file, {
       headers: {
-        'content-type': 'multpart-formdata',
+        'Content-Type': 'multpart-form-data',
       },
     })
 
