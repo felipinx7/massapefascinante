@@ -69,15 +69,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     console.log('data do request:', data)
 
     try {
-      if (photoFile) {
-        if (!props.data.photo?.[0]?.url) {
-          console.error('Tentando atualizar foto mas não existe ID/URL da foto antiga')
-          return
-        }
-
-        const response = await updatePhoto(props.data.photo[0].url, photoFile)
-        console.log('Foto atualizada com sucesso:', response)
-      }
 
       if (removePhoto) {
         setValue('photoURLs', [], { shouldValidate: true })
