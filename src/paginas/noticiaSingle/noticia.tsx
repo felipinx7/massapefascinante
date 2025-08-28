@@ -77,7 +77,7 @@ export function PaginaNoticiaUnica() {
                 ></div>
 
 
-              <div className="flex flex-row items-center justify-between">
+              <div className="w-full flex flex-row items-center justify-between">
                 <h1>{uniqueNews?.author}</h1>
                 <h1>{uniqueNews?.date}</h1>
               </div>
