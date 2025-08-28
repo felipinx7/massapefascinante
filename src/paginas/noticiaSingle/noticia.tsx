@@ -31,28 +31,17 @@ export default function PaginaNoticiaUnica() {
   const router = useRouter()
 
   //Funções
-  async function FetchNews(id: ParamValue) {
-    try {
-      const allNews = await GetAllNews()
-      setNews(allNews || [])
-
-      const safeId = Array.isArray(id) ? id[0] : id
-      if (safeId) {
-        const card = await GetUniqueNews(safeId)
-        setUniqueNews(card || undefined)
-      }
-    } catch (err) {
-      console.error('Erro ao buscar notícias:', err)
-      setNews([])
-      setUniqueNews(undefined)
-    }
-  }
   useEffect(() => {
-    if (id) {
-      FetchNews(id)
-    }
-  }, [id])
+    async function FetchNews() {
+      const res = await GetAllNews()
+      const resNew = await GetUniqueNews(id?.toString())
+      console.log('Resposta da API', res.response)
+      setUniqueNews(resNew);
 
+      setNews(res.response)
+    }
+    FetchNews()
+  }, [id])
   const handleChangePage = () => {
     router.back()
   }
