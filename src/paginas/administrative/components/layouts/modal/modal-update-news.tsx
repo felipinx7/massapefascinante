@@ -3,7 +3,7 @@ import { IconClosed } from '@/assets/icons/icone-closed'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { useForm } from 'react-hook-form'
@@ -24,7 +24,6 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     baseUrlPhoto('news', props.data.photo?.[0]?.url),
   )
   const [removePhoto, setRemovePhoto] = useState(false)
-  
 
   // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
@@ -61,14 +60,20 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     resolver: zodResolver(newsSchema),
     mode: 'onChange',
     defaultValues: {
-    title: props.data.title,
-    author: props.data.author,
-    content: props.data.content,
-  }
+      title: props.data.title,
+      author: props.data.author,
+      content: props.data.content,
+    },
   })
 
-  async function onSubmit(data: newsDTO, ) {
+  async function onSubmit(data: newsDTO) {
     console.log('data do request:', data)
+    if (preview !== props.data.photo?.[0]?.url) {
+      const response = await updatePhoto(props.data.photo?.[0]?.url, preview)
+      console.log('Atualizado viu', response)
+      return response
+    }
+    
     if (removePhoto) register('photoURLs', { value: [] })
     const response = await updateNews(data)
     console.log('Resposta da API:', response)
@@ -105,7 +110,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             </label>
             {preview ? (
               //  Preview of Photo
-              <div className="h-[250px] w-full rounded-sm relative">
+              <div className="relative h-[250px] w-full rounded-sm">
                 <img
                   className="h-full w-full rounded-[1rem] object-cover"
                   src={preview}
