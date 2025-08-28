@@ -35,7 +35,7 @@ export function PaginaNoticiaUnica() {
       const res = await GetAllNews()
       const resNew = await GetUniqueNews(id?.toString())
       console.log('Resposta da API', res.response)
-      setUniqueNews(resNew.response);
+      setUniqueNews(resNew.response)
 
       setNews(res.response)
     }
@@ -67,7 +67,8 @@ export function PaginaNoticiaUnica() {
         <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
-       {uniqueNews != undefined ? (     <div className="flex w-full flex-col items-center justify-start gap-3">
+            {uniqueNews != undefined ? (
+              <div className="flex w-full flex-col items-center justify-start gap-3">
                 <div
                   style={{
                     backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
@@ -76,18 +77,18 @@ export function PaginaNoticiaUnica() {
                   className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full"
                 ></div>
 
-
-              <div className="w-full flex flex-row items-center justify-between">
-                <h1>{uniqueNews?.author}</h1>
-                <h1>{uniqueNews?.date}</h1>
+                <div className="flex w-full flex-row items-center justify-between">
+                  <h1>{uniqueNews?.author}</h1>
+                  {uniqueNews?.date
+                    ? new Date(uniqueNews.date).toLocaleDateString('pt-BR')
+                    : '-'}{' '}
+                </div>
+                <div className="flex w-full justify-start text-3xl font-bold">
+                  {uniqueNews?.title}
+                </div>
+                <div className="flex w-full justify-start text-base">{uniqueNews?.content}</div>
               </div>
-              <div className="flex w-full justify-start  text-3xl font-bold">
-                {uniqueNews?.title}
-              </div>
-              <div className="flex w-full justify-start  text-base">
-                {uniqueNews?.content}
-              </div>
-            </div> ) : (
+            ) : (
               <div>Carregando...</div>
             )}
 
