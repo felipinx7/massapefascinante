@@ -76,13 +76,19 @@ export default function PaginaNoticiaUnica() {
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             <div className="flex w-full flex-col items-center justify-start gap-3">
-              <div
-                style={{
-                  backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
-                  backgroundSize: 'cover',
-                }}
-                className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
-              ></div>
+              {uniqueNews?.photo[0] ? (
+                <div
+                  style={{
+                    backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
+                    backgroundSize: 'cover',
+                  }}
+                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
+                ></div>
+              ) : (
+                <div className="flex h-[500px] w-full items-center justify-center rounded-[5px] bg-slate-950 p-8 text-white max-lg:h-[300px] max-lg:w-full">
+                  Imagem não disponível
+                </div>
+              )}
 
               <div className="flex flex-row items-center justify-between">
                 <h1>{uniqueNews?.author}</h1>
