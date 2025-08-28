@@ -66,9 +66,17 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   })
 
   async function onSubmit(data: newsDTO) {
-    console.log('data do request:', data)
+    console.log('Data do request:', data)
 
     try {
+      if (photoFile) {
+        if (!props.data.photo?.[0]?.url) {
+          console.error('Não existe ID/URL da foto antiga para atualizar')
+        } else {
+          const responsePhoto = await updatePhoto(props.data.photo[0].url, photoFile)
+          console.log('Foto atualizada com sucesso:', responsePhoto?.data)
+        }
+      }
 
       if (removePhoto) {
         setValue('photoURLs', [], { shouldValidate: true })
@@ -76,13 +84,11 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
 
       const payload = {
         ...data,
-        photoURLs: data.photoURLs ?? [],
+        photoURLs: removePhoto ? [] : (data.photoURLs ?? []),
       }
 
-      console.log('Payload final:', payload)
-
-      const response = await updateNews(payload)
-      console.log('Notícia atualizada com sucesso:', response)
+      const responseNews = await updateNews(payload)
+      console.log('Notícia atualizada com sucesso:', responseNews?.data ?? 'sem body de resposta')
 
       reset()
       handleVisibilityModal()
