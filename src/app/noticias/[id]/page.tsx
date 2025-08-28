@@ -1,4 +1,3 @@
-'use client'
 
 
 import PaginaNoticiaUnica from "@/paginas/noticiaSingle/noticia"

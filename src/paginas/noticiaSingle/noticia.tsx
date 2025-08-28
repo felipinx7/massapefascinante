@@ -2,15 +2,16 @@
 
 import { IconeSetaVoltando } from '@/assets/icons/icone-de-seta-voltando'
 import { useParams, useRouter } from 'next/navigation'
-import CardNoticiasRelevantes from './components/card-noticias-relevantes'
 import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { Footer } from '../home-page/sections/footer'
-import CardMaisNoticias from './components/card-mais-noticias'
 import { GetAllNews } from '@/services/routes/news/getAll'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
+
+import CardNoticiasRelevantes from './components/card-noticias-relevantes'
+import CardMaisNoticias from './components/card-mais-noticias'
 
 import '../../config/globals.css'
 import { GetUniqueNews } from '@/services/routes/news/getUnique'
