@@ -4,7 +4,7 @@ export default async function updatePhoto(id: string, file: File) {
   try {
     const formdata = new FormData()
     formdata.append("photoURLs", file)
-    const response = api.put(`/news/photo/${id}`, file, {
+    const response = api.put(`/news/photo/${id}`, formdata, {
     })
 
     console.log('Atualizada com sucesso!', response)
