@@ -32,17 +32,21 @@ export default function PaginaNoticiaUnica() {
 
   //Funções
   async function FetchNews(id: ParamValue) {
-    const res = await GetAllNews()
-    setNews(res)
+    try {
+      const allNews = await GetAllNews()
+      setNews(allNews || [])
 
-    if (id) {
-      const card = await GetUniqueNews(id.toString())
-      setUniqueNews(card)
+      const safeId = Array.isArray(id) ? id[0] : id
+      if (safeId) {
+        const card = await GetUniqueNews(safeId)
+        setUniqueNews(card || undefined)
+      }
+    } catch (err) {
+      console.error('Erro ao buscar notícias:', err)
+      setNews([])
+      setUniqueNews(undefined)
     }
-
-    setNews(res)
   }
-
   useEffect(() => {
     if (id) {
       FetchNews(id)
