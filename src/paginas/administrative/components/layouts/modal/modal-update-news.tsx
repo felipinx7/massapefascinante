@@ -66,38 +66,36 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
   })
 
   async function onSubmit(data: newsDTO) {
-  console.log('data do request:', data)
+    console.log('Data do request:', data)
 
-  try {
-    if (photoFile) {
-      if (!props.data.photo?.[0]?.url) {
-        console.error('Tentando atualizar foto mas não existe ID/URL da foto antiga')
-      } else {
-        const responsePhoto = await updatePhoto(props.data.photo[0].url, photoFile)
-        console.log('Foto atualizada com sucesso:', responsePhoto?.data)
+    try {
+      if (photoFile) {
+        if (!props.data.photo?.[0]?.url) {
+          console.error('Não existe ID/URL da foto antiga para atualizar')
+        } else {
+          const responsePhoto = await updatePhoto(props.data.photo[0].url, photoFile)
+          console.log('Foto atualizada com sucesso:', responsePhoto?.data)
+        }
       }
+
+      if (removePhoto) {
+        setValue('photoURLs', [], { shouldValidate: true })
+      }
+
+      const payload = {
+        ...data,
+        photoURLs: removePhoto ? [] : (data.photoURLs ?? []),
+      }
+
+      const responseNews = await updateNews(payload)
+      console.log('Notícia atualizada com sucesso:', responseNews?.data ?? 'sem body de resposta')
+
+      reset()
+      handleVisibilityModal()
+    } catch (err) {
+      console.error('Erro ao atualizar:', err)
     }
-
-    if (removePhoto) {
-      setValue('photoURLs', [], { shouldValidate: true })
-    }
-
-    const payload = {
-      ...data,
-      photoURLs: data.photoURLs ?? [],
-    }
-
-    const responseNews = await updateNews(payload)
-    console.log('Notícia atualizada com sucesso:', responseNews?.data ?? 'sem body de resposta')
-
-    // 4️⃣ Limpa o formulário e fecha modal
-    reset()
-    handleVisibilityModal()
-  } catch (err) {
-    console.error('Erro ao atualizar:', err)
   }
-}
-
 
   return ReactDOM.createPortal(
     <section
