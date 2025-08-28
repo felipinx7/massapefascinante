@@ -2,16 +2,20 @@ import { api } from '@/config/axios'
 
 export default async function updatePhoto(id: string, file: File) {
   try {
-    const response = await api.put(`/news/photo/${id}`, file, {
-        headers: {
+    const formData = new FormData()
+    formData.append("photo", file)
+
+    const response = await api.put(`/news/photo/${id}`, formData, {
+      headers: {
         "Content-Type": "multipart/form-data",
-        withCredencials: true
-    }
+      },
+      withCredentials: true,  
     })
 
-    console.log('Atualizada com sucesso!', response)
-    return response
+    console.log("Foto atualizada com sucesso!", response.data)
+    return response.data  
   } catch (error) {
-    console.log('Error ao atualizar foto', error)
+    console.error("Erro ao atualizar foto", error)
+    throw error
   }
 }
