@@ -36,7 +36,7 @@ export default function PaginaNoticiaUnica() {
       const res = await GetAllNews()
       const resNew = await GetUniqueNews(id?.toString())
       console.log('Resposta da API', res.response)
-      setUniqueNews(resNew);
+      setUniqueNews(resNew.response);
 
       setNews(res.response)
     }
