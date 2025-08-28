@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react'
 
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 
-export default function PaginaNoticiaUnica() {
+export function PaginaNoticiaUnica() {
   const params = useParams()
   const { id } = params
   //Estados
