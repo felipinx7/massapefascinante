@@ -17,6 +17,8 @@ import { GetUniqueNews } from '@/services/routes/news/getUnique'
 import { useEffect, useState } from 'react'
 import { ParamValue } from 'next/dist/server/request/params'
 
+import { baseUrlPhoto } from '@/utils/base-url-photos'
+
 export default function PaginaNoticiaUnica() {
   const params = useParams()
   const { id } = params
@@ -75,7 +77,7 @@ export default function PaginaNoticiaUnica() {
             <div className="flex w-full flex-col items-center justify-start gap-3">
               <div
                 style={{
-                  backgroundImage: `url(${uniqueNews?.photo[0].url})`,
+                  backgroundImage: `url(${baseUrlPhoto("news" , uniqueNews?.photo[0].url)})`,
                   backgroundSize: 'cover',
                 }}
                 className="relative flex h-[500px] w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
