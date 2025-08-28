@@ -78,7 +78,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
         }
       }
 
-      if (removePhoto) {
+      if (removePhoo) {
         setValue('photoURLs', [], { shouldValidate: true })
       }
 

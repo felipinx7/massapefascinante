@@ -31,24 +31,17 @@ export default function PaginaNoticiaUnica() {
   const router = useRouter()
 
   //Funções
-  async function FetchNews(id: ParamValue) {
-    const res = await GetAllNews()
-    setNews(res)
-
-    if (id) {
-      const card = await GetUniqueNews(id.toString())
-      setUniqueNews(card)
-    }
-
-    setNews(res)
-  }
-
   useEffect(() => {
-    if (id) {
-      FetchNews(id)
-    }
-  }, [id])
+    async function FetchNews() {
+      const res = await GetAllNews()
+      const resNew = await GetUniqueNews(id?.toString())
+      console.log('Resposta da API', res.response)
+      setUniqueNews(resNew);
 
+      setNews(res.response)
+    }
+    FetchNews()
+  }, [id])
   const handleChangePage = () => {
     router.back()
   }
@@ -76,10 +69,19 @@ export default function PaginaNoticiaUnica() {
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             <div className="flex w-full flex-col items-center justify-start gap-3">
-              <div
-                style={{ backgroundImage: `url(${baseUrlPhoto("news" , uniqueNews?.photo[0]?.url)})`, backgroundSize: 'cover' }}
-                className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
-              ></div>
+              {uniqueNews?.photo[0] ? (
+                <div
+                  style={{
+                    backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
+                    backgroundSize: 'cover',
+                  }}
+                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
+                ></div>
+              ) : (
+                <div className="flex h-[500px] w-full items-center justify-center rounded-[5px] bg-slate-950 p-8 text-white max-lg:h-[300px] max-lg:w-full">
+                  Imagem não disponível
+                </div>
+              )}
 
               <div className="flex flex-row items-center justify-between">
                 <h1>{uniqueNews?.author}</h1>
@@ -97,8 +99,17 @@ export default function PaginaNoticiaUnica() {
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
               {news
                 ?.filter((card) => card.id !== uniqueNews?.id)
-                .slice(0, 5)
-                .map((card) => <div key={card.id} className='flex' onClick={() => router.push(`/noticias/${card.id}`)}> <CardNoticiasRelevantes  {...card} /> </div> )}
+                ?.slice(0, 5)
+                ?.map((card) => (
+                  <div
+                    key={card.id}
+                    className="flex"
+                    onClick={() => router.push(`/noticias/${card.id}`)}
+                  >
+                    {' '}
+                    <CardNoticiasRelevantes {...card} />{' '}
+                  </div>
+                ))}
             </div>
           </div>
           {/* container mais noticias */}
@@ -130,9 +141,12 @@ export default function PaginaNoticiaUnica() {
                 {news
                   ?.filter((card) => card.id !== uniqueNews?.id)
                   ?.slice(5)
-                  .map((card) => (
+                  ?.map((card) => (
                     <SwiperSlide key={card.title}>
-                      <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
+                      <div
+                        className="w-68 mr-12 flex h-80 items-start justify-center"
+                        onClick={() => router.push(`/noticias/${card.id}`)}
+                      >
                         <CardMaisNoticias key={card.title} {...card} />
                       </div>
                     </SwiperSlide>

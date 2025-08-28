@@ -1,6 +1,6 @@
 import { api } from "../../../config/axios";
 
-export async function GetUniqueNews(id: string){
+export async function GetUniqueNews(id: string | undefined) {
     
     try{
     const response = await api.get(`/news/${id}`);
