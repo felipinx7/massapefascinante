@@ -1,8 +1,10 @@
 import { api } from "../../../config/axios";
 
-export async function DeleteNews(id: string){
+export async function DeleteNews(id: string | undefined) {
     try {
-        const res = await api.delete(`/news/${id}`);
+        const json = {
+        };
+        const res = await api.delete(`/news/${id}`, json );
         console.log("data: ", res);
         return res.data;
     }catch (error) {

@@ -3,7 +3,7 @@ import { IconClosed } from '@/assets/icons/icone-closed'
 import { CardNoticiasDTO, newsDTO } from '@/dto/news/DTO-news'
 import { newsSchema } from '@/schemas/news-schema'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { useForm } from 'react-hook-form'
@@ -24,15 +24,17 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     baseUrlPhoto('news', props.data.photo?.[0]?.url),
   )
   const [removePhoto, setRemovePhoto] = useState(false)
+  
 
   // Function Utils in componente
   function handleChangePhoto(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return
 
     const arrayFile = Array.from(event.target.files)
-    setValue('photoURLs', arrayFile, { shouldValidate: true })
     console.log('Dados da foto', arrayFile)
     setPreview(URL.createObjectURL(arrayFile[0]))
+    setValue('photoURLs', arrayFile, { shouldValidate: true })
+
     setRemovePhoto(false)
   }
 
@@ -47,6 +49,8 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     props.handleVisibilityModalUpdate()
   }
 
+  console.log(props.data)
+
   const {
     register,
     setValue,
@@ -57,20 +61,15 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
     resolver: zodResolver(newsSchema),
     mode: 'onChange',
     defaultValues: {
-      title: props.data.title,
-      author: props.data.author,
-      content: props.data.content,
-    },
+    title: props.data.title,
+    author: props.data.author,
+    content: props.data.content,
+  }
   })
 
-  async function onSubmit(data: newsDTO) {
+  async function onSubmit(data: newsDTO, ) {
+    console.log('data do request:', data)
     if (removePhoto) register('photoURLs', { value: [] })
-
-    if (preview !== props.data.photo?.[0]?.url) {
-      const response = await updatePhoto(props.data.photo?.[0].url, preview)
-      console.log('Valor da Foto Atualizado', response)
-      return response
-    }
     const response = await updateNews(data)
     console.log('Resposta da API:', response)
     reset()
@@ -91,7 +90,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
           <h1 className="text-lg font-semibold text-gray-800">Atualizar Notícia</h1>
           <div
             className="h-[30px] w-[30px] text-gray-600 hover:text-gray-800"
-            onClick={props.handleVisibilityModalUpdate}
+            onClick={() => props.handleVisibilityModalUpdate()}
           >
             <IconClosed />
           </div>
@@ -106,7 +105,7 @@ export default function ModalUpdateNews(props: ModalUpdateNewsProps) {
             </label>
             {preview ? (
               //  Preview of Photo
-              <div className="h-[250px] w-full rounded-sm">
+              <div className="h-[250px] w-full rounded-sm relative">
                 <img
                   className="h-full w-full rounded-[1rem] object-cover"
                   src={preview}

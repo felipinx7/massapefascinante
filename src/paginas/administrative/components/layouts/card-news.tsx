@@ -7,6 +7,7 @@ import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import ModalUpdateNews from './modal/modal-update-news'
 import { useEffect, useState } from 'react'
+import { DeleteNews } from '@/services/routes/news/delete'
 
 export default function CardNews(data: CardNoticiasDTO) {
   // State utils in component
@@ -18,6 +19,12 @@ export default function CardNews(data: CardNoticiasDTO) {
   // Function utils in component
   function handleVisibilityModalUpdate() {
     setOpenModalVisibilityModalUpdate((prev) => !prev)
+  }
+
+  async function handleDeleteNews() {
+    const res = await DeleteNews(data.id)
+    
+    console.log('Delete da Notícia:', res)
   }
 
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function CardNews(data: CardNoticiasDTO) {
           >
             <IconPencil />
           </div>
-          <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500">
+          <div onClick={() => handleDeleteNews()} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[5.97px] bg-white transition-all duration-500 hover:bg-primaryWhite500">
             <IconTrash />
           </div>
         </div>

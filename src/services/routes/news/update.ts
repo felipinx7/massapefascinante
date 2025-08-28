@@ -1,7 +1,7 @@
 import { newsDTO } from '@/dto/news/DTO-news'
 import { api } from '../../../config/axios'
 
-export async function updateNews(data: newsDTO) {
+export async function updateNews(data: newsDTO, id: string | undefined, ) {
   try {
     const formData = new FormData()
 
@@ -9,11 +9,14 @@ export async function updateNews(data: newsDTO) {
     formData.append('title', data.title)
     formData.append('content', data.content)
 
-    data.photoURLs.forEach((file) => {
-      formData.append('photoURLs', file)
-    })
+    if (data.photoURLs && data.photoURLs.length > 0) {
+      data.photoURLs.forEach((file) => {
+        formData.append('photoURLs', file)
+      })
+    }
 
-    const res = await api.put(`/news`, formData, {
+
+    const res = await api.put(`/news/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
