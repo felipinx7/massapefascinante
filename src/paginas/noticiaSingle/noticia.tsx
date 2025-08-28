@@ -77,7 +77,10 @@ export default function PaginaNoticiaUnica() {
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             <div className="flex w-full flex-col items-center justify-start gap-3">
               <div
-                style={{ backgroundImage: `url(${baseUrlPhoto("news" , uniqueNews?.photo[0]?.url)})`, backgroundSize: 'cover' }}
+                style={{
+                  backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
+                  backgroundSize: 'cover',
+                }}
                 className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:h-[300px] max-lg:w-full"
               ></div>
 
@@ -97,8 +100,17 @@ export default function PaginaNoticiaUnica() {
             <div className="flex w-[40%] flex-col gap-5 overflow-x-auto max-lg:mt-4 max-lg:w-full max-lg:flex-row max-lg:gap-3">
               {news
                 ?.filter((card) => card.id !== uniqueNews?.id)
-                .slice(0, 5)
-                .map((card) => <div key={card.id} className='flex' onClick={() => router.push(`/noticias/${card.id}`)}> <CardNoticiasRelevantes  {...card} /> </div> )}
+                ?.slice(0, 5)
+                ?.map((card) => (
+                  <div
+                    key={card.id}
+                    className="flex"
+                    onClick={() => router.push(`/noticias/${card.id}`)}
+                  >
+                    {' '}
+                    <CardNoticiasRelevantes {...card} />{' '}
+                  </div>
+                ))}
             </div>
           </div>
           {/* container mais noticias */}
@@ -130,9 +142,12 @@ export default function PaginaNoticiaUnica() {
                 {news
                   ?.filter((card) => card.id !== uniqueNews?.id)
                   ?.slice(5)
-                  .map((card) => (
+                  ?.map((card) => (
                     <SwiperSlide key={card.title}>
-                      <div className="w-68 mr-12 flex h-80 items-start justify-center" onClick={() => router.push(`/noticias/${card.id}`)}>
+                      <div
+                        className="w-68 mr-12 flex h-80 items-start justify-center"
+                        onClick={() => router.push(`/noticias/${card.id}`)}
+                      >
                         <CardMaisNoticias key={card.title} {...card} />
                       </div>
                     </SwiperSlide>
