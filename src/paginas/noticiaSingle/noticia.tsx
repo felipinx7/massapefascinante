@@ -71,7 +71,7 @@ export function PaginaNoticiaUnica() {
             {uniqueNews != undefined ? (
               <div className="flex w-full flex-col items-center justify-start gap-3">
   
-                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full" />
+                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative object-cover flex h-[500px] w-full overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full" />
 
 
                 <div className="flex w-full flex-row items-center justify-between">
