@@ -117,16 +117,22 @@ export function PaginaNoticiaUnica() {
                 pagination={{ clickable: true }}
                 breakpoints={{
                   0: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                   },
-                  600: {
-                    slidesPerView: 3.5,
+                  420: {
+                    slidesPerView: 1.5,
                   },
-                  720: {
-                    slidesPerView: 4,
+                  624: {
+                    slidesPerView: 2.3,
                   },
-                  860: {
-                    slidesPerView: 4.3,
+                  768: {
+                    slidesPerView: 3.1,
+                  },
+                  1024: {
+                    slidesPerView: 4.2,
+                  },
+                  1280: {
+                    slidesPerView: 4.8,
                   },
                 }}
                 className="gap-8 rounded-xl px-8 py-8"
