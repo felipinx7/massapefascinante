@@ -74,7 +74,7 @@ export function PaginaNoticiaUnica() {
                 <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative object-cover flex h-[500px] w-full overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full" />
 
 
-                <div className="flex w-full flex-row items-center justify-between">
+                <div className="flex w-full flex-row items-center justify-between px-3">
                   <h1>{uniqueNews?.author}</h1>
                   {formatData(uniqueNews?.date)}
                 </div>
