@@ -68,7 +68,6 @@ export default function PaginaNoticia() {
               <div
               onClick={() => router.push(`/noticias/${card.id}`)}
                 key={card.title}
-                style={{ backgroundImage: `url(${baseUrlPhoto("news" , card.photo[0].url)})`, backgroundSize: 'cover' }}
                 className="relative flex cursor-pointer mt-1  h-[500px]  w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:w-full"
               >
                 <h1 className="z-10 text-2xl max-md:text-xl font-semibold text-white">{card.title}</h1>
@@ -78,6 +77,7 @@ export default function PaginaNoticia() {
                   <h1 className="text-xs text-white">{formatData(card.date)}</h1>
                 </div>
                 <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
+                <img src={baseUrlPhoto("news", card.photo[0].url)} alt="" className='w-full h-full absolute' />
               </div>
             ))}
 
