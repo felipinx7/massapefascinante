@@ -16,6 +16,7 @@ import { Navigation } from 'swiper/modules'
 
 import '../../config/globals.css'
 import { useEffect, useState } from 'react'
+import { formatData } from '@/types/FormatDate'
 
 export default function PaginaNoticia() {
   //Estados
@@ -74,6 +75,7 @@ export default function PaginaNoticia() {
                 <h1 className="z-10 mt-2 max-md:text-sm text-base text-white line-clamp-2">{card.content}</h1>
                 <div className="z-10 mt-3 flex w-full justify-between">
                   <h1 className="text-xs text-white">{card.author}</h1>
+                  <h1 className="text-xs text-white">{formatData(card.date)}</h1>
                 </div>
                 <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
               </div>

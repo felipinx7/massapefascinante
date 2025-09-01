@@ -6,6 +6,7 @@ import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { Footer } from '../home-page/sections/footer'
 import { GetAllNews } from '@/services/routes/news/getAll'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { formatData } from '@/types/FormatDate'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
@@ -79,9 +80,7 @@ export function PaginaNoticiaUnica() {
 
                 <div className="flex w-full flex-row items-center justify-between">
                   <h1>{uniqueNews?.author}</h1>
-                  {uniqueNews?.date
-                    ? new Date(uniqueNews.date).toLocaleDateString('pt-BR')
-                    : '-'}{' '}
+                  {formatData(uniqueNews?.date)}
                 </div>
                 <div className="flex w-full justify-start text-3xl font-bold">
                   {uniqueNews?.title}
