@@ -70,13 +70,9 @@ export function PaginaNoticiaUnica() {
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             {uniqueNews != undefined ? (
               <div className="flex w-full flex-col items-center justify-start gap-3">
-                <div
-                  style={{
-                    backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
-                    backgroundSize: 'cover',
-                  }}
-                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full"
-                ></div>
+  
+                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full" />
+
 
                 <div className="flex w-full flex-row items-center justify-between">
                   <h1>{uniqueNews?.author}</h1>
@@ -86,6 +82,7 @@ export function PaginaNoticiaUnica() {
                   {uniqueNews?.title}
                 </div>
                 <div className="flex w-full justify-start text-base">{uniqueNews?.content}</div>
+                
               </div>
             ) : (
               <div>Carregando...</div>
