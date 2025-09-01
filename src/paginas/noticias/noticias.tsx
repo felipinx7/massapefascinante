@@ -102,7 +102,8 @@ export default function PaginaNoticia() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className="mt-4 overflow-hidden">
+            <div className="mt-4 overflow-hidden
+            ">
               <Swiper
                 modules={[Navigation]}
                 pagination={{ clickable: true }}

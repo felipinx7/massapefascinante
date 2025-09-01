@@ -20,6 +20,7 @@ export const SideBarCliente = () => {
         <Image src={logomassapemonocromatica} width={170} alt="logo do sistema" />
         <nav className="flex gap-8 text-[1.2rem] font-semibold text-white">
           <a href="#home">Início</a>
+          <a href="/noticias">Notícias</a>
           <a href="/historia-cidade">História</a>
           <a href="/about-city">Sobre a cidade</a>
         </nav>
