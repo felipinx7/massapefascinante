@@ -77,7 +77,7 @@ export default function PaginaNoticia() {
                   <h1 className="text-xs text-white">{formatData(card.date)}</h1>
                 </div>
                 <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
-                <img src={baseUrlPhoto("news", card.photo[0].url)} alt="" className='w-full h-full absolute' />
+                <img src={baseUrlPhoto("news", card.photo[0].url)} alt="" className='w-full h-full object-cover absolute bottom-0 left-0' />
               </div>
             ))}
 
