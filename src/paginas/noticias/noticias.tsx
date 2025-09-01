@@ -82,7 +82,7 @@ export default function PaginaNoticia() {
             ))}
 
             {/* container de noticias relevantes  */}
-            <div className="flex w-[450px] overflow-hidden max-lg:overflow-y-hidden max-lg:w-full max-lg:gap-1 max-lg:h-80 overflow-y-hidden max-lg:justify-between max-md:overflow-scroll p-1 overflow-x-hidden justify-between max-lg:justify-start flex-col gap-5 max-lg:mt-4  max-lg:flex-row ">
+            <div className="flex w-[450px] overflow-hidden max-lg:gap-3 max-lg:overflow-y-hidden max-lg:w-full  max-lg:h-80 overflow-y-hidden  max-md:overflow-scroll p-1 overflow-x-hidden justify-between max-lg:justify-start flex-col gap-5 max-lg:mt-4  max-lg:flex-row ">
               {news?.slice(1, 5).map((card) => (
                 <div
                   className="flex"
