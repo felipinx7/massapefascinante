@@ -69,12 +69,12 @@ export function PaginaNoticiaUnica() {
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             {uniqueNews != undefined ? (
-              <div className="flex w-full flex-col items-center justify-start gap-3">
+              <div className="flex w-full flex-col items-center justify-start gap-3 px-3">
   
-                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative object-cover flex h-[500px] w-full overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full" />
+                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative object-cover flex h-[500px] w-full overflow-hidden rounded-[5px] max-lg:h-[300px] max-lg:w-full" />
 
 
-                <div className="flex w-full flex-row items-center justify-between px-3">
+                <div className="flex w-full flex-row items-center justify-between ">
                   <h1>{uniqueNews?.author}</h1>
                   {formatData(uniqueNews?.date)}
                 </div>
