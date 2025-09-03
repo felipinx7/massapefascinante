@@ -2,9 +2,9 @@ export const BASE_URL_BACK_END = 'https://api.massapefascinante.com.br/api/uploa
 
 export function baseUrlPhoto(
   type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news',
-  photoName: string | undefined,
+  photoName: string | undefined | null,
 ) {
-  if (!photoName) return null
+  if (!photoName) return undefined
 
   // Se já for uma URL (começa com http), apenas retorna como está
   if (photoName.startsWith('http')) return photoName

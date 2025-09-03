@@ -6,6 +6,7 @@ import { CardNoticiasDTO } from '@/dto/news/DTO-news'
 import { Footer } from '../home-page/sections/footer'
 import { GetAllNews } from '@/services/routes/news/getAll'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { formatData } from '@/types/FormatDate'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
@@ -68,25 +69,20 @@ export function PaginaNoticiaUnica() {
           {/* container noticias relevantes  */}
           <div className="flex h-auto w-full items-start justify-between gap-3 max-lg:flex-col">
             {uniqueNews != undefined ? (
-              <div className="flex w-full flex-col items-center justify-start gap-3">
-                <div
-                  style={{
-                    backgroundImage: `url(${baseUrlPhoto('news', uniqueNews?.photo[0]?.url)})`,
-                    backgroundSize: 'cover',
-                  }}
-                  className="relative flex h-[500px] w-full flex-col items-start justify-end overflow-hidden rounded-[5px] p-8 max-lg:h-[300px] max-lg:w-full"
-                ></div>
+              <div className="flex w-full flex-col items-center justify-start gap-3 px-3">
+  
+                <img src={baseUrlPhoto("news", uniqueNews?.photo[0].url)} alt="" className="relative object-cover flex h-[500px] w-full overflow-hidden rounded-[5px] max-lg:h-[300px] max-lg:w-full" />
 
-                <div className="flex w-full flex-row items-center justify-between">
+
+                <div className="flex w-full flex-row items-center justify-between ">
                   <h1>{uniqueNews?.author}</h1>
-                  {uniqueNews?.date
-                    ? new Date(uniqueNews.date).toLocaleDateString('pt-BR')
-                    : '-'}{' '}
+                  {formatData(uniqueNews?.date)}
                 </div>
                 <div className="flex w-full justify-start text-3xl font-bold">
                   {uniqueNews?.title}
                 </div>
                 <div className="flex w-full justify-start text-base">{uniqueNews?.content}</div>
+                
               </div>
             ) : (
               <div>Carregando...</div>
@@ -115,22 +111,28 @@ export function PaginaNoticiaUnica() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className="mt-4">
+            <div className="mt-4 overflow-hidden">
               <Swiper
                 modules={[Navigation]}
                 pagination={{ clickable: true }}
                 breakpoints={{
                   0: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                   },
-                  600: {
-                    slidesPerView: 3.5,
+                  420: {
+                    slidesPerView: 1.5,
                   },
-                  720: {
-                    slidesPerView: 4,
+                  624: {
+                    slidesPerView: 2.3,
                   },
-                  860: {
-                    slidesPerView: 4.3,
+                  768: {
+                    slidesPerView: 3.1,
+                  },
+                  1024: {
+                    slidesPerView: 4.2,
+                  },
+                  1280: {
+                    slidesPerView: 4.8,
                   },
                 }}
                 className="gap-8 rounded-xl px-8 py-8"

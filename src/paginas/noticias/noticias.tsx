@@ -16,6 +16,7 @@ import { Navigation } from 'swiper/modules'
 
 import '../../config/globals.css'
 import { useEffect, useState } from 'react'
+import { formatData } from '@/types/FormatDate'
 
 export default function PaginaNoticia() {
   //Estados
@@ -67,20 +68,21 @@ export default function PaginaNoticia() {
               <div
               onClick={() => router.push(`/noticias/${card.id}`)}
                 key={card.title}
-                style={{ backgroundImage: `url(${baseUrlPhoto("news" , card.photo[0].url)})`, backgroundSize: 'cover' }}
                 className="relative flex cursor-pointer mt-1  h-[500px]  w-[90%] flex-col items-start justify-end overflow-hidden rounded-[5px] bg-slate-950 p-8 max-lg:w-full"
               >
                 <h1 className="z-10 text-2xl max-md:text-xl font-semibold text-white">{card.title}</h1>
                 <h1 className="z-10 mt-2 max-md:text-sm text-base text-white line-clamp-2">{card.content}</h1>
                 <div className="z-10 mt-3 flex w-full justify-between">
                   <h1 className="text-xs text-white">{card.author}</h1>
+                  <h1 className="text-xs text-white">{formatData(card.date)}</h1>
                 </div>
-                <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
+                <div className="absolute bottom-0 left-0 z-[5] h-full w-full bg-gradient-to-t from-slate-950 from-10% to-transparent"></div>
+                <img src={baseUrlPhoto("news", card.photo[0].url)} alt="" className='w-full z-[3] h-full object-cover absolute bottom-0 left-0' />
               </div>
             ))}
 
             {/* container de noticias relevantes  */}
-            <div className="flex w-[428px] max-lg:overflow-y-hidden max-lg:w-full max-lg:gap-1 max-lg:h-80 overflow-y-hidden max-lg:justify-between max-md:overflow-scroll p-1 overflow-x-hidden justify-between max-lg:justify-start flex-col gap-5 max-lg:mt-4  max-lg:flex-row ">
+            <div className="flex w-[450px] overflow-hidden max-lg:gap-3 max-lg:overflow-y-hidden max-lg:w-full  max-lg:h-80 overflow-y-hidden  max-md:overflow-scroll p-1 overflow-x-hidden justify-between max-lg:justify-start flex-col gap-5 max-lg:mt-4  max-lg:flex-row ">
               {news?.slice(1, 5).map((card) => (
                 <div
                   className="flex"
@@ -100,7 +102,8 @@ export default function PaginaNoticia() {
 
             {/* container das demais noticias */}
             {/* grid-cols-[repeat(auto-fill,minmax(280px,1fr))] */}
-            <div className="mt-4">
+            <div className="mt-4 overflow-hidden
+            ">
               <Swiper
                 modules={[Navigation]}
                 pagination={{ clickable: true }}

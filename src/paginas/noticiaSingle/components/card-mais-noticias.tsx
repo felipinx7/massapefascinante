@@ -1,20 +1,23 @@
-import { backgroundloginpage } from "@/assets/image"
-import { CardNoticiasDTO } from "@/dto/news/DTO-news"
-import { baseUrlPhoto } from "@/utils/base-url-photos"
+import { backgroundloginpage } from '@/assets/image'
+import { CardNoticiasDTO } from '@/dto/news/DTO-news'
+import { formatData } from '@/types/FormatDate'
+import { baseUrlPhoto } from '@/utils/base-url-photos'
 
 export default function CardNoticiasRelevantes(data: CardNoticiasDTO) {
-    const photo = data.photo?.[0]?.url
+  const photo = data.photo?.[0]?.url
     ? baseUrlPhoto('news', data.photo[0].url) || backgroundloginpage
     : backgroundloginpage
   return (
-    <article className=" flex z-100  h-72 w-56  cursor-pointer flex-col items-start gap-2 transition-all duration-300 ease-in-out hover:scale-105">
-        <div className="w-56 h-56 flex rounded-lg" style={{backgroundImage: `url(${photo})`, backgroundSize: "cover"}}></div>
-        <div className="flex flex-col w-56 items-start h-full">
-        <h1 className="line-clamp-3 text-slate-950 text-sm font-normal">{data.title}</h1>
-        <h1 className="line-clamp-1 text-slate-950 font-normal text-xs">{data.date}</h1>
-        <h1 className="line-clamp-1 text-slate-950 font-normal text-xs">{data.author}</h1>
-        </div>
+    <article className="z-100 flex h-72 w-56 cursor-pointer flex-col items-start gap-2 transition-all duration-300 ease-in-out hover:scale-105">
+        <img src={photo} className="max-w-56 min-w-56 object-cover max-h-36 min-h-36 flex rounded-lg" alt="" />
+
+      <div className="flex h-full w-56 flex-col items-start">
+        <h1 className="line-clamp-3 text-sm font-normal text-slate-950">{data.title}</h1>
+        <h1 className="line-clamp-1 text-xs font-normal text-slate-950">
+          {formatData(data?.date)}
+        </h1>
+        <h1 className="line-clamp-1 text-xs font-normal text-slate-950">{data.author}</h1>
+      </div>
     </article>
   )
-  
 }
