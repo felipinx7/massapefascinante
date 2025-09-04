@@ -56,7 +56,7 @@ export const SectionDestination = () => {
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.isArray(infoPlaces) &&
             infoPlaces
-              .filter((place) => place.category === 'TOURIST_ATTRACTIONS')
+              .filter((place) => place.category === 'TOURIST_ATTRACTIONS' || place.category === 'LANDSCAPE')
               .map((place) => <CardPLaces key={place.id} {...place} />)}
         </div>
       </section>
