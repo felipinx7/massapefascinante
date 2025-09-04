@@ -58,7 +58,7 @@ export default function PaginaNoticia() {
       {/* container main  */}
       <section className="m-0 mt-3 h-full w-[100%] max-w-[1280px] px-5">
         <h1 className="text-[1.5rem] font-bold text-primargreen max-md:text-center">
-          Veja as notícias mais relevantes de Massapê!
+          Veja as notícias destaques do turismo de Massapê
         </h1>
         {/* container noticias  */}
         <div className="mt-3 flex w-full flex-col items-baseline rounded-md">
