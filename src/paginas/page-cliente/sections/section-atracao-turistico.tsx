@@ -26,7 +26,7 @@ export const SectionDestination = () => {
 
   return (
     <section id="destination" className="flex w-full flex-col items-center gap-5">
-      <div className="absolute flex w-full items-center justify-center bg-primargreen p-4">
+      <div className="fixed flex w-full items-center justify-center bg-primargreen p-4">
         <div className="m-0 flex w-[100%] max-w-[1280px] flex-row-reverse items-center justify-end">
           {/* Título */}
           <h2 className="text-xl font-bold text-white">Destinos</h2>
