@@ -79,7 +79,7 @@ export function SectionRestaurant() {
   return (
     <section id="restaurant" className="flex w-full flex-col items-center gap-5">
       {/* Header com botão de voltar */}
-      <div className="absolute flex w-full items-center justify-center bg-primargreen p-4">
+      <div className="fixed z-[999] flex w-full items-center justify-center bg-primargreen p-4">
         <div className="m-0 flex w-[100%] max-w-[1280px] flex-row-reverse items-center justify-end">
           <h2 className="text-xl font-bold text-white">Restaurantes</h2>
           <button

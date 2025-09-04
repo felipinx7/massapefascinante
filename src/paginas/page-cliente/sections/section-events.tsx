@@ -62,7 +62,7 @@ export const SectionEvents = () => {
   return (
     <section id="events" className="relative flex w-full flex-col items-center gap-5">
       {/* Cabeçalho fixo */}
-      <div className="absolute left-0 top-0 z-10 flex w-full items-center justify-center bg-primargreen p-4 shadow-md">
+      <div className="fixed z-[999] left-0 top-0 flex w-full items-center justify-center bg-primargreen p-4 shadow-md">
         <div className="flex w-full max-w-[1280px] flex-row-reverse items-center justify-end gap-4">
           <h2 className="text-xl font-bold text-white">Eventos</h2>
           <button

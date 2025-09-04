@@ -60,7 +60,7 @@ export const PageCliente = () => {
       {/* CONTAINER INFO MAIN */}
       <div
         id="home"
-        className="flex w-full animate-fadeIn flex-col items-center justify-center px-4 pt-[70px]"
+        className="flex w-full animate-fadeIn flex-col items-center justify-center px-4 pt-[30px]"
       >
         <h1 className="mx-auto w-full animate-typing-with-cursor overflow-hidden whitespace-nowrap break-words border-r-4 border-white text-center text-[2rem] font-bold text-primargreen max-lg:hidden sm:text-[3rem] md:text-[3.6rem] lg:w-[50%] lg:border-none">
           Conheça melhor a cidade de Massapê

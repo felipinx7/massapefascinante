@@ -79,6 +79,9 @@ export const SideBarCliente = () => {
           <a href="#explorer" onClick={handleToggleMenu}>
             Explorar
           </a>
+          <a href="/noticias" onClick={handleToggleMenu}>
+            Notícias
+          </a>
 
           <a href="/about-city" onClick={handleToggleMenu}>
             Sobre a cidade

@@ -31,7 +31,7 @@ export function SectionHotel() {
   return (
     <section id="hotel" className="flex w-full flex-col items-center gap-5">
       {/* Cabeçalho fixo */}
-      <div className="absolute flex w-full items-center justify-center bg-primargreen p-4">
+      <div className="fixed z-[999] flex w-full items-center justify-center bg-primargreen p-4">
         <div className="m-0 flex w-[100%] max-w-[1280px] flex-row-reverse items-center justify-end">
           <h2 className="text-xl font-bold text-white">Hospedagens</h2>
           <button
