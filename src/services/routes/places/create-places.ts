@@ -11,6 +11,8 @@ export const createPlace = async (data: DataPlaces) => {
     formData.append('location', data.location)
     formData.append('description', data.description)
     formData.append('category', data.category)
+    formData.append('subLocation', data.subLocation)
+
 
     // add file photo
     data.photoURLs.forEach((file) => {

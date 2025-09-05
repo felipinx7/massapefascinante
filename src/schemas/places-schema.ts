@@ -19,6 +19,7 @@ export const placeSchema = z.object({
   photoURLs: z.array(z.instanceof(File)),
 
   category: z.enum(['RESTAURANT', 'HOTEL', 'TOURIST_ATTRACTIONS', 'LANDSCAPE', "HOSTING"]),
+  subLocation: z.enum(['SEDE', 'PÉ_DA_SERRA', 'VÁRZEA_DA_CRUZ', 'MIRIM', 'GREGÓRIO', 'CONTENDAS', 'TANGENTE']),
 })
 
 export type eventSchema = z.infer<typeof placeSchema>
