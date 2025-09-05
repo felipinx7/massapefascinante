@@ -55,6 +55,7 @@ export const CardPlaces = (props: CardPlacesDTO) => {
         instagram: props.instagram || '',
         location: props.location || '',
         category: props.category || 'RESTAURANT',
+        subLocation: props.subLocation || 'Sede',
         description: props.description || '',
         photoURLs: [], // We'll handle photos separately
       })
