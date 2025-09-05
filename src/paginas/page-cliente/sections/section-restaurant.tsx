@@ -10,7 +10,7 @@ import { IconArrowLeft } from '@/assets/icons/icon-arrow-left'
 const ordemDesejada = [
   'SABOR DO SERTÃO',
   "LIRA'S BURGUER",
-  "BOTECO DO TORRESMO",
+  'BOTECO DO TORRESMO',
   'RESTAURANTE PRIMEIRA PARADA',
   'RESTAURANTE SABOR DA SERRA',
   'RESTAURANTE BRANCA DE NEVE',
@@ -25,12 +25,43 @@ const ordemDesejada = [
   'BALNEÁRIO LILI E MESSIAS',
 ]
 
+type SubLocation =
+  | 'SEDE'
+  | 'PÉ_DA_SERRA'
+  | 'VÁRZEA_DA_CRUZ'
+  | 'MIRIM'
+  | 'GREGÓRIO'
+  | 'CONTENDAS'
+  | 'TANGENTE'
+
+// lista das chaves
+const subLocationKeys: SubLocation[] = [
+  'SEDE',
+  'PÉ_DA_SERRA',
+  'VÁRZEA_DA_CRUZ',
+  'MIRIM',
+  'GREGÓRIO',
+  'CONTENDAS',
+  'TANGENTE',
+]
+
+// labels amigáveis
+const subLocationLabels: Record<SubLocation, string> = {
+  SEDE: 'Sede',
+  PÉ_DA_SERRA: 'Pé da Serra',
+  VÁRZEA_DA_CRUZ: 'Várzea da Cruz',
+  MIRIM: 'Mirim',
+  GREGÓRIO: 'Gregório',
+  CONTENDAS: 'Contendas',
+  TANGENTE: 'Tangente',
+}
+
 function normalizeString(str: string) {
   return str
-    .normalize('NFD')  
-    .replace(/[\u0300-\u036f]/g, '')  
-    .replace(/[^\w\s]/gi, '')  
-    .replace(/\s+/g, ' ')  
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s]/gi, '')
+    .replace(/\s+/g, ' ')
     .trim()
     .toUpperCase()
 }
@@ -48,20 +79,14 @@ export function SectionRestaurant() {
       try {
         const response = await getAllPlaces()
 
-        const restaurantes = response.filter(
-          (place) => place.category === 'RESTAURANT'
-        )
+        const restaurantes = response.filter((place) => place.category === 'RESTAURANT')
 
         const ordenado = restaurantes.sort((a, b) => {
           const nomeA = normalizeString(a.name)
           const nomeB = normalizeString(b.name)
 
-          const indexA = ordemDesejada.findIndex(
-            (nome) => normalizeString(nome) === nomeA
-          )
-          const indexB = ordemDesejada.findIndex(
-            (nome) => normalizeString(nome) === nomeB
-          )
+          const indexA = ordemDesejada.findIndex((nome) => normalizeString(nome) === nomeA)
+          const indexB = ordemDesejada.findIndex((nome) => normalizeString(nome) === nomeB)
 
           // Se o nome não está no array, coloca ele no final
           return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
@@ -95,7 +120,7 @@ export function SectionRestaurant() {
       </div>
 
       {/* Conteúdo principal */}
-      <section className="m-0 mt-24 flex w-[100%] gap-8 max-w-[1280px] flex-col items-start justify-center p-4">
+      <section className="m-0 mt-24 flex w-[100%] max-w-[1280px] flex-col items-start justify-center gap-8 p-4">
         <div className="m-0 flex flex-col items-start justify-start">
           <h1 className="text-[2rem] font-[700] text-primargreen">
             Principais Restaurantes da Cidade
@@ -104,11 +129,24 @@ export function SectionRestaurant() {
             Conheça os restaurantes destaques na nossa cidade
           </p>
         </div>
+        {subLocationKeys.map((subLoc) => {
+          const placesInSubLoc = infoPlaces.filter((place) => place.subLocation === subLoc)
 
-        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.isArray(infoPlaces) &&
-            infoPlaces.map((place) => <CardPLaces key={place.id} {...place} />)}
-        </div>
+          if (placesInSubLoc.length === 0) return null
+
+          return (
+            <div key={subLoc} className="w-full">
+              <h1 className="mb-4 text-2xl font-bold text-primargreen">
+                {subLocationLabels[subLoc]}
+              </h1>
+              <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {placesInSubLoc.map((place) => (
+                  <CardPLaces key={place.id} {...place} />
+                ))}
+              </div>
+            </div>
+          )
+        })}
       </section>
     </section>
   )
