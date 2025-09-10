@@ -6,5 +6,6 @@ export interface DataPlaces {
   description: string
   photoURLs: File[]
   category: string
+  subLocation: string
 }
 

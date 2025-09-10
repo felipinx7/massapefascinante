@@ -9,6 +9,7 @@ export interface CardPlacesDTO {
   description: string
   photos: Photo[]
   category: "RESTAURANT"| "HOTEL" | "TOURIST_ATTRACTIONS" | "LANDSCAPE"
+  subLocation: "SEDE" | "PÉ_DA_SERRA" | "VÁRZEA_DA_CRUZ" | "MIRIM" | "GREGÓRIO" | "CONTENDAS" | "TANGENTE"
   cityId: string
   rooms?: {
     id: string,

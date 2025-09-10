@@ -230,10 +230,32 @@ export const SectionLocation = () => {
                   <option value="HOTEL">Hotel</option>
                   <option value="TOURIST_ATTRACTIONS">Turismo</option>
                   <option value="HOSTING">Hospedagem</option>
-
                 </select>
                 {errors.category && (
                   <p className="text-sm text-red-500">{errors.category.message}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Sublocation */}
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <label className="mb-1 block text-sm font-medium text-gray-700">SubLocalidade</label>
+                <select
+                  {...register('subLocation')}
+                  className="w-full rounded border border-gray-300 p-2 text-sm"
+                >
+                  <option value="">Selecione a Sublocalidade</option>
+                  <option value="SEDE">Sede</option>
+                  <option value="PÉ_DA_SERRA">Pé da Serra</option>
+                  <option value="VÁRZEA_DA_CRUZ">Várzea da Cruz</option>
+                  <option value="MIRIM">Mirim</option>
+                  <option value="GREGÓRIO">Gregório</option>
+                  <option value="CONTENDAS">Contendas</option>
+                  <option value="TANGENTE">Tangente</option>
+                </select>
+                {errors.subLocation && (
+                  <p className="text-sm text-red-500">{errors.subLocation.message}</p>
                 )}
               </div>
             </div>
