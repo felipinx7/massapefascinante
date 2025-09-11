@@ -33,16 +33,25 @@ export default function VideoSingle() {
       <HeaderInfo tittle="Hi Evenly, How are you?" />
 
       {/* container principal  */}
-      <div className="m-0 flex w-[100%] max-w-[1280px] flex-col items- gap-6 justify-center">
+      <div className="items- m-0 flex w-[100%] max-w-[1280px] flex-col justify-center gap-6">
         {/* container do vídeo  */}
         <div className="flex w-full flex-col gap-4">
           {/* video  */}
-          <div className="h-[500px] w-full rounded-xl bg-primargreen">
-            <h1>oi</h1>
+          <div className="h-[600px] max-md:h-[350px] w-full rounded-xl max-md:rounded-none bg-primargreen">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Z5GDBP4j79Q"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="rounded-xl max-md:rounded-none"
+              />
           </div>
 
           {/* informações vídeos  */}
-          <div>
+          <div className='px-4'>
             <h1 className="line-clamp-2 text-[1.5rem]">
               Ocorrem Chuvas Fortes na comunidade de cachimbinha, coisa que causou grande alegria
               aos moradores locais
@@ -52,9 +61,9 @@ export default function VideoSingle() {
         </div>
 
         {/* container dos outros vídeos  */}
-        <div className="grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 grid w-full">
+        <div className="grid w-full px-4 grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
           {videoskk.map((card) => (
-            <CardVideo key={card.title} {...card} />
+            <CardVideo key={card.title} {...card} date_sumbit={card.date_submit} />
           ))}
         </div>
       </div>
