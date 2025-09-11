@@ -16,7 +16,7 @@ export default function HeaderInfo(props: HeaderInfoProps) {
     router.back()
   }
   return (
-    <header className="flex h-16 px-4 w-full items-center justify-center bg-primargreen">
+    <header className="flex z-[1000] h-16 px-4 fixed top-0  w-full items-center justify-center bg-primargreen">
       <div className="m-0 flex w-full max-w-[1280px] flex-row-reverse items-center justify-end gap-3">
         <h1 className="text-[1.2rem] font-semibold text-white">{props.tittle}</h1>
         <div className='cursor-pointer' onClick={handleBackPage}>
