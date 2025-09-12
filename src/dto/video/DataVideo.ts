@@ -4,5 +4,5 @@ export interface DataVideo{
     title: string,
     videoURL: string,
     duration: string,
-    date_sumbit: string
+    createdAt: string
 }
