@@ -1,26 +1,25 @@
 import { backgroundclientpage } from '@/assets/image'
 import { dataInfoTaxi } from '@/dto/taxi/data-taxi-DTO'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import Image from 'next/image'
 import { useEffect } from 'react'
 
 export const CardTaxi = (props: dataInfoTaxi) => {
-  const photoBaseUrl = baseUrlPhoto('taxiDrivers', props.photoURLs[0])
+  const photoBaseUrl = baseUrlPhoto('taxiDrivers', props.photoURLs)
   const cleanedPhone = props.phone.replace(/\D/g, '')
   const whatsappUrl = `https://wa.me/55${cleanedPhone}`
 
   useEffect(() => {
-    console.log('A Url vinda do backend', photoBaseUrl)
+    console.log('A Url vinda do backend', photoBaseUrl, props.photoURLs)
   }, [])
 
   return (
     <article className="flex w-[280px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition hover:shadow-xl max-md:w-full">
       {/* Imagem com fundo suave, ocupando bem o espaço */}
-      <div className="relative h-[180px] w-full bg-gradient-to-tr from-[#f0f4ff] to-[#dbe8ff]">
+      <div className="relative h-[180px] max-h-[180px] w-full bg-gradient-to-tr from-[#f0f4ff] to-[#dbe8ff]">
         <img
           src={photoBaseUrl || backgroundclientpage}
           alt="Foto do taxista"
-          className="rounded-t-xl object-cover"
+          className="rounded-t-xl w-full h-full object-cover"
         />
       </div>
 

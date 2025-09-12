@@ -1,6 +1,7 @@
 import CardVideo from '../components/layout/card-video'
 import HeaderInfo from '../components/layout/header'
 
+
 export default function VideoSingle() {
   const videoskk = [
     { title: 'Introdução ao React', duration: '12:35', date_submit: '2025-01-10' },
@@ -38,16 +39,9 @@ export default function VideoSingle() {
         <div className="flex w-full flex-col gap-4">
           {/* video  */}
           <div className="h-[600px] max-md:h-[350px] w-full rounded-xl max-md:rounded-none bg-primargreen">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/Z5GDBP4j79Q"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-xl max-md:rounded-none"
-              />
+                <video className='h-full w-full object-cover' controls> 
+                  <source src="https://api.massapefascinante.com.br/videos/1416529-sd_640_360_30fps.mov" /> 
+                </video>
           </div>
 
           {/* informações vídeos  */}

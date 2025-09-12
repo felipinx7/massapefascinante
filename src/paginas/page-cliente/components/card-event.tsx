@@ -14,7 +14,7 @@ export function CardEvent(data: dataCardEventClientPage) {
     console.log('Valor do Estado:', showModal)
   }
 
-  const photoURL = baseUrlPhoto('event', data.photoURLs)
+  const photoURL = baseUrlPhoto('event', data.photoURLs[0].url)
 
   return (
     <div>
