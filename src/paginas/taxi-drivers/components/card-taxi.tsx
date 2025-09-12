@@ -4,12 +4,12 @@ import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { useEffect } from 'react'
 
 export const CardTaxi = (props: dataInfoTaxi) => {
-  const photoBaseUrl = baseUrlPhoto('taxiDrivers', props.photoURLs[0])
+  const photoBaseUrl = baseUrlPhoto('taxiDrivers', props.photoURLs)
   const cleanedPhone = props.phone.replace(/\D/g, '')
   const whatsappUrl = `https://wa.me/55${cleanedPhone}`
 
   useEffect(() => {
-    console.log('A Url vinda do backend', photoBaseUrl, props.photoURLs[0], props.photoURLs)
+    console.log('A Url vinda do backend', photoBaseUrl, props.photoURLs)
   }, [])
 
   return (
