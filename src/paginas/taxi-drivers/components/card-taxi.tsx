@@ -19,7 +19,7 @@ export const CardTaxi = (props: dataInfoTaxi) => {
         <img
           src={photoBaseUrl || backgroundclientpage}
           alt="Foto do taxista"
-          className="rounded-t-xl w-full h-full object-cover"
+          className="absolute top-0 left-0 rounded-t-xl w-full h-full object-cover"
         />
       </div>
 
