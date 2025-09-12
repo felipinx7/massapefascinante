@@ -101,7 +101,7 @@ export const ModalLocation: FC<ModalLocationProps> = ({
             {photosUrls.map((photo, index) => (
               <SwiperSlide key={index}>
                 <div className="h-[350px] w-full overflow-hidden rounded-xl">
-                  <Image
+                  <img
                     src={photo}
                     alt={`Foto ${index + 1} de Moraújo`}
                     width={1200}

@@ -81,13 +81,12 @@ export const ModalEvents: FC<ModalEventsProps> = ({
       <div className="m-auto w-full max-w-[1280px] px-4 py-8">
         {/* Main image */}
         <div className="max-h-[300px] w-full overflow-hidden rounded-xl md:h-[250px]">
-          <Image
+          <img
             src={photo || backgroundloginpage}
             alt={`Imagem de ${name}`}
             className="h-full w-full rounded-xl object-cover"
             width={1200}
             height={400}
-            priority
           />
         </div>
 

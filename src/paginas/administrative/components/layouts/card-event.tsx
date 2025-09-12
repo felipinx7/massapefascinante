@@ -113,9 +113,8 @@ export const CardEventAndLocation = ({
   return (
     <article className="flex h-[300px] w-[280px] flex-col rounded-[0.9rem] shadow-shadowCardEventLocation">
       <div className="relative h-[80%] w-full">
-        <Image
+        <img
           src={photoUrl || backgroundloginpage}
-          fill
           alt="Foto de Evento"
           className="h-full w-full rounded-tl-[0.9rem] rounded-tr-[0.9rem] object-cover"
         />
