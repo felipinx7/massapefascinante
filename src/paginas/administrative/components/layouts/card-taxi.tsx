@@ -168,10 +168,9 @@ export function CardTaxi(data: dataCardInfoTaxiDTO) {
                       {previewImages.map((url, index) => (
                         <SwiperSlide key={index}>
                           <div className="relative h-[250px] w-full overflow-hidden rounded-md">
-                            <Image
+                            <img
                               src={url}
                               alt={`Preview ${index + 1}`}
-                              fill
                               className="object-cover"
                             />
                             <button

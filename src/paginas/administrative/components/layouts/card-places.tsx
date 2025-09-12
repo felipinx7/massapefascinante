@@ -231,10 +231,9 @@ export const CardPlaces = (props: CardPlacesDTO) => {
                     {previewImages.map((url, index) => (
                       <SwiperSlide key={index}>
                         <div className="relative h-[250px] w-full overflow-hidden rounded-md">
-                          <Image
+                          <img
                             src={url}
                             alt={`Preview ${index + 1}`}
-                            fill
                             className="object-cover"
                           />
                           {/* Remove image button */}
