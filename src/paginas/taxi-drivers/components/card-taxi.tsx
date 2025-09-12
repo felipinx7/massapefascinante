@@ -1,7 +1,6 @@
 import { backgroundclientpage } from '@/assets/image'
 import { dataInfoTaxi } from '@/dto/taxi/data-taxi-DTO'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
-import Image from 'next/image'
 import { useEffect } from 'react'
 
 export const CardTaxi = (props: dataInfoTaxi) => {
@@ -10,7 +9,7 @@ export const CardTaxi = (props: dataInfoTaxi) => {
   const whatsappUrl = `https://wa.me/55${cleanedPhone}`
 
   useEffect(() => {
-    console.log('A Url vinda do backend', photoBaseUrl)
+    console.log('A Url vinda do backend', photoBaseUrl, props.photoURLs[0], props.photoURLs)
   }, [])
 
   return (
