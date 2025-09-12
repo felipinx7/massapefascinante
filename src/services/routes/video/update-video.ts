@@ -13,7 +13,7 @@ export default async function UpdateVideo(id: string, data: DTOVideo) {
         'Content-Type': 'multipart/form-data',
       },
     })
-    console.log('Vídeo atualizado com sucesso!', response)
+    console.log('Vídeo atualizado com sucesso', response)
     return response.data
   } catch (error) {
     console.log('Error ao atualizar o vídeo', error)
