@@ -12,10 +12,9 @@ export const CardTaxi = (props: dataInfoTaxi) => {
     <article className="flex w-[280px] flex-col overflow-hidden max-md:w-full rounded-xl bg-white shadow-md transition hover:shadow-xl">
       {/* Imagem com fundo suave, ocupando bem o espaço */}
       <div className="relative h-[180px] w-full bg-gradient-to-tr from-[#f0f4ff] to-[#dbe8ff]">
-        <Image
+        <img
           src={photoBaseUrl || backgroundclientpage}
           alt="Foto do taxista"
-          fill
           className="rounded-t-xl object-cover"
         />
       </div>
