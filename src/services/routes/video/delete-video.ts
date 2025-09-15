@@ -1,6 +1,6 @@
 import { api } from '@/config/axios'
 
-export async function DeleteVideo(id: string) {
+export default async function DeleteVideo(id: string) {
   try {
     const response = await api.delete(`/video/${id}`)
 

@@ -3,11 +3,14 @@ import { z } from 'zod'
 
 export type videoSchemaDTO = z.infer<typeof videoSchema>
 
-export type DTOVideo = {
-  id?: string
+export type videoDTO = {
+  id: string
   description: string
   title: string
-  videoURL: File
+  videoURL: string
+  photoURL: string
   duration?: string
   createdAt?: string
+  handleDeletePlace?: (id: string) => void
+
 }
