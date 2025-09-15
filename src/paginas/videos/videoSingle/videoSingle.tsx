@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react'
 import CardVideo from '../components/layout/card-video'
+import CardVideoEskeleton from '../components/layout/card-video-eskeleton'
 import HeaderInfo from '../components/layout/header'
-
+import ViewVideoEskeleton from '../components/layout/view-video-eskeleton'
 
 export default function VideoSingle() {
+  const [loading, setLoading] = useState(false)
   const videoskk = [
     { title: 'Introdução ao React', duration: '12:35', date_submit: '2025-01-10' },
     { title: 'Aprendendo TypeScript', duration: '18:22', date_submit: '2025-01-15' },
@@ -29,37 +32,61 @@ export default function VideoSingle() {
     { title: 'Testes Unitários com Jest', duration: '24:33', date_submit: '2025-03-12' },
     { title: 'Performance no Frontend', duration: '19:12', date_submit: '2025-03-15' },
   ]
+
+  useEffect(() => {
+    const time = setTimeout(() => {
+      setLoading(true)
+    }, 2000)
+
+    return () => clearTimeout(time)
+  }, [])
   return (
     <section className="flex h-screen w-full items-start justify-center pt-24">
-      <HeaderInfo tittle="Hi Evenly, How are you?" />
+      <HeaderInfo title="Hi Evenly, How are you?" />
 
       {/* container principal  */}
       <div className="items- m-0 flex w-[100%] max-w-[1280px] flex-col justify-center gap-6">
-        {/* container do vídeo  */}
-        <div className="flex w-full flex-col gap-4">
-          {/* video  */}
-          <div className="h-[600px] max-md:h-[350px] w-full rounded-xl max-md:rounded-none bg-primargreen">
-                <video className='h-full w-full object-cover' controls> 
-                  <source src="https://api.massapefascinante.com.br/videos/1416529-sd_640_360_30fps.mov" /> 
+        {loading === false ? (
+          //  container dos vídeo carregando
+          <>
+            <ViewVideoEskeleton />
+
+            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 place-items-center">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <CardVideoEskeleton key={index} />
+              ))}
+            </div>
+          </>
+        ) : (
+
+          //  container dos vídeo carregado
+          <>
+            <div className="flex w-full flex-col gap-4">
+              {/* video  */}
+              <div className="h-[600px] w-full rounded-xl bg-primargreen max-md:h-[350px] max-md:rounded-none">
+                <video className="h-full w-full object-cover" controls>
+                  <source src="https://api.massapefascinante.com.br/videos/1416529-sd_640_360_30fps.mov" />
                 </video>
-          </div>
+              </div>
 
-          {/* informações vídeos  */}
-          <div className='px-4'>
-            <h1 className="line-clamp-2 text-[1.5rem]">
-              Ocorrem Chuvas Fortes na comunidade de cachimbinha, coisa que causou grande alegria
-              aos moradores locais
-            </h1>
-            <p className="text-[1rem] font-bold">09/09/2029</p>
-          </div>
-        </div>
+              {/* informações vídeos  */}
+              <div className="px-4">
+                <h1 className="line-clamp-2 text-[1.5rem]">
+                  Ocorrem Chuvas Fortes na comunidade de cachimbinha, coisa que causou grande
+                  alegria aos moradores locais
+                </h1>
+                <p className="text-[1rem] font-bold">09/09/2029</p>
+              </div>
+            </div>
 
-        {/* container dos outros vídeos  */}
-        <div className="grid w-full px-4 grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
-          {videoskk.map((card) => (
-            <CardVideo key={card.title} {...card} date_sumbit={card.date_submit} />
-          ))}
-        </div>
+            {/* container dos outros vídeos  */}
+            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 place-items-center">
+              {videoskk.map((card) => (
+                <CardVideo key={card.title} {...card} date_submit={card.date_submit} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   )
