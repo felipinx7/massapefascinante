@@ -8,6 +8,7 @@ export type DTOVideo = {
   description: string
   title: string
   videoURL: File
+  photoURL:File 
   duration?: string
   createdAt?: string
 }

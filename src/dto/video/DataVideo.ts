@@ -3,6 +3,7 @@ export interface DataVideo{
     description: string,
     title: string,
     videoURL: string,
+    photoURL: string
     duration: string,
     createdAt: string
 }

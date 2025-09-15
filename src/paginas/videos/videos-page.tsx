@@ -47,7 +47,7 @@ export default function VideosPage() {
 
         {/* container rendering videos */}
         <div className="mt-10 grid w-full grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-16 gap-y-3">
-          {/* Loading skeleton while loading from api */}
+          {/* Loading skeleton while loading data from api */}
           {loading === false ? (
             videosFilter.length > 0 ? (
               videosFilter.map((card) => (
