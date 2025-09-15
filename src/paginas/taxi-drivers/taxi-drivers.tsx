@@ -10,6 +10,7 @@ import { GetAllTaxi } from '@/services/routes/taxi/get-all-taxi'
 export const SectionTaxiPage = () => {
   const [showTaxi, setShowTaxi] = useState<dataInfoTaxi[]>([])
   const router = useRouter()
+  
 
   const handleBackToPage = () => {
     router.back()

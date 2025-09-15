@@ -1,6 +1,6 @@
 interface CardVideoProps {
   duration: string
-  date_sumbit: string
+  date_submit: string
   title: string
 }
 
@@ -26,7 +26,7 @@ export default function CardVideo(data: CardVideoProps) {
 
       {/* data do vídeo  */}
       <div>
-        <h6 className="text-[0.9rem]">{data.date_sumbit}</h6>
+        <h6 className="text-[0.9rem]">{data.date_submit}</h6>
       </div>
     </article>
   )

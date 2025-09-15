@@ -8,6 +8,7 @@ export default async function CreateVideo(data: videoSchemaDTO) {
     formData.append('videoURL', data.videoURL)
     formData.append('photoURL', data.photoURL)
     formData.append('description', data.description)
+    formData.append('photoURL', data.photoURL)
 
     const response = await api.post('/video', formData, {
       headers: {

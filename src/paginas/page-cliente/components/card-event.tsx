@@ -14,7 +14,7 @@ export function CardEvent(data: dataCardEventClientPage) {
     console.log('Valor do Estado:', showModal)
   }
 
-  const photoURL = baseUrlPhoto('event', data.photoURLs[0].url)
+  const photoURL = baseUrlPhoto('event', data.photoURLs)
 
   return (
     <div>
@@ -24,11 +24,10 @@ export function CardEvent(data: dataCardEventClientPage) {
       >
         <div className="relative h-[229px] w-full bg-primarygray">
           {hasImage ? (
-            <Image
+            <img
               src={photoURL ? photoURL : backgroundclientpage}
               alt={`Imagem de ${data.name}`}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover absolute top-0 left-0 w-full h-full transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 368px"
             />
           ) : (
