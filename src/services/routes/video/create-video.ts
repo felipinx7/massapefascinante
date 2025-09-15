@@ -1,11 +1,12 @@
 import { api } from '@/config/axios'
-import { DTOVideo } from '@/dto/video/DTOVideo'
+import { videoSchemaDTO } from '@/dto/video/DTOVideo'
 
-export default async function CreateVideo(data: DTOVideo) {
+export default async function CreateVideo(data: videoSchemaDTO) {
   try {
     const formData = new FormData()
     formData.append('title', data.title)
     formData.append('videoURL', data.videoURL)
+    formData.append('photoURL', data.photoURL)
     formData.append('description', data.description)
     formData.append('photoURL', data.photoURL)
 
