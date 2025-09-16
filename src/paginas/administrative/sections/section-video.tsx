@@ -143,8 +143,8 @@ export const SectionVideo = () => {
                         accept="image/*"
                         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                         onChange={(e) => {
-                          const files = e.target.files
-                          field.onChange(files ? Array.from(files) : [])
+                          const files = e.target.files[0]
+                          field.onChange(files ? files : null)
                         }}
                       />
                       <span>Click to upload images</span>
@@ -172,8 +172,8 @@ export const SectionVideo = () => {
                         accept="video/*"
                         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                         onChange={(e) => {
-                          const files = e.target.files
-                          field.onChange(files ? Array.from(files) : [])
+                          const files = e.target.files[0]
+                          field.onChange(files ? files : null)
                         }}
                       />
                       
