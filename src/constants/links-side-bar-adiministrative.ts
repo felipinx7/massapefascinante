@@ -4,6 +4,7 @@ import { IconCity } from '@/assets/icons/icon-city'
 import { IconLocation } from '@/assets/icons/icon-location'
 import { IconNews } from '@/assets/icons/icon-news'
 import { IconTaxi } from '@/assets/icons/icon-taxi'
+import { IconVideo } from '@/assets/icons/icon-video'
 import React from 'react'
 
 interface LinksSideBarAdministrativeProps {
@@ -18,5 +19,6 @@ export const LinksSideBarAdministrative: LinksSideBarAdministrativeProps[] = [
   { id: 'location', name: 'Locais', icon: IconLocation },
   { id: 'taxis', name: 'Taxis', icon: IconTaxi },
   {id: 'room', name: 'Quarto', icon: IconBedSmall},
-  {id: "news", name:"Noticias", icon: IconNews }
+  {id: "news", name:"Noticias", icon: IconNews },
+  {id: "video", name:"Vídeos", icon: IconVideo}
 ]

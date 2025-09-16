@@ -9,6 +9,7 @@ import { SectionTaxi } from './sections/section-taxis'
 import { NameAdminstrative } from './components/layouts/header-info-adm'
 import { SectionRoom } from './sections/section-room'
 import { SectionNews } from './sections/section-news'
+import { SectionVideo } from './sections/section-video'
 
 export const PageAdiminstrative = () => {
   const [activeSection, setActiveSection] = useState('city')
@@ -29,7 +30,7 @@ export const PageAdiminstrative = () => {
         {activeSection === 'taxis' && <SectionTaxi />}
         {activeSection === 'room' && <SectionRoom />}
         {activeSection === 'news' && <SectionNews />}
-
+        {activeSection === 'video' && <SectionVideo/>}
       </div>
     </section>
   )
