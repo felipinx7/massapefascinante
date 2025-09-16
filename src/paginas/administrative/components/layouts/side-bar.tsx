@@ -18,7 +18,7 @@ export const SideBarAdministrative = ({ setActiveSection }: SideBarProps) => {
   }
 
   return (
-    <article className="flex min-h-[100vh] w-[20%] flex-col items-start bg-primargreen p-2 max-lg:hidden">
+    <article className="flex min-h-[100vh] w-[20%] max-w-60 flex-col items-start bg-primargreen p-2 max-lg:hidden">
       <div className="justify-center flex py-3 w-full items-center">
         <Image src={imageLogo} width={250} className="" alt="Logo CocoTour" />
       </div>
