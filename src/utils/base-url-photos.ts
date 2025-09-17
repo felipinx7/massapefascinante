@@ -11,5 +11,5 @@ export function baseUrlPhoto(
   // Se já for uma URL (começa com http), apenas retorna como está
   if (photoName.startsWith('http')) return photoName
 
-  return `${API_URL}/${type}/${photoName}`
+  return `${API_URL}${type}/${photoName}`
 }
