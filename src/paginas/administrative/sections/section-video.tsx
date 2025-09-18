@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { IconClosed } from '@/assets/icons/icone-closed'
 
 import { CardVideos } from '../components/layouts/card-videos'
-import { videoDTO , videoSchemaDTO } from '@/dto/video/DTOVideo'
+import { videoDTO, videoSchemaDTO } from '@/dto/video/DTOVideo'
 import { videoSchema } from '@/schemas/video-schema'
 
 import CreateVideo from '@/services/routes/video/create-video'
@@ -71,7 +71,6 @@ export const SectionVideo = () => {
     handleFilter()
   }, [searchValue])
 
-
   const FunctiondeleteVideo = async (id: string) => {
     await DeleteVideo(id)
     console.log('Card Excluido com sucesso!')
@@ -82,7 +81,7 @@ export const SectionVideo = () => {
   }
 
   return (
-    <section className="w-[cacl(100%-20%)]">
+    <section className="w-[calc(100% - 20%)]">
       <div className="max-lg:hidden">
         <NameAdminstrative SibeBarMobile={false} />
       </div>
@@ -142,9 +141,9 @@ export const SectionVideo = () => {
                         multiple
                         accept="image/*"
                         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                        onChange={(e) => {
-                          const files = e.target.files[]
-                          field.onChange(files ? files : null)
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          const file = e.target.files?.[0] ?? null
+                          field.onChange(file)
                         }}
                       />
                       <span>Click to upload images</span>
@@ -152,9 +151,7 @@ export const SectionVideo = () => {
                   )}
                 />
               </div>
-              {errors.photoURL && (
-                <p className="text-sm text-red-500">{errors.photoURL.message}</p>
-              )}
+              {errors.photoURL && <p className="text-sm text-red-500">{errors.photoURL.message}</p>}
             </div>
 
             {/* Upload de videos */}
@@ -171,20 +168,18 @@ export const SectionVideo = () => {
                         multiple
                         accept="video/*"
                         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                        onChange={(e) => {
-                          const files = e.target.files[0]
-                          field.onChange(files ? files : null)
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          const file = e.target.files?.[0] ?? null
+                          field.onChange(file)
                         }}
                       />
-                      
+
                       <span>Click to upload Video</span>
                     </>
                   )}
                 />
               </div>
-              {errors.videoURL && (
-                <p className="text-sm text-red-500">{errors.videoURL.message}</p>
-              )}
+              {errors.videoURL && <p className="text-sm text-red-500">{errors.videoURL.message}</p>}
             </div>
 
             {/* Campos de nome e telefone */}
@@ -199,10 +194,8 @@ export const SectionVideo = () => {
                 />
                 {errors.title && <p className="text-sm text-red-500">{errors.title?.message}</p>}
               </div>
-
             </div>
 
-            
             {/* Descrição */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">Description</label>
