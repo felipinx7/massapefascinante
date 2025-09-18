@@ -1,38 +1,40 @@
-'use client'
+"use client";
+import { useState } from "react";
 
-import { useRouter } from 'next/navigation'
+export default function VideoPreview() {
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
-export default function Pagina() {
-  const router = useRouter()
-  const noticias = [
-    { id: 1, nome: 'Felipe' },
-    { id: 2, nome: 'Felipe Lima' },
-    { id: 3, nome: 'Jóse Felipe' },
-    { id: 4, nome: 'João Felipe' },
-    { id: 5, nome: 'Felipe Souza' },
-  ]
-
-  function HandleNavigateRouter(id: number) {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then((response) => response.json())
-      .then((json) => console.log(json))
-
-    router.push(`http://localhost:3000/test/${id}`)
-  }
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith("video/")) {
+      const url = URL.createObjectURL(file);
+      setVideoUrl(url);
+    }
+  };
 
   return (
-    <div className="flex h-screen w-ful l flex-col items-center justify-center">
-      <div className="flex flex-col items-start gap-4">
-        {noticias.map((card) => (
-          <article
-            onClick={() => HandleNavigateRouter(card.id)}
-            className="cursor-pointer p-3"
-            key={card.id}
-          >
-            <h1>{card.nome}</h1>
-          </article>
-        ))}
-      </div>
+    <div className="flex flex-col items-center gap-4 p-6">
+      {/* Input de vídeo */}
+      <input
+        type="file"
+        accept="video/*"
+        onChange={handleFileChange}
+        className="block text-sm text-gray-500
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-xl file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-green-50 file:text-green-700
+                   hover:file:bg-green-100"
+      />
+
+      {/* Preview do vídeo */}
+      {videoUrl && (
+        <video
+          src={videoUrl}
+          controls
+          className="rounded-xl shadow-lg w-full max-w-lg"
+        />
+      )}
     </div>
-  )
+  );
 }
