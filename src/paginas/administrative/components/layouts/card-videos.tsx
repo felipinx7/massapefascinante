@@ -84,18 +84,17 @@ export const CardVideos = (props: videoDTO) => {
 
   // Foto principal do card
   const photo = props.photoURL
-    ? baseUrlPhoto('place', props.photoURL) || backgroundloginpage
+    ? baseUrlPhoto('thumbnails', props.photoURL) || backgroundloginpage
     : backgroundloginpage
 
   return (
     <article className="flex h-[300px] w-[280px] flex-col rounded-[0.9rem] shadow-shadowCardEventLocation">
       {/* Cover image */}
       <div className="relative h-[80%] w-full">
-        <Image
+        <img
           src={photo}
           alt="Video cover"
-          fill
-          className="h-full w-full rounded-tl-[0.9rem] rounded-tr-[0.9rem] object-cover"
+          className="h-full max-h-44 w-full rounded-tl-[0.9rem] rounded-tr-[0.9rem] object-cover"
         />
 
         <div className="absolute bottom-0 right-0 flex w-full items-center justify-end gap-3 p-2">
@@ -120,7 +119,7 @@ export const CardVideos = (props: videoDTO) => {
       {/* Summary info */}
       <div className="flex h-[70%] flex-col p-3">
         <h1 className="w-[95%] truncate text-[1.1rem] font-medium text-black">{props.title}</h1>
-        <p className="line-clamp-3 h-full text-secundarygray900">{props.description}</p>
+        <p className="line-clamp-2 h-full text-secundarygray900">{props.description}</p>
       </div>
 
       {/* Modal */}
@@ -185,52 +184,6 @@ export const CardVideos = (props: videoDTO) => {
                 )}
           </div>
 
-
-                              {/* Upload única foto */}
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  Foto do Vídeo
-                </label>
-
-                {!previewImage ? (
-                  <Controller
-                    name="videoURL"
-                    control={control}
-                    render={() => (
-                      <div className="relative flex h-48 w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-500">
-                        <input
-                          type="file"
-                          accept="video/*"
-                          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-
-                          aria-label="Select video"
-                        />
-                        <span>Clique e selecione o video</span>
-                      </div>
-                    )}
-                  />
-                ) : (
-                  <div className="relative mt-2 h-[250px] w-full overflow-hidden rounded-md">
-                    <img
-                      alt="Preview"
-                      className="h-full w-full object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleRemovePreviewImage}
-                      className="absolute right-2 top-2 z-10 rounded bg-white p-1 text-gray-700 hover:text-red-600"
-                      title="Remover imagem"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                )}
-
-
-                {errors.photoURL && (
-                  <p className="text-sm text-red-500">{errors.photoURL.message}</p>
-                )}
-              </div>
 
               {/* Title */}
               <div>

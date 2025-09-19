@@ -48,7 +48,8 @@ export const SectionVideo = () => {
   useEffect(() => {
     const fetchInfoVideos = async () => {
       const res = await GetVideos()
-      setShowVideos(res)
+      console.log("videos:", res.videos)
+      setShowVideos(res.videos)
     }
 
     fetchInfoVideos()
@@ -60,8 +61,8 @@ export const SectionVideo = () => {
       return
     }
 
-    const filtered = showVideos?.filter((place) =>
-      place.title.toLowerCase().includes(searchValue.toLowerCase()),
+    const filtered = showVideos?.filter((video) =>
+      video.title.toLowerCase().includes(searchValue.toLowerCase()),
     )
 
     setFilteredVideos(filtered ?? [])
@@ -226,15 +227,15 @@ export const SectionVideo = () => {
       {/* Filtered cards or all */}
       <div className="mt-4 grid min-h-[80vh] w-full grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-10 overflow-y-auto">
         {(filteredVideos ?? showVideos)?.length ? (
-          (filteredVideos ?? showVideos)?.map((place, index) => (
+          (filteredVideos ?? showVideos)?.map((video, index) => (
             <CardVideos
               key={index}
-              {...place}
-              handleDeletePlace={() => FunctiondeleteVideo(place.id)}
+              {...video}
+              handleDeletePlace={() => FunctiondeleteVideo(video.id)}
             />
           ))
         ) : (
-          <p className="col-span-full text-center">Nenhum local encontrado.</p>
+          <p className="col-span-full text-center">Nenhum video encontrado.</p>
         )}
       </div>
     </section>

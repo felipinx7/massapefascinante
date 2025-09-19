@@ -1,7 +1,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function baseUrlPhoto(
-  type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news',
+  type: 'city' | 'event' | 'place' | 'taxiDrivers' | 'room' | 'news' | "thumbnails",
   photoName: string | undefined | null,
 ) {
   if (!photoName) return undefined
