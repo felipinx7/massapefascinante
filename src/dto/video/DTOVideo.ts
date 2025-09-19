@@ -11,5 +11,7 @@ export type videoDTO = {
   photoURL: string
   duration?: string
   createdAt?: string
+  url?: string
   handleDeletePlace?: (id: string) => void
+  handleNavigateVideoUnique?: (id: string | undefined) => void
 }

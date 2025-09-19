@@ -2,13 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import HeaderInfo from './components/layout/header'
-import { useRouter } from 'next/navigation'
 import InputSearch from './components/ui/inputSearch'
 import CardVideo from './components/layout/card-video'
-import Image from 'next/image'
 import { notFoundVideo } from '@/assets/image'
 import CardVideoEskeleton from './components/layout/card-video-eskeleton'
-import { videoskk } from '@/constants/videos-array'
 import GetVideos from '@/services/routes/video/get-videos'
 import { videoDTO } from '@/dto/video/DTOVideo'
 
@@ -24,9 +21,8 @@ export default function VideosPage() {
         )
       : null
 
-  const router = useRouter()
 
-  //Simulating API call
+  //API call
   useEffect(() => {
     async function FetchVideos() {
       try {
@@ -44,9 +40,7 @@ export default function VideosPage() {
   }, [])
 
   // Functions utils in components
-  function handleNavigateUniqueVideo() {
-    router.push('/teste')
-  }
+
 
   return (
     <section className="flex h-screen w-full items-start justify-center pt-20">
@@ -62,7 +56,12 @@ export default function VideosPage() {
           {/* Loading skeleton while loading data from api */}
           {loading === false ? (
             videosFilter !== null ? (
-              videosFilter.map((card) => <CardVideo key={card.id} {...card} />)
+              videosFilter.map((card) => (
+                <CardVideo
+                  key={card.id}
+                  {...card}
+                />
+              ))
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <img src={notFoundVideo.src} className="w-[400px]" alt="não encontrado" />

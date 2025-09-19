@@ -1,10 +1,18 @@
+'use client'
+
 import { videoDTO } from '@/dto/video/DTOVideo'
 import { baseUrlPhoto } from '@/utils/base-url-photos'
 import { formatDate } from '@/utils/formatDate'
+import { useRouter } from 'next/navigation'
 
 export default function CardVideo(data: videoDTO) {
+  // variaveis utilzidas no componente
   const photo = baseUrlPhoto('thumbnails', data.photoURL)
+  const dataFormatada = formatDate(data.createdAt ?? '')
+  const durationFormatada = FormatedDuration(String(data.duration))
+  const router = useRouter()
 
+  // funções utilizadas no componente
   function FormatedDuration(duration: string) {
     const durationNumber = Number(duration)
 
@@ -19,13 +27,15 @@ export default function CardVideo(data: videoDTO) {
     return `${horasFormatada}:${MinutosFormatado}:${SegundosFormatado}`
   }
 
-  const durationFormatada = FormatedDuration(String(data.duration))
+  function handleNavigateVideoUnique(id: string){
+    router.push(`videos/watch/${id}`)
+  }
 
-  console.log('Duração formatada', durationFormatada)
-
-  const dataaa = formatDate(data.createdAt ?? '')
   return (
-    <article className="flex h-[240px] w-[250px] cursor-pointer flex-col items-start justify-start gap-1 max-sm:h-[300px] max-sm:w-full">
+    <article
+      onClick={() => handleNavigateVideoUnique(data.id)}
+      className="flex h-[240px] w-[250px] cursor-pointer flex-col items-start justify-start gap-1 max-sm:h-[300px] max-sm:w-full"
+    >
       {/* Container capa do video  */}
       <div className="relative min-h-[65%] w-full rounded-md bg-primargreen">
         <img src={photo} alt="" />
@@ -45,7 +55,7 @@ export default function CardVideo(data: videoDTO) {
 
       {/* data do vídeo  */}
       <div>
-        <h6 className="text-[0.9rem]">{dataaa}</h6>
+        <h6 className="text-[0.9rem]">{dataFormatada}</h6>
       </div>
     </article>
   )
