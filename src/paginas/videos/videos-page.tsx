@@ -3,32 +3,44 @@
 import { useEffect, useState } from 'react'
 import HeaderInfo from './components/layout/header'
 import { useRouter } from 'next/navigation'
-import { formatData } from '@/types/FormatDate'
-import { DataVideo } from '@/dto/video/DataVideo'
 import InputSearch from './components/ui/inputSearch'
 import CardVideo from './components/layout/card-video'
 import Image from 'next/image'
 import { notFoundVideo } from '@/assets/image'
 import CardVideoEskeleton from './components/layout/card-video-eskeleton'
 import { videoskk } from '@/constants/videos-array'
+import GetVideos from '@/services/routes/video/get-videos'
+import { videoDTO } from '@/dto/video/DTOVideo'
 
 export default function VideosPage() {
   // State and variables utils in components
   const [valueInput, setValueInput] = useState('')
   const [loading, setLoading] = useState(true)
-  const [videos, setVideos] = useState(videoskk)
-  const videosFilter = videos.filter((video) =>
-    video.title.toLowerCase().includes(valueInput.toLowerCase()),
-  )
+  const [videos, setVideos] = useState<videoDTO[] | []>([])
+  const videosFilter =
+    videos.length > 0
+      ? videos.filter((video: videoDTO) =>
+          video.title.toLowerCase().includes(valueInput.toLowerCase()),
+        )
+      : null
+
   const router = useRouter()
 
   //Simulating API call
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+    async function FetchVideos() {
+      try {
+        const response = await GetVideos()
+        setVideos(response.videos)
+        setLoading(false)
+        console.log('Vídeos da API', videos)
+        return response.videos
+      } catch (error) {
+        console.log('Error ao carregar vídeos', error)
+      }
+    }
 
-    return () => clearTimeout(timer)
+    FetchVideos()
   }, [])
 
   // Functions utils in components
@@ -49,15 +61,8 @@ export default function VideosPage() {
         <div className="mt-10 grid w-full grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-16 gap-y-3">
           {/* Loading skeleton while loading data from api */}
           {loading === false ? (
-            videosFilter.length > 0 ? (
-              videosFilter.map((card) => (
-                <CardVideo
-                  key={card.title}
-                  title={card.title}
-                  duration={card.duration}
-                  date_submit={card.date_submit}
-                />
-              ))
+            videosFilter !== null ? (
+              videosFilter.map((card) => <CardVideo key={card.id} {...card} />)
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <img src={notFoundVideo.src} className="w-[400px]" alt="não encontrado" />

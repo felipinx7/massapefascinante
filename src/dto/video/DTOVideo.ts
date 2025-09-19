@@ -12,5 +12,4 @@ export type videoDTO = {
   duration?: string
   createdAt?: string
   handleDeletePlace?: (id: string) => void
-
 }
