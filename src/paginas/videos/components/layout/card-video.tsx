@@ -28,7 +28,7 @@ export default function CardVideo(data: videoDTO) {
   }
 
   function handleNavigateVideoUnique(id: string){
-    router.push(`videos/watch/${id}`)
+    router.push(`/videos/watch/${id}`)
   }
 
   return (

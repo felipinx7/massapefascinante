@@ -12,7 +12,7 @@ export default function VideoSingle() {
   const [loading, setLoading] = useState(true)
   const [video, setVideo] = useState<videoDTO | null>(null)
   const [allVideos, setAllVideos] = useState<videoDTO[] | []>([])
-  const videoURL = video?.url?.split(" ").join()
+  const videoURL = video?.url?.split(" ").join("")
   const params = useParams()
   // const DataFormatada = formatDate(video?.createdAt ?? '')
   const VideoId = params.id
@@ -46,7 +46,6 @@ export default function VideoSingle() {
     FetchVideoSingle()
     FetchAllVideos()
   }, [])
-  console.log("DADOS DO ESTADO", video)
   return (
     <section className="flex h-screen w-full items-start justify-center pt-24">
       <HeaderInfo title="Hi Evenly, How are you?" />
