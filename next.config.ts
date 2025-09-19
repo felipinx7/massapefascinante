@@ -13,6 +13,12 @@ const nextConfig = {
         hostname: 'api.massapefascinante.com.br',
         pathname: '/api/uploads/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '4444',
+        pathname: '/uploads/**',
+      },
     ],
   },
   experimental: {
