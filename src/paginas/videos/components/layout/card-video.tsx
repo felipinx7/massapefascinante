@@ -37,8 +37,8 @@ export default function CardVideo(data: videoDTO) {
       className="flex h-[240px] w-[250px] cursor-pointer flex-col items-start justify-start gap-1 max-sm:h-[300px] max-sm:w-full"
     >
       {/* Container capa do video  */}
-      <div className="relative min-h-[65%] w-full rounded-md bg-primargreen">
-        <img src={photo} alt="" />
+      <div className="relative min-h-[65%] w-full bg-primargreen rounded-lg">
+        <img src={photo} alt= "" className='w-full h-full absolute rounded-lg top-0 object-cover' />
 
         {/* duração do vídeo  */}
         <div className="absolute top-0 flex h-full w-full items-end justify-end p-2">

@@ -21,7 +21,6 @@ export default function VideosPage() {
         )
       : null
 
-
   //API call
   useEffect(() => {
     async function FetchVideos() {
@@ -29,7 +28,6 @@ export default function VideosPage() {
         const response = await GetVideos()
         setVideos(response.videos)
         setLoading(false)
-        console.log('Vídeos da API', videos)
         return response.videos
       } catch (error) {
         console.log('Error ao carregar vídeos', error)
@@ -39,8 +37,11 @@ export default function VideosPage() {
     FetchVideos()
   }, [])
 
-  // Functions utils in components
+  useEffect(() => {
+    console.log('Videos armazenados no estado', videos)
+  }, [videos])
 
+  // Functions utils in components
 
   return (
     <section className="flex h-screen w-full items-start justify-center pt-20">
@@ -56,12 +57,7 @@ export default function VideosPage() {
           {/* Loading skeleton while loading data from api */}
           {loading === false ? (
             videosFilter !== null ? (
-              videosFilter.map((card) => (
-                <CardVideo
-                  key={card.id}
-                  {...card}
-                />
-              ))
+              videosFilter.map((card) => <CardVideo key={card.id} {...card} />)
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <img src={notFoundVideo.src} className="w-[400px]" alt="não encontrado" />
