@@ -1,0 +1,50 @@
+# Dependências
+node_modules
+npm-debug.log
+pnpm-debug.log
+yarn-debug.log
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+README.md
+LICENSE
+CONTRIBUTING.md
+CHANGELOG.md
+.editorconfig
+.prettierignore
+.eslintignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Package manager files (keeping lock files)
+npm-shrinkwrap.json
